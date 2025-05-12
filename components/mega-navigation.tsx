@@ -6,65 +6,85 @@ import Image from "next/image"
 import { Instagram, Linkedin, Search, ChevronDown, ChevronRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
+// const productCategories = {
+//   indoor: {
+//     seating: [
+//       { name: "Ottomans | Stools", path: "/collections/ottomans-stools" },
+//       { name: "Chairs", path: "/collections/chairs" },
+//       { name: "Lounge Chairs", path: "/collections/lounge-chairs" },
+//       { name: "Sofas", path: "/collections/sofas" },
+//       { name: "Daybeds | Chaises | Benches", path: "/collections/daybeds-chaises-benches" },
+//     ],
+//     tables: [
+//       { name: "Side Tables", path: "/collections/side-tables" },
+//       { name: "Coffee Tables", path: "/collections/coffee-tables" },
+//       { name: "Dining Tables", path: "/collections/dining-tables" },
+//       { name: "Consoles", path: "/collections/consoles" },
+//       { name: "Desks", path: "/collections/desks" },
+//       { name: "Dressers", path: "/collections/dressers" },
+//     ],
+//     lighting: [
+//       { name: "Floor Lamps", path: "/collections/floor-lamps" },
+//       { name: "Table Lamps", path: "/collections/table-lamps" },
+//       { name: "Wall Sconces", path: "/collections/wall-sconces" },
+//       { name: "Suspended Lamps", path: "/collections/suspended-lamps" },
+//     ],
+//     storage: [
+//       { name: "Shelving Units", path: "/collections/shelving-units" },
+//       { name: "Chest Of Drawers", path: "/collections/chest-of-drawers" },
+//       { name: "Sideboards", path: "/collections/sideboards" },
+//       { name: "Bedside Tables", path: "/collections/bedside-tables" },
+//       { name: "Bar Cabinets", path: "/collections/bar-cabinets" },
+//       { name: "Bar Counters", path: "/collections/bar-counters" },
+//     ],
+//     complements: [
+//       { name: "Mirrors", path: "/collections/mirrors" },
+//       { name: "Trolleys", path: "/collections/trolleys" },
+//       { name: "Valet Stands", path: "/collections/valet-stands" },
+//       { name: "Magazine Stands", path: "/collections/magazine-stands" },
+//     ],
+//     surfaces: [
+//       { name: "Panellings", path: "/collections/panellings" },
+//       { name: "Partition Screens", path: "/collections/partition-screens" },
+//     ],
+//     beds: [{ name: "Beds", path: "/collections/beds" }],
+//   },
+//   outdoor: {
+//     seating: [
+//       { name: "Chairs", path: "/collections/outdoor-chairs" },
+//       { name: "Daybeds | Chaises | Benches", path: "/collections/outdoor-daybeds-chaises-benches" },
+//       { name: "Lounge Chairs", path: "/collections/outdoor-lounge-chairs" },
+//       { name: "Ottomans | Stools", path: "/collections/outdoor-ottomans-stools" },
+//       { name: "Sofas", path: "/collections/outdoor-sofas" },
+//     ],
+//     tables: [
+//       { name: "Side Tables", path: "/collections/outdoor-side-tables" },
+//       { name: "Coffee Tables", path: "/collections/outdoor-coffee-tables" },
+//       { name: "Dining Tables", path: "/collections/outdoor-dining-tables" },
+//     ],
+//     complements: [{ name: "Trolleys", path: "/collections/outdoor-trolleys" }],
+//   },
+// }
+
 const productCategories = {
   indoor: {
     seating: [
-      { name: "Ottomans | Stools", path: "/collections/ottomans-stools" },
-      { name: "Chairs", path: "/collections/chairs" },
-      { name: "Lounge Chairs", path: "/collections/lounge-chairs" },
-      { name: "Sofas", path: "/collections/sofas" },
-      { name: "Daybeds | Chaises | Benches", path: "/collections/daybeds-chaises-benches" },
-    ],
+      { name: "Duchess Chair", path: "/products/duchess-chair" },],
     tables: [
-      { name: "Side Tables", path: "/collections/side-tables" },
-      { name: "Coffee Tables", path: "/collections/coffee-tables" },
-      { name: "Dining Tables", path: "/collections/dining-tables" },
-      { name: "Consoles", path: "/collections/consoles" },
-      { name: "Desks", path: "/collections/desks" },
-      { name: "Dressers", path: "/collections/dressers" },
+      { name: "Vayuvega Night Stand", path: "/products/vayuvega-night-stand" },
+      { name: "Pinetta Booze Stand", path: "/products/pinetta-booze-stand" },
+      { name: "Basilisk Bar Counter", path: "/products/basilisk-bar-counter" },
     ],
     lighting: [
-      { name: "Floor Lamps", path: "/collections/floor-lamps" },
-      { name: "Table Lamps", path: "/collections/table-lamps" },
-      { name: "Wall Sconces", path: "/collections/wall-sconces" },
-      { name: "Suspended Lamps", path: "/collections/suspended-lamps" },
+      { name: "Rise of the Great Artefact", path: "/products/rise-of-the-great-artefact" },
     ],
     storage: [
-      { name: "Shelving Units", path: "/collections/shelving-units" },
-      { name: "Chest Of Drawers", path: "/collections/chest-of-drawers" },
-      { name: "Sideboards", path: "/collections/sideboards" },
-      { name: "Bedside Tables", path: "/collections/bedside-tables" },
-      { name: "Bar Cabinets", path: "/collections/bar-cabinets" },
-      { name: "Bar Counters", path: "/collections/bar-counters" },
-    ],
+      { name: "All Storage", path: "/collections?category=storage" },],
     complements: [
-      { name: "Mirrors", path: "/collections/mirrors" },
-      { name: "Trolleys", path: "/collections/trolleys" },
-      { name: "Valet Stands", path: "/collections/valet-stands" },
-      { name: "Magazine Stands", path: "/collections/magazine-stands" },
-    ],
-    surfaces: [
-      { name: "Panellings", path: "/collections/panellings" },
-      { name: "Partition Screens", path: "/collections/partition-screens" },
-    ],
-    beds: [{ name: "Beds", path: "/collections/beds" }],
-  },
-  outdoor: {
-    seating: [
-      { name: "Chairs", path: "/collections/outdoor-chairs" },
-      { name: "Daybeds | Chaises | Benches", path: "/collections/outdoor-daybeds-chaises-benches" },
-      { name: "Lounge Chairs", path: "/collections/outdoor-lounge-chairs" },
-      { name: "Ottomans | Stools", path: "/collections/outdoor-ottomans-stools" },
-      { name: "Sofas", path: "/collections/outdoor-sofas" },
-    ],
-    tables: [
-      { name: "Side Tables", path: "/collections/outdoor-side-tables" },
-      { name: "Coffee Tables", path: "/collections/outdoor-coffee-tables" },
-      { name: "Dining Tables", path: "/collections/outdoor-dining-tables" },
-    ],
-    complements: [{ name: "Trolleys", path: "/collections/outdoor-trolleys" }],
-  },
-}
+      { name: "All Artefacts", path: "/collections?category=artefacts" },
+    ]
+  }
+};
 
 const aboutUsLinks = [
   { name: "Our Philosophy", path: "/story#philosophy" },
@@ -217,7 +237,7 @@ export default function MegaNavigation() {
                         <div>
                           <h4 className="font-display text-sm uppercase tracking-wider mb-3">Seating</h4>
                           <ul className="space-y-2">
-                            {productCategories.outdoor.seating.map((item) => (
+                            {/* {productCategories.outdoor.seating.map((item) => (
                               <li key={item.name}>
                                 <Link
                                   href={item.path}
@@ -227,13 +247,14 @@ export default function MegaNavigation() {
                                   {item.name}
                                 </Link>
                               </li>
-                            ))}
+                            ))} */}
+                            Coming Soon...
                           </ul>
                         </div>
                         <div>
                           <h4 className="font-display text-sm uppercase tracking-wider mb-3">Tables</h4>
                           <ul className="space-y-2">
-                            {productCategories.outdoor.tables.map((item) => (
+                            {/* {productCategories.outdoor.tables.map((item) => (
                               <li key={item.name}>
                                 <Link
                                   href={item.path}
@@ -243,13 +264,14 @@ export default function MegaNavigation() {
                                   {item.name}
                                 </Link>
                               </li>
-                            ))}
+                            ))} */}
+                            Coming Soon...
                           </ul>
                         </div>
                         <div>
                           <h4 className="font-display text-sm uppercase tracking-wider mb-3">Complements</h4>
                           <ul className="space-y-2">
-                            {productCategories.outdoor.complements.map((item) => (
+                            {/* {productCategories.outdoor.complements.map((item) => (
                               <li key={item.name}>
                                 <Link
                                   href={item.path}
@@ -259,7 +281,8 @@ export default function MegaNavigation() {
                                   {item.name}
                                 </Link>
                               </li>
-                            ))}
+                            ))} */}
+                            Coming Soon...
                           </ul>
                         </div>
                       </div>

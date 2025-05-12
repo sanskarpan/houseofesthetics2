@@ -29,7 +29,7 @@ const products = [
     type: "Night Stand",
     category: "storage",
     description: "A sculptural night stand that combines functionality with artistic form.",
-    image: "/vayuvega/vayuvega2.jpg",
+    image: "/vayuvega/Vayuvega2.jpg",
     slug: "vayuvega-night-stand",
   },
   {
@@ -38,7 +38,7 @@ const products = [
     type: "Booze Stand",
     category: "storage",
     description: "A sophisticated booze stand crafted with meticulous attention to detail.",
-    image: "/pinetta/pinetta2.jpg",
+    image: "/pinetta/Pinetta2.jpg",
     slug: "pinetta-booze-stand",
   },
   {
@@ -47,7 +47,7 @@ const products = [
     type: "Standing Artefact",
     category: "artefacts",
     description: "A statement piece that serves as both functional art and conversation starter.",
-    image: "/rise-of-the-great/rise3.jpg",
+    image: "/rise-of-the-great/Rise3.jpg",
     slug: "rise-of-the-great-artefact",
   },
   {
@@ -56,7 +56,7 @@ const products = [
     type: "Bar Counter",
     category: "storage",
     description: "An architectural bar counter that transforms any space into a luxurious entertainment area.",
-    image: "/basilisk/basilisk3.jpg",
+    image: "/basilisk/Basilisk3.jpg",
     slug: "basilisk-bar-counter",
   },
 ]

@@ -48,7 +48,7 @@ const products = [
       metal: ["Brass", "Bronze", "Graphite"],
       wood: ["Walnut", "Oak", "Ash", "Maple"],
     },
-    image: "/vayuvega/vayuvega1.jpg",
+    image: "/vayuvega/Vayuvega1.jpg",
     slug: "vayuvega-night-stand",
   },
   {
@@ -70,7 +70,7 @@ const products = [
       wood: ["Walnut", "Oak", "Ebony"],
       stone: ["Marble", "Granite", "Travertine"],
     },
-    image: "/pinetta/pinetta1.jpg",
+    image: "/pinetta/Pinetta1.jpg",
     slug: "pinetta-booze-stand",
   },
   {
@@ -86,7 +86,7 @@ const products = [
       metal: ["Bronze", "Brass", "Blackened Steel"],
       stone: ["Marble", "Granite", "Limestone", "Travertine"],
     },
-    image: "/rise-of-the-great/rise3.jpg",
+    image: "/rise-of-the-great/Rise3.jpg",
     slug: "rise-of-the-great-artefact",
   },
   {
@@ -108,7 +108,7 @@ const products = [
       wood: ["Walnut", "Oak", "Ebony"],
       stone: ["Marble", "Granite", "Quartzite"],
     },
-    image: "/basilisk/basilisk1.jpg",
+    image: "/basilisk/Basilisk1.jpg",
     slug: "basilisk-bar-counter",
   },
 ]
