@@ -80,7 +80,7 @@ export default function ProductCarousel() {
       x: 0,
       opacity: 1,
       transition: {
-        x: { type: "tween", duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+        x: { type: "tween", duration: 0.8, ease: [0.22, 1, 0.36, 1] },
         opacity: { duration: 0.5 },
       },
     },
@@ -95,24 +95,33 @@ export default function ProductCarousel() {
   }
 
   const textVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: {
+      opacity: 0,
+      y: 10,
+      filter: "blur(2px)",
+    },
     visible: {
       opacity: 1,
       y: 0,
+      filter: "blur(0px)",
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         ease: [0.22, 1, 0.36, 1],
       },
     },
     exit: {
       opacity: 0,
-      y: -20,
+      y: -10,
+      filter: "blur(2px)",
       transition: {
-        duration: 0.5,
+        duration: 0.1,
         ease: [0.22, 1, 0.36, 1],
       },
     },
   }
+  
+  
+  
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-deep-neutral">
