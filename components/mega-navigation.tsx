@@ -127,9 +127,9 @@ export default function MegaNavigation() {
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="relative z-10">
             <Image
-              src={logoVariant === "light" ? "/logo.png" : "/logo.png"}
+              src={logoVariant === "light" ? "/logo.jpeg" : "/logo.jpeg"}
               alt="House of Esthete"
-              width={120}
+              width={60}
               height={40}
               className={`transition-opacity duration-500 ${logoVariant === "light" ? "invert" : ""}`}
             />
