@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Instagram, Linkedin } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -13,46 +14,32 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display text-base tracking-widest uppercase mb-6">Discover</h4>
+            <h4 className="font-display text-base tracking-widest uppercase mb-6">Explore</h4>
             <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/origins"
-                  className="font-body text-sm tracking-wide opacity-80 hover:opacity-100 transition-opacity duration-300"
-                >
-                  Origins
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/process"
-                  className="font-body text-sm tracking-wide opacity-80 hover:opacity-100 transition-opacity duration-300"
-                >
-                  Process
-                </Link>
-              </li>
               <li>
                 <Link
                   href="/collections"
                   className="font-body text-sm tracking-wide opacity-80 hover:opacity-100 transition-opacity duration-300"
                 >
-                  Collections
+                  Our Collections
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/journal"
+                  href="/story"
                   className="font-body text-sm tracking-wide opacity-80 hover:opacity-100 transition-opacity duration-300"
                 >
-                  Journal
+                  Our Story
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-display text-base tracking-widest uppercase mb-6">Connect</h4>
-            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/media"
+                  className="font-body text-sm tracking-wide opacity-80 hover:opacity-100 transition-opacity duration-300"
+                >
+                  Media
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/contact"
@@ -61,6 +48,12 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-display text-base tracking-widest uppercase mb-6">Connect</h4>
+            <ul className="space-y-3">
               <li>
                 <Link
                   href="/visit"
@@ -84,42 +77,14 @@ export default function Footer() {
                     className="opacity-80 hover:opacity-100 transition-opacity duration-300"
                   >
                     <span className="sr-only">Instagram</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                    </svg>
+                    <Instagram size={18} />
                   </Link>
                   <Link
-                    href="https://pinterest.com"
+                    href="https://linkedin.com"
                     className="opacity-80 hover:opacity-100 transition-opacity duration-300"
                   >
-                    <span className="sr-only">Pinterest</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="12" x2="12" y1="8" y2="16" />
-                      <line x1="8" x2="16" y1="12" y2="12" />
-                      <circle cx="12" cy="12" r="10" />
-                    </svg>
+                    <span className="sr-only">LinkedIn</span>
+                    <Linkedin size={18} />
                   </Link>
                 </div>
               </li>
