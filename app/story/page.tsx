@@ -9,7 +9,7 @@ export default function StoryPage() {
       <section className="relative h-[60vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/placeholder.svg?height=1080&width=1920&text=Our Story"
+            src="/Frame 7.png?height=1080&width=1920&text=Our Story"
             alt="House of Esthete craftsmanship"
             fill
             priority
@@ -37,7 +37,7 @@ export default function StoryPage() {
             <RevealSection delay={0.2} direction="left">
               <div className="h-[500px] md:h-[600px] relative overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=800&width=600&text=Philosophy"
+                  src="/Frame 6.png?height=800&width=600&text=Philosophy"
                   alt="House of Esthete philosophy"
                   fill
                   className="object-cover"
@@ -68,7 +68,7 @@ export default function StoryPage() {
       </section>
 
       {/* Brand Values Section */}
-      <section id="values" className="py-24 md:py-32 bg-background-dark text-background-light">
+      <section id="values" className="py-24 md:py-32 bg-background-dark text-background">
         <div className="container mx-auto px-6">
           <RevealSection>
             <h2 className="section-title text-center mb-16">Brand Values</h2>
@@ -129,7 +129,7 @@ export default function StoryPage() {
               <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
                 <div className="w-40 h-40 rounded-full overflow-hidden relative flex-shrink-0">
                   <Image
-                    src="/placeholder.svg?height=400&width=400&text=Director"
+                    src="/Frame 7.png?height=400&width=400&text=Director"
                     alt="Creative Director"
                     fill
                     className="object-cover"
@@ -155,7 +155,7 @@ export default function StoryPage() {
               <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
                 <div className="w-40 h-40 rounded-full overflow-hidden relative flex-shrink-0">
                   <Image
-                    src="/placeholder.svg?height=400&width=400&text=Director"
+                    src="/Frame 7.png?height=400&width=400&text=Director"
                     alt="Design Director"
                     fill
                     className="object-cover"
@@ -179,7 +179,7 @@ export default function StoryPage() {
       </section>
 
       {/* Design Studio Section */}
-      <section id="studio" className="py-24 md:py-32 bg-background-dark text-background-light">
+      <section id="studio" className="py-24 md:py-32 bg-background-dark text-background">
         <div className="container mx-auto px-6">
           <RevealSection>
             <h2 className="section-title text-center mb-16">House of Esthete Design Studio</h2>
@@ -208,7 +208,7 @@ export default function StoryPage() {
             <RevealSection delay={0.4} direction="right" className="order-1 md:order-2">
               <div className="h-[500px] md:h-[600px] relative overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=800&width=600&text=Design Studio"
+                  src="/plantImages/plantImg2.jpeg?height=800&width=600&text=Design Studio"
                   alt="House of Esthete design studio"
                   fill
                   className="object-cover"
@@ -232,7 +232,7 @@ export default function StoryPage() {
                 <div className="text-center">
                   <div className="w-40 h-40 rounded-full overflow-hidden relative mx-auto mb-6">
                     <Image
-                      src={`/placeholder.svg?height=400&width=400&text=Designer ${designer}`}
+                      src={`/Frame 7.png?height=400&width=400&text=Designer ${designer}`}
                       alt={`Designer ${designer}`}
                       fill
                       className="object-cover"

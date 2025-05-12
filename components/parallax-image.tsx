@@ -49,7 +49,7 @@ export default function ParallaxImage({ src, alt, speed = 0.3, className = "", p
         }}
         className="w-full h-full"
       >
-        <Image src={src || "/placeholder.svg"} alt={alt} fill priority={priority} className="object-cover" />
+        <Image src={src || "/Frame 5.png"} alt={alt} fill priority={priority} className="object-cover" />
       </div>
     </div>
   )

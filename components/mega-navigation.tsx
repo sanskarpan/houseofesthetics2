@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Instagram, Linkedin, Search } from "lucide-react"
+import { Instagram, Linkedin, Search, ChevronDown, ChevronRight } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 const productCategories = {
   indoor: {
@@ -77,6 +78,7 @@ export default function MegaNavigation() {
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -108,6 +110,10 @@ export default function MegaNavigation() {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown)
   }
 
+  const toggleMobileSubmenu = (submenu: string) => {
+    setMobileSubmenu(mobileSubmenu === submenu ? null : submenu)
+  }
+
   return (
     <header
       className="fixed top-0 left-0 w-full z-50 transition-all duration-500"
@@ -137,132 +143,130 @@ export default function MegaNavigation() {
                 className={`font-display text-sm tracking-widest uppercase hover:text-accent-green transition-colors duration-300 flex items-center ${textColor}`}
               >
                 Our Collections
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                <ChevronDown
+                  size={16}
                   className={`ml-1 transition-transform duration-300 ${activeDropdown === "products" ? "rotate-180" : ""}`}
-                >
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+                />
               </button>
 
-              {activeDropdown === "products" && (
-                <div className="absolute left-0 mt-4 w-[800px] bg-background-light shadow-lg p-8 grid grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="font-display text-base uppercase tracking-wider mb-4">Indoor</h3>
-                    <div className="grid grid-cols-3 gap-6">
-                      <div>
-                        <h4 className="font-display text-sm uppercase tracking-wider mb-3">Seating</h4>
-                        <ul className="space-y-2">
-                          {productCategories.indoor.seating.map((item) => (
-                            <li key={item.name}>
-                              <Link
-                                href={item.path}
-                                className="font-body text-xs hover:text-accent-green transition-colors"
-                                onClick={() => setActiveDropdown(null)}
-                              >
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-display text-sm uppercase tracking-wider mb-3">Tables</h4>
-                        <ul className="space-y-2">
-                          {productCategories.indoor.tables.map((item) => (
-                            <li key={item.name}>
-                              <Link
-                                href={item.path}
-                                className="font-body text-xs hover:text-accent-green transition-colors"
-                                onClick={() => setActiveDropdown(null)}
-                              >
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-display text-sm uppercase tracking-wider mb-3">Lighting</h4>
-                        <ul className="space-y-2">
-                          {productCategories.indoor.lighting.map((item) => (
-                            <li key={item.name}>
-                              <Link
-                                href={item.path}
-                                className="font-body text-xs hover:text-accent-green transition-colors"
-                                onClick={() => setActiveDropdown(null)}
-                              >
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-base uppercase tracking-wider mb-4">Outdoor</h3>
-                    <div className="grid grid-cols-3 gap-6">
-                      <div>
-                        <h4 className="font-display text-sm uppercase tracking-wider mb-3">Seating</h4>
-                        <ul className="space-y-2">
-                          {productCategories.outdoor.seating.map((item) => (
-                            <li key={item.name}>
-                              <Link
-                                href={item.path}
-                                className="font-body text-xs hover:text-accent-green transition-colors"
-                                onClick={() => setActiveDropdown(null)}
-                              >
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-display text-sm uppercase tracking-wider mb-3">Tables</h4>
-                        <ul className="space-y-2">
-                          {productCategories.outdoor.tables.map((item) => (
-                            <li key={item.name}>
-                              <Link
-                                href={item.path}
-                                className="font-body text-xs hover:text-accent-green transition-colors"
-                                onClick={() => setActiveDropdown(null)}
-                              >
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-display text-sm uppercase tracking-wider mb-3">Complements</h4>
-                        <ul className="space-y-2">
-                          {productCategories.outdoor.complements.map((item) => (
-                            <li key={item.name}>
-                              <Link
-                                href={item.path}
-                                className="font-body text-xs hover:text-accent-green transition-colors"
-                                onClick={() => setActiveDropdown(null)}
-                              >
-                                {item.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
+              <AnimatePresence>
+                {activeDropdown === "products" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute left-0 mt-4 w-[800px] bg-background-light shadow-lg p-8 grid grid-cols-2 gap-8 z-50"
+                  >
+                    <div>
+                      <h3 className="font-display text-base uppercase tracking-wider mb-4">Indoor</h3>
+                      <div className="grid grid-cols-3 gap-6">
+                        <div>
+                          <h4 className="font-display text-sm uppercase tracking-wider mb-3">Seating</h4>
+                          <ul className="space-y-2">
+                            {productCategories.indoor.seating.map((item) => (
+                              <li key={item.name}>
+                                <Link
+                                  href={item.path}
+                                  className="font-body text-xs hover:text-accent-green transition-colors"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-display text-sm uppercase tracking-wider mb-3">Tables</h4>
+                          <ul className="space-y-2">
+                            {productCategories.indoor.tables.map((item) => (
+                              <li key={item.name}>
+                                <Link
+                                  href={item.path}
+                                  className="font-body text-xs hover:text-accent-green transition-colors"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-display text-sm uppercase tracking-wider mb-3">Lighting</h4>
+                          <ul className="space-y-2">
+                            {productCategories.indoor.lighting.map((item) => (
+                              <li key={item.name}>
+                                <Link
+                                  href={item.path}
+                                  className="font-body text-xs hover:text-accent-green transition-colors"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              )}
+                    <div>
+                      <h3 className="font-display text-base uppercase tracking-wider mb-4">Outdoor</h3>
+                      <div className="grid grid-cols-3 gap-6">
+                        <div>
+                          <h4 className="font-display text-sm uppercase tracking-wider mb-3">Seating</h4>
+                          <ul className="space-y-2">
+                            {productCategories.outdoor.seating.map((item) => (
+                              <li key={item.name}>
+                                <Link
+                                  href={item.path}
+                                  className="font-body text-xs hover:text-accent-green transition-colors"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-display text-sm uppercase tracking-wider mb-3">Tables</h4>
+                          <ul className="space-y-2">
+                            {productCategories.outdoor.tables.map((item) => (
+                              <li key={item.name}>
+                                <Link
+                                  href={item.path}
+                                  className="font-body text-xs hover:text-accent-green transition-colors"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-display text-sm uppercase tracking-wider mb-3">Complements</h4>
+                          <ul className="space-y-2">
+                            {productCategories.outdoor.complements.map((item) => (
+                              <li key={item.name}>
+                                <Link
+                                  href={item.path}
+                                  className="font-body text-xs hover:text-accent-green transition-colors"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* About Us Dropdown */}
@@ -272,39 +276,37 @@ export default function MegaNavigation() {
                 className={`font-display text-sm tracking-widest uppercase hover:text-accent-green transition-colors duration-300 flex items-center ${textColor}`}
               >
                 Our Story
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                <ChevronDown
+                  size={16}
                   className={`ml-1 transition-transform duration-300 ${activeDropdown === "about" ? "rotate-180" : ""}`}
-                >
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+                />
               </button>
 
-              {activeDropdown === "about" && (
-                <div className="absolute left-0 mt-4 w-64 bg-background-light shadow-lg p-6">
-                  <ul className="space-y-3">
-                    {aboutUsLinks.map((item) => (
-                      <li key={item.name}>
-                        <Link
-                          href={item.path}
-                          className="font-body text-sm hover:text-accent-green transition-colors"
-                          onClick={() => setActiveDropdown(null)}
-                        >
-                          {item.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <AnimatePresence>
+                {activeDropdown === "about" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute left-0 mt-4 w-64 bg-background-light shadow-lg p-6 z-50"
+                  >
+                    <ul className="space-y-3">
+                      {aboutUsLinks.map((item) => (
+                        <li key={item.name}>
+                          <Link
+                            href={item.path}
+                            className="font-body text-sm hover:text-accent-green transition-colors"
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {item.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <Link
@@ -312,6 +314,13 @@ export default function MegaNavigation() {
               className={`font-display text-sm tracking-widest uppercase hover:text-accent-green transition-colors duration-300 ${textColor}`}
             >
               Media
+            </Link>
+
+            <Link
+              href="/contact"
+              className={`font-display text-sm tracking-widest uppercase hover:text-accent-green transition-colors duration-300 ${textColor}`}
+            >
+              Contact Us
             </Link>
           </div>
 
@@ -324,7 +333,7 @@ export default function MegaNavigation() {
               <Instagram size={18} />
             </Link>
             <Link
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
               className={`${textColor} hover:text-accent-green transition-colors duration-300`}
               aria-label="LinkedIn"
             >
@@ -344,76 +353,203 @@ export default function MegaNavigation() {
             aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             <span
-              className={`block w-6 h-0.5 transition-all duration-300 ${isOpen ? "rotate-45 translate-y-0.5" : "-translate-y-1"}`}
+              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${isOpen ? "rotate-45 translate-y-0.5" : "-translate-y-1"}`}
             ></span>
             <span
-              className={`block w-6 h-0.5 transition-all duration-300 ${isOpen ? "opacity-0" : "opacity-100"}`}
+              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${isOpen ? "opacity-0" : "opacity-100"}`}
             ></span>
             <span
-              className={`block w-6 h-0.5 transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-0.5" : "translate-y-1"}`}
+              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-0.5" : "translate-y-1"}`}
             ></span>
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
-      {isOpen && (
-        <div className="md:hidden absolute top-0 left-0 w-full h-screen bg-background-light z-40 flex flex-col justify-center items-center overflow-y-auto">
-          <nav className="text-center">
-            <ul className="space-y-8">
-              <li>
-                <Link
-                  href="/collections"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Our Collections
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/story"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Our Story
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/media"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Media
-                </Link>
-              </li>
-            </ul>
-          </nav>
-          <div className="flex items-center space-x-6 mt-12">
-            <Link
-              href="https://instagram.com"
-              className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
-              aria-label="Instagram"
-            >
-              <Instagram size={24} />
-            </Link>
-            <Link
-              href="https://linkedin.com"
-              className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={24} />
-            </Link>
-            <button
-              className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
-              aria-label="Search"
-            >
-              <Search size={24} />
-            </button>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden absolute top-0 left-0 w-full h-screen bg-background-light z-40 flex flex-col pt-24 px-6 overflow-y-auto"
+          >
+            <nav className="text-left">
+              <ul className="space-y-6">
+                <li>
+                  <div className="relative">
+                    <button
+                      onClick={() => toggleMobileSubmenu("collections")}
+                      className="font-display text-xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300 flex items-center justify-between w-full"
+                    >
+                      Our Collections
+                      <ChevronRight
+                        size={20}
+                        className={`transition-transform duration-300 ${mobileSubmenu === "collections" ? "rotate-90" : ""}`}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {mobileSubmenu === "collections" && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pt-4 pl-4">
+                            <h3 className="font-display text-lg uppercase tracking-wider mb-3">Indoor</h3>
+                            <ul className="space-y-3 mb-6">
+                              <li>
+                                <Link
+                                  href="/collections/chairs"
+                                  className="font-body text-base hover:text-accent-green transition-colors"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  Chairs
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  href="/collections/tables"
+                                  className="font-body text-base hover:text-accent-green transition-colors"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  Tables
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  href="/collections/storage"
+                                  className="font-body text-base hover:text-accent-green transition-colors"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  Storage
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  href="/collections/artefacts"
+                                  className="font-body text-base hover:text-accent-green transition-colors"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  Artefacts
+                                </Link>
+                              </li>
+                            </ul>
+
+                            <h3 className="font-display text-lg uppercase tracking-wider mb-3">Outdoor</h3>
+                            <ul className="space-y-3">
+                              <li>
+                                <Link
+                                  href="/collections/outdoor-seating"
+                                  className="font-body text-base hover:text-accent-green transition-colors"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  Seating
+                                </Link>
+                              </li>
+                              <li>
+                                <Link
+                                  href="/collections/outdoor-tables"
+                                  className="font-body text-base hover:text-accent-green transition-colors"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  Tables
+                                </Link>
+                              </li>
+                            </ul>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </li>
+                <li>
+                  <div className="relative">
+                    <button
+                      onClick={() => toggleMobileSubmenu("story")}
+                      className="font-display text-xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300 flex items-center justify-between w-full"
+                    >
+                      Our Story
+                      <ChevronRight
+                        size={20}
+                        className={`transition-transform duration-300 ${mobileSubmenu === "story" ? "rotate-90" : ""}`}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {mobileSubmenu === "story" && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <ul className="space-y-3 pt-4 pl-4">
+                            {aboutUsLinks.map((item) => (
+                              <li key={item.name}>
+                                <Link
+                                  href={item.path}
+                                  className="font-body text-base hover:text-accent-green transition-colors"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </li>
+                <li>
+                  <Link
+                    href="/media"
+                    className="font-display text-xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Media
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="font-display text-xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Contact Us
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+            <div className="flex items-center space-x-6 mt-12">
+              <Link
+                href="https://instagram.com"
+                className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                aria-label="Instagram"
+              >
+                <Instagram size={24} />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
+                className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={24} />
+              </Link>
+              <button
+                className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                aria-label="Search"
+              >
+                <Search size={24} />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

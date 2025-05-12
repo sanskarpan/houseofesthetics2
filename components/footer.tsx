@@ -54,22 +54,22 @@ export default function Footer() {
           <div>
             <h4 className="font-display text-base tracking-widest uppercase mb-6">Connect</h4>
             <ul className="space-y-3">
-              <li>
+              {/* <li>
                 <Link
                   href="/visit"
                   className="font-body text-sm tracking-wide opacity-80 hover:opacity-100 transition-opacity duration-300"
                 >
                   Visit Atelier
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link
                   href="/newsletter"
                   className="font-body text-sm tracking-wide opacity-80 hover:opacity-100 transition-opacity duration-300"
                 >
                   Newsletter
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <div className="flex space-x-4 mt-2">
                   <Link
@@ -80,7 +80,7 @@ export default function Footer() {
                     <Instagram size={18} />
                   </Link>
                   <Link
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
                     className="opacity-80 hover:opacity-100 transition-opacity duration-300"
                   >
                     <span className="sr-only">LinkedIn</span>

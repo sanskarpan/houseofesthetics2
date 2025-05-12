@@ -12,7 +12,7 @@ const mediaItems = [
     title: "House of Esthete Featured in Architectural Digest",
     excerpt: "Our Duchess Chair and Basilisk Bar Counter were featured in Architectural Digest's annual design issue.",
     date: "May 2025",
-    image: "/placeholder.svg?height=600&width=800&text=Media 1",
+    image: "/Frame 5.png?height=600&width=800&text=Media 1",
     link: "#",
   },
   {
@@ -21,7 +21,7 @@ const mediaItems = [
     excerpt:
       "An in-depth conversation about the philosophy and process behind House of Esthete's distinctive approach to design.",
     date: "April 2025",
-    image: "/placeholder.svg?height=600&width=800&text=Media 2",
+    image: "/Frame 6.png?height=600&width=800&text=Media 2",
     link: "#",
   },
   {
@@ -30,7 +30,7 @@ const mediaItems = [
     excerpt:
       "A photo essay documenting the creation of our signature standing artefact, from initial sketch to final piece.",
     date: "March 2025",
-    image: "/placeholder.svg?height=600&width=800&text=Media 3",
+    image: "/Frame 7.png?height=600&width=800&text=Media 3",
     link: "#",
   },
   {
@@ -39,7 +39,7 @@ const mediaItems = [
     excerpt:
       "Our latest collection, inspired by architectural forms and natural materials, debuts to critical acclaim.",
     date: "February 2025",
-    image: "/placeholder.svg?height=600&width=800&text=Media 4",
+    image: "/Frame 8.png?height=600&width=800&text=Media 4",
     link: "#",
   },
   {
@@ -48,7 +48,7 @@ const mediaItems = [
     excerpt:
       "An exploration of our deliberate approach to design and the value of taking time to create objects of lasting beauty.",
     date: "January 2025",
-    image: "/placeholder.svg?height=600&width=800&text=Media 5",
+    image: "/Frame 9.png?height=600&width=800&text=Media 5",
     link: "#",
   },
   {
@@ -56,7 +56,7 @@ const mediaItems = [
     title: "House of Esthete Featured in Design Week",
     excerpt: "Our installation at Design Week was highlighted as one of the standout presentations of the event.",
     date: "December 2024",
-    image: "/placeholder.svg?height=600&width=800&text=Media 6",
+    image: "/Frame 4.png?height=600&width=800&text=Media 6",
     link: "#",
   },
 ]
@@ -71,7 +71,7 @@ export default function MediaPage() {
       <section className="relative h-[50vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/placeholder.svg?height=1080&width=1920&text=Media"
+            src="/Frame 4.png?height=1080&width=1920&text=Media"
             alt="House of Esthete media coverage"
             fill
             priority
@@ -125,7 +125,7 @@ export default function MediaPage() {
       </section>
 
       {/* Press Kit Section */}
-      <section className="py-24 md:py-32 bg-background-dark text-background-light">
+      {/* <section className="py-24 md:py-32 bg-background-dark text-background">
         <div className="container mx-auto px-6">
           <RevealSection>
             <div className="max-w-2xl mx-auto text-center">
@@ -143,7 +143,7 @@ export default function MediaPage() {
             </div>
           </RevealSection>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Section */}
       <section className="py-24 md:py-32 bg-background-light">

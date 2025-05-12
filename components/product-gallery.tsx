@@ -10,25 +10,25 @@ const products = [
     id: 1,
     name: "Sculptural Vase",
     description: "Hand-thrown ceramic with a textured matte finish.",
-    image: "/placeholder.svg?height=800&width=600&text=Product 1",
+    image: "/duchess/Duchess9.jpg?height=800&width=600&text=Product 1",
   },
   {
     id: 2,
     name: "Woven Armchair",
     description: "Natural rattan with brass-finished steel frame.",
-    image: "/placeholder.svg?height=800&width=600&text=Product 2",
+    image: "/duchess/Duchess7.jpg?height=800&width=600&text=Product 2",
   },
   {
     id: 3,
     name: "Marble Coffee Table",
     description: "Carrara marble with hand-finished brass details.",
-    image: "/placeholder.svg?height=800&width=600&text=Product 3",
+    image: "/duchess/Duchess4.jpg?height=800&width=600&text=Product 3",
   },
   {
     id: 4,
     name: "Linen Throw Pillow",
     description: "Hand-loomed linen with natural vegetable dyes.",
-    image: "/placeholder.svg?height=800&width=600&text=Product 4",
+    image: "/duchess/Duchess2.jpg?height=800&width=600&text=Product 4",
   },
 ]
 
@@ -79,7 +79,7 @@ export default function ProductGallery() {
             <motion.div key={product.id} variants={itemVariants} className="group">
               <div className="relative overflow-hidden mb-4 aspect-[3/4]">
                 <Image
-                  src={product.image || "/placeholder.svg"}
+                  src={product.image || "/duchess/Duchess1.jpg"}
                   alt={product.name}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"

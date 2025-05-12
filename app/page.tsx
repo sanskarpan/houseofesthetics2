@@ -36,7 +36,7 @@ export default function Home() {
             <RevealSection delay={0.2} direction="left">
               <div className="h-[500px] md:h-[600px] relative overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=800&width=600&text=Design Process"
+                  src="/plantImages/plantImg1.jpeg?height=800&width=600&text=Design Process"
                   alt="Archival sketches and design process"
                   fill
                   className="object-cover"
@@ -81,7 +81,7 @@ export default function Home() {
       <section className="py-24 md:py-32 bg-deep-neutral text-background-light relative">
         <div className="absolute inset-0 opacity-20">
           <Image
-            src="/placeholder.svg?height=1080&width=1920&text=Texture"
+            src="/brand.png?height=1080&width=1920&text=Texture"
             alt="Workshop textures"
             fill
             className="object-cover"
@@ -130,7 +130,7 @@ export default function Home() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-24 md:py-32 bg-background-light">
+      {/* <section className="py-24 md:py-32 bg-background-light">
         <div className="container mx-auto px-6">
           <RevealSection>
             <div className="max-w-2xl mx-auto text-center">
@@ -158,7 +158,7 @@ export default function Home() {
             </div>
           </RevealSection>
         </div>
-      </section>
+      </section> */}
     </div>
   )
 }

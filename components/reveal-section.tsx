@@ -10,18 +10,27 @@ interface RevealSectionProps {
   delay?: number
   direction?: "up" | "down" | "left" | "right" | "none"
   className?: string
+  once?: boolean
 }
 
-export default function RevealSection({ children, delay = 0, direction = "up", className = "" }: RevealSectionProps) {
+export default function RevealSection({
+  children,
+  delay = 0,
+  direction = "up",
+  className = "",
+  once = true,
+}: RevealSectionProps) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const isInView = useInView(ref, { once, amount: 0.2 })
   const controls = useAnimation()
 
   useEffect(() => {
     if (isInView) {
       controls.start("visible")
+    } else if (!once) {
+      controls.start("hidden")
     }
-  }, [isInView, controls])
+  }, [isInView, controls, once])
 
   const getDirectionVariants = () => {
     switch (direction) {
@@ -59,7 +68,12 @@ export default function RevealSection({ children, delay = 0, direction = "up", c
       initial="hidden"
       animate={controls}
       variants={getDirectionVariants()}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay }}
+      transition={{
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+        delay,
+        staggerChildren: 0.1,
+      }}
       className={className}
     >
       {children}

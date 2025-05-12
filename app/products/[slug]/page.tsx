@@ -1,10 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 import ProductInquiry from "@/components/product-inquiry"
+import { motion, useInView } from "framer-motion"
 
 const products = [
   {
@@ -26,7 +27,7 @@ const products = [
       wood: ["Walnut", "Oak", "Ebony"],
       fabric: ["Linen", "Velvet", "Wool", "Leather"],
     },
-    image: "/prod1.png",
+    image: "/duchess/Duchess1.jpg",
     slug: "duchess-chair",
   },
   {
@@ -47,7 +48,7 @@ const products = [
       metal: ["Brass", "Bronze", "Graphite"],
       wood: ["Walnut", "Oak", "Ash", "Maple"],
     },
-    image: "/prod2.png",
+    image: "/vayuvega/vayuvega1.jpg",
     slug: "vayuvega-night-stand",
   },
   {
@@ -69,7 +70,7 @@ const products = [
       wood: ["Walnut", "Oak", "Ebony"],
       stone: ["Marble", "Granite", "Travertine"],
     },
-    image: "/prod3.png",
+    image: "/pinetta/pinetta1.jpg",
     slug: "pinetta-booze-stand",
   },
   {
@@ -85,7 +86,7 @@ const products = [
       metal: ["Bronze", "Brass", "Blackened Steel"],
       stone: ["Marble", "Granite", "Limestone", "Travertine"],
     },
-    image: "/prod4.png",
+    image: "/rise-of-the-great/rise3.jpg",
     slug: "rise-of-the-great-artefact",
   },
   {
@@ -107,13 +108,16 @@ const products = [
       wood: ["Walnut", "Oak", "Ebony"],
       stone: ["Marble", "Granite", "Quartzite"],
     },
-    image: "/prod5.png",
+    image: "/basilisk/basilisk1.jpg",
     slug: "basilisk-bar-counter",
   },
 ]
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const [isInquiryOpen, setIsInquiryOpen] = useState(false)
+  const [selectedImage, setSelectedImage] = useState(0)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.1 })
 
   const product = products.find((p) => p.slug === params.slug)
 
@@ -130,8 +134,34 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     )
   }
 
+  // Generate thumbnail images (in a real app, these would be actual different views)
+  const thumbnails = [product.image, product.image, product.image, product.image, product.image]
+
+  // Generate color swatches for finishes
+  const colorMap = {
+    Brass: "bg-yellow-700",
+    Bronze: "bg-amber-800",
+    Graphite: "bg-gray-700",
+    Copper: "bg-orange-700",
+    Walnut: "bg-amber-900",
+    Oak: "bg-yellow-100",
+    Ebony: "bg-gray-900",
+    Ash: "bg-gray-200",
+    Maple: "bg-yellow-50",
+    Marble: "bg-gray-100",
+    Granite: "bg-gray-500",
+    Travertine: "bg-yellow-200",
+    Limestone: "bg-gray-300",
+    Quartzite: "bg-gray-400",
+    Linen: "bg-yellow-50",
+    Velvet: "bg-purple-900",
+    Wool: "bg-gray-300",
+    Leather: "bg-amber-800",
+    "Blackened Steel": "bg-gray-800",
+  }
+
   return (
-    <div className="pt-24 min-h-screen">
+    <div className="pt-24 min-h-screen bg-background-light">
       {/* Breadcrumb */}
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center text-sm">
@@ -143,35 +173,56 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             Collections
           </Link>
           <ChevronRight size={14} className="mx-2" />
-          <span className="text-deep-neutral/70">{product.name}</span>
+          <span className="text-deep-neutral/70">
+            {product.name} {product.type}
+          </span>
         </div>
       </div>
 
       {/* Product Details */}
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 py-8" ref={ref}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Product Images */}
-          <div>
-            <div className="aspect-square relative mb-4">
-              <Image src={product.image || "/placeholder.svg"} alt={product.name} fill className="object-cover" />
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="aspect-square relative mb-4 bg-gray-100">
+              <Image
+                src={product.image || "/placeholder.svg"}
+                alt={`${product.name} ${product.type}`}
+                fill
+                className="object-contain p-4"
+              />
             </div>
             <div className="grid grid-cols-5 gap-2">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="aspect-square relative">
+              {thumbnails.map((thumb, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSelectedImage(i)}
+                  className={`aspect-square relative border ${
+                    selectedImage === i ? "border-accent-green" : "border-gray-200"
+                  }`}
+                >
                   <Image
-                    src={product.image || "/placeholder.svg"}
+                    src={thumb || "/placeholder.svg"}
                     alt={`${product.name} view ${i + 1}`}
                     fill
-                    className="object-cover"
+                    className="object-contain p-1"
                   />
-                </div>
+                </button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Product Info */}
-          <div>
-            <h1 className="font-display text-3xl md:text-4xl tracking-wider mb-2">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          >
+            <h1 className="font-display text-3xl md:text-4xl tracking-wider mb-4">
               {product.name} {product.type}
             </h1>
 
@@ -206,10 +257,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 <div key={category} className="mb-6">
                   <h4 className="font-display text-base mb-2 capitalize">{category}</h4>
                   <div className="flex flex-wrap gap-2">
-                    {options.map((option) => (
+                    {options.map((option:any) => (
                       <div
                         key={option}
-                        className="w-12 h-12 rounded-full bg-background-dark flex items-center justify-center"
+                        className={`w-12 h-12 rounded-full ${colorMap[option as keyof typeof colorMap] || "bg-gray-300"} flex items-center justify-center`}
+                        title={option}
                       >
                         <span className="sr-only">{option}</span>
                       </div>
@@ -225,7 +277,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             >
               Enquire
             </button>
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -238,21 +290,31 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {products
               .filter((p) => p.id !== product.id)
               .slice(0, 3)
-              .map((relatedProduct) => (
-                <div key={relatedProduct.id} className="group">
+              .map((relatedProduct, index) => (
+                <motion.div
+                  key={relatedProduct.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{
+                    duration: 0.8,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.2 + index * 0.1,
+                  }}
+                  className="group"
+                >
                   <Link href={`/products/${relatedProduct.slug}`}>
-                    <div className="relative aspect-square overflow-hidden mb-4">
+                    <div className="relative aspect-square overflow-hidden mb-4 bg-gray-100">
                       <Image
                         src={relatedProduct.image || "/placeholder.svg"}
                         alt={relatedProduct.name}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
                     <h3 className="font-display text-lg tracking-wider mb-1">{relatedProduct.name}</h3>
                     <p className="font-body text-sm">{relatedProduct.type}</p>
                   </Link>
-                </div>
+                </motion.div>
               ))}
           </div>
         </div>

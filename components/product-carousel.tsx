@@ -32,13 +32,16 @@ const slides = [
 export default function ProductCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [direction, setDirection] = useState(0)
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null)
 
   const nextSlide = () => {
+    setDirection(1)
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
   }
 
   const prevSlide = () => {
+    setDirection(-1)
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
   }
 
@@ -64,10 +67,11 @@ export default function ProductCarousel() {
   }, [currentSlide, isAutoPlaying])
 
   const handleDotClick = (index: number) => {
+    setDirection(index > currentSlide ? 1 : -1)
     setCurrentSlide(index)
   }
 
-  const slideVariants = {
+  const variants = {
     enter: (direction: number) => ({
       x: direction > 0 ? "100%" : "-100%",
       opacity: 0,
@@ -75,10 +79,18 @@ export default function ProductCarousel() {
     center: {
       x: 0,
       opacity: 1,
+      transition: {
+        x: { type: "tween", duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+        opacity: { duration: 0.5 },
+      },
     },
     exit: (direction: number) => ({
       x: direction < 0 ? "100%" : "-100%",
       opacity: 0,
+      transition: {
+        x: { type: "tween", duration: 0.1, ease: [0.22, 1, 0.36, 1] },
+        opacity: { duration: 0.1 },
+      },
     }),
   }
 
@@ -102,37 +114,21 @@ export default function ProductCarousel() {
     },
   }
 
-  const [direction, setDirection] = useState(0)
-
-  const handleNext = () => {
-    setDirection(1)
-    nextSlide()
-  }
-
-  const handlePrev = () => {
-    setDirection(-1)
-    prevSlide()
-  }
-
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative h-screen w-full overflow-hidden bg-deep-neutral">
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentSlide}
           custom={direction}
-          variants={slideVariants}
+          variants={variants}
           initial="enter"
           animate="center"
           exit="exit"
-          transition={{
-            x: { type: "tween", duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-            opacity: { duration: 0.5 },
-          }}
           className="absolute inset-0"
         >
           <div className="relative h-full w-full">
             <Image
-              src={slides[currentSlide].image || "/placeholder.svg"}
+              src={slides[currentSlide].image || "/Frame 7.png"}
               alt={slides[currentSlide].alt}
               fill
               priority
@@ -165,22 +161,22 @@ export default function ProductCarousel() {
 
       {/* Navigation arrows */}
       <button
-        onClick={handlePrev}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-background-light/10 hover:bg-background-light/20 text-background-light rounded-full p-2 backdrop-blur-sm transition-all duration-300"
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-background-light/10 hover:bg-background-light/20 text-background-light rounded-full p-2 backdrop-blur-sm transition-all duration-300 z-10"
         aria-label="Previous slide"
       >
         <ChevronLeft size={24} />
       </button>
       <button
-        onClick={handleNext}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-background-light/10 hover:bg-background-light/20 text-background-light rounded-full p-2 backdrop-blur-sm transition-all duration-300"
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-background-light/10 hover:bg-background-light/20 text-background-light rounded-full p-2 backdrop-blur-sm transition-all duration-300 z-10"
         aria-label="Next slide"
       >
         <ChevronRight size={24} />
       </button>
 
       {/* Dots indicator */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-3">
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-3 z-10">
         {slides.map((_, index) => (
           <button
             key={index}

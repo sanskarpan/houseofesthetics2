@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import MegaNavigation from "@/components/mega-navigation"
 import Footer from "@/components/footer"
 import CustomCursor from "@/components/custom-cursor"
+import ScrollToTop from "@/components/scroll-to-top"
 
 const leagueSpartan = League_Spartan({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
           <MegaNavigation />
           <main>{children}</main>
           <Footer />
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>

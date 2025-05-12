@@ -81,7 +81,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="relative z-10">
             <Image
-              src={logoVariant === "light" ? "/logo.png" : "/logo.png"}
+              src={logoVariant === "light" ? "/logo.jpeg" : "/logo.jpeg"}
               alt="House of Esthete"
               width={120}
               height={40}
@@ -209,7 +209,7 @@ export default function Navigation() {
               <Instagram size={18} />
             </Link>
             <Link
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
               className={`${textColor} hover:text-accent-green transition-colors duration-300`}
               aria-label="LinkedIn"
             >
@@ -293,7 +293,7 @@ export default function Navigation() {
               <Instagram size={24} />
             </Link>
             <Link
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
               className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
               aria-label="LinkedIn"
             >
