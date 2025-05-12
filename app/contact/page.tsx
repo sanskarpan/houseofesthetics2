@@ -18,7 +18,7 @@ export default function ContactPage() {
       <section className="relative h-[40vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/carousel/carousel3.jpeg?height=1080&width=1920&text=Contact Us"
+            src="/carousel/Carousel3.jpeg?height=1080&width=1920&text=Contact Us"
             alt="House of Esthete contact"
             fill
             priority
