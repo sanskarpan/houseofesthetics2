@@ -152,7 +152,7 @@ export default function ContactPage() {
                     <h3 className="font-display text-lg mb-4">Follow Us</h3>
                     <div className="flex space-x-4">
                       <a
-                        href="https://instagram.com"
+                        href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
                         className="w-10 h-10 rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-green hover:text-accent-green transition-colors"
                         aria-label="Instagram"
                       >

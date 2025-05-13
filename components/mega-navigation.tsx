@@ -349,7 +349,7 @@ export default function MegaNavigation() {
 
           <div className="hidden md:flex items-center space-x-4">
             <Link
-              href="https://instagram.com"
+              href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
               className={`${textColor} hover:text-accent-green transition-colors duration-300`}
               aria-label="Instagram"
             >
@@ -550,7 +550,7 @@ export default function MegaNavigation() {
             </nav>
             <div className="flex items-center space-x-6 mt-12">
               <Link
-                href="https://instagram.com"
+                href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
                 className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
                 aria-label="Instagram"
               >

@@ -73,7 +73,7 @@ export default function Footer() {
               <li>
                 <div className="flex space-x-4 mt-2">
                   <Link
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
                     className="opacity-80 hover:opacity-100 transition-opacity duration-300"
                   >
                     <span className="sr-only">Instagram</span>
