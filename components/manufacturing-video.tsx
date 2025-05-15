@@ -2,22 +2,45 @@
 
 import { useRef, useEffect } from "react"
 import { motion, useInView, useAnimation } from "framer-motion"
-import Image from "next/image"
 
 export default function ManufacturingVideo() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, amount: 0.3 })
   const controls = useAnimation()
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     if (isInView) {
       controls.start("visible")
+      videoRef.current?.play().catch(error => console.log("Video autoplay prevented:", error));
+    } else {
+      controls.start("hidden")
+      videoRef.current?.pause();
     }
   }, [isInView, controls])
 
   return (
-    <section ref={ref} className="bg-deep-neutral text-background-light py-24 md:py-32 relative overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
+    <section 
+      ref={ref} 
+      className="w-full py-0 relative overflow-hidden min-h-[70vh] md:min-h-screen flex items-center justify-center" // Removed bg-deep-neutral, py-24/32
+    >
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          ref={videoRef}
+          src="/videos/manufacturing_video.mp4" //  YOUR ACTUAL VIDEO PATH
+          className="w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        {/* Optional: Dark overlay for better text contrast */}
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
+
+      {/* Text Overlay Content */}
+      <div className="relative z-10 container mx-auto px-6 text-background-light">
         <motion.div
           initial="hidden"
           animate={controls}
@@ -32,59 +55,14 @@ export default function ManufacturingVideo() {
               },
             },
           }}
-          className="text-center mb-16"
+          className="text-center" // Removed mb-16 as text is overlaid
         >
-          <h2 className="section-title">Craftsmanship in Motion</h2>
-          <p className="body-text max-w-2xl mx-auto">
+          <h2 className="section-title !text-3xl md:!text-5xl lg:!text-6xl !mb-4 md:!mb-6 text-background-light"> {/* Ensure text is light */}
+            Craftsmanship in Motion
+          </h2>
+          <p className="body-text max-w-2xl mx-auto text-background-light/90 tracking-body-loose"> {/* Ensure text is light */}
             Witness the meticulous process behind each House of Esthete creation.
           </p>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          animate={controls}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                duration: 0.8,
-                delay: 0.3,
-                ease: [0.22, 1, 0.36, 1],
-              },
-            },
-          }}
-          className="relative aspect-video max-w-5xl mx-auto overflow-hidden rounded-sm"
-        >
-          {/* Replace with actual video component when available */}
-          <div className="relative w-full h-full">
-            <Image
-              src="/Frame 6.png?height=1080&width=1920&text=Manufacturing Video"
-              alt="Manufacturing process video"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <button
-                className="w-20 h-20 rounded-full bg-accent-green/80 flex items-center justify-center hover:bg-accent-green transition-colors duration-300"
-                aria-label="Play video"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polygon points="5 3 19 12 5 21 5 3" fill="white" />
-                </svg>
-              </button>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>

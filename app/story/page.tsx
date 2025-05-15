@@ -220,7 +220,7 @@ export default function StoryPage() {
       </section>
 
       {/* Designers Section */}
-      <section id="designers" className="py-24 md:py-32 bg-background-light">
+      {/* <section id="designers" className="py-24 md:py-32 bg-background-light">
         <div className="container mx-auto px-6">
           <RevealSection>
             <h2 className="section-title text-center mb-16">Meet The Designers</h2>
@@ -249,7 +249,7 @@ export default function StoryPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   )
 }

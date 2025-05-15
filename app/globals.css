@@ -4,17 +4,21 @@
 
 @layer base {
   :root {
-    --background-light: 60 6% 91%;
-    --background-dark: 60 5% 85%;
-    --accent-green: 152 55% 27%;
-    --deep-neutral: 144 14% 19%;
+    --background-light: 60 6% 91%; /* E9E9E7 */
+    --background-dark: 60 5% 85%; /* D9D9D6 */
+    --accent-green: 152 55% 27%; /* #1F6B49 */
+    --deep-neutral: 144 14% 19%; /* #28362D */
 
     --radius: 0.5rem;
   }
 
+  html {
+    scroll-behavior: smooth; /* Added for smooth scrolling to #ids */
+  }
+
   body {
     @apply font-body text-deep-neutral;
-    cursor: none;
+    cursor: none; /* For custom cursor */
   }
 
   h1,
@@ -23,32 +27,37 @@
   h4,
   h5,
   h6 {
-    @apply font-display tracking-wider;
+    @apply font-display tracking-normal; /* Reduced from tracking-wider */
   }
 }
 
 @layer components {
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-display uppercase tracking-widest mb-8;
+    @apply text-3xl md:text-4xl lg:text-5xl font-display uppercase tracking-tight md:tracking-normal mb-8; /* Adjusted tracking */
   }
 
   .section-subtitle {
-    @apply text-xl md:text-2xl font-display tracking-wider mb-4;
+    @apply text-xl md:text-2xl font-display tracking-tight md:tracking-normal mb-4; /* Adjusted tracking */
   }
 
   .body-text {
-    @apply font-body text-base md:text-lg leading-relaxed tracking-wide;
+    @apply font-body text-base md:text-lg leading-relaxed tracking-wider; /* Increased from tracking-wide */
   }
 
   .micro-text {
     @apply font-body text-sm tracking-widest uppercase;
+  }
+
+  /* Custom class for Quicksand increased letter spacing if needed beyond tracking-wider */
+  .tracking-body-loose {
+    letter-spacing: 0.05em;
   }
 }
 
 .cursor-dot {
   width: 8px;
   height: 8px;
-  background-color: rgba(31, 107, 73, 0.8);
+  background-color: rgba(31, 107, 73, 0.8); /* accent-green */
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
@@ -60,10 +69,10 @@
 .cursor-dot.expanded {
   width: 24px;
   height: 24px;
-  background-color: rgba(31, 107, 73, 0.4);
+  background-color: rgba(31, 107, 73, 0.4); /* accent-green with more transparency */
 }
 
-/* Scroll animations */
+/* Scroll animations (can be removed if RevealSection is used everywhere) */
 .fade-in-up {
   opacity: 0;
   transform: translateY(30px);
@@ -97,7 +106,6 @@
   transform: translateX(0);
 }
 
-/* Gradient transitions */
 .gradient-transition {
   background: linear-gradient(to bottom, rgba(233, 233, 231, 1) 0%, rgba(40, 54, 45, 1) 100%);
   height: 100px;

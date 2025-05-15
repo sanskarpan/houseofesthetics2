@@ -53,11 +53,11 @@ export default function Navigation() {
       surfaces: ["Panellings", "Partition Screens"],
       beds: ["Beds"],
     },
-    outdoor: {
-      seating: ["Chairs", "Daybeds | Chaises | Benches", "Lounge Chairs", "Ottomans | Stools", "Sofas"],
-      tables: ["Side Tables", "Coffee Tables", "Dining Tables"],
-      complements: ["Trolleys"],
-    },
+    // outdoor: {
+    //   seating: ["Chairs", "Daybeds | Chaises | Benches", "Lounge Chairs", "Ottomans | Stools", "Sofas"],
+    //   tables: ["Side Tables", "Coffee Tables", "Dining Tables"],
+    //   complements: ["Trolleys"],
+    // },
   }
 
   const aboutUsLinks = [
@@ -65,7 +65,7 @@ export default function Navigation() {
     { name: "Brand Values", path: "/story#values" },
     { name: "Meet The Directors", path: "/story#directors" },
     { name: "House of Esthete Design Studio", path: "/story#studio" },
-    { name: "Meet The Designers", path: "/story#designers" },
+    // { name: "Meet The Designers", path: "/story#designers" },
   ]
 
   return (
@@ -127,7 +127,7 @@ export default function Navigation() {
                         ))}
                       </div>
                     </div>
-                    <div>
+                    {/* <div>
                       <h3 className="font-display text-sm uppercase tracking-wider mb-4 text-deep-neutral">Outdoor</h3>
                       <div className="grid grid-cols-3 gap-6">
                         {Object.entries(productCategories.outdoor).map(([category, items]) => (
@@ -151,7 +151,7 @@ export default function Navigation() {
                           </div>
                         ))}
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               )}
