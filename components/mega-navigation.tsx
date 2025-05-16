@@ -31,7 +31,7 @@ const aboutUsLinks = [
   { name: "Brand Values", path: "/story#values" },
   { name: "Meet The Directors", path: "/story#directors" },
   { name: "House of Esthete Design Studio", path: "/story#studio" },
-  { name: "Meet The Designers", path: "/story#designers" },
+  // { name: "Meet The Designers", path: "/story#designers" },
 ]
 
 export default function MegaNavigation() {
@@ -86,7 +86,7 @@ export default function MegaNavigation() {
       className="fixed top-0 left-0 w-full z-[60] transition-colors duration-300 ease-out"
       style={{
         backgroundColor: `hsla(var(--background-light), ${navbarOpacity})`,
-        backdropFilter: scrollPosition > 20 ? "blur(8px)" : "none",
+        backdropFilter: scrollPosition > 20 ? "blur(1px)" : "none",
       }}
       ref={dropdownRef}
     >
