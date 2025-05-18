@@ -7,6 +7,7 @@ import { ChevronRight } from "lucide-react"
 import ProductInquiry from "@/components/product-inquiry"
 import { motion, useInView } from "framer-motion"
 
+const productSpecificWhatsAppLink = "https://wa.me/919848000000";
 const products = [
   {
     id: "duchess",
@@ -271,12 +272,30 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               ))}
             </div>
 
+            <div className="flex items-center gap-3">
             <button
               onClick={() => setIsInquiryOpen(true)}
               className="inline-block font-body text-sm uppercase tracking-widest border border-deep-neutral px-8 py-3 hover:bg-accent-green hover:border-accent-green hover:text-background-light transition-all duration-300"
             >
               Enquire
             </button>
+            <Link
+              href={productSpecificWhatsAppLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-11 h-11 border border-deep-neutral rounded-sm text-deep-neutral hover:bg-green-500 hover:text-white hover:border-green-500 transition-all duration-300"
+              aria-label="Inquire on WhatsApp"
+              title="Inquire on WhatsApp"
+            >
+              <Image
+                src="/whatsappIcon.png"
+                alt="Whatsapp"
+                width={24}
+                height={24}
+              />
+            </Link>
+          </div>
+
           </motion.div>
         </div>
       </div>

@@ -33,6 +33,7 @@ const aboutUsLinks = [
   { name: "House of Esthete Design Studio", path: "/story#studio" },
   // { name: "Meet The Designers", path: "/story#designers" },
 ]
+const generalWhatsAppLink = "https://wa.me/919848000000";
 
 export default function MegaNavigation() {
   const [scrollPosition, setScrollPosition] = useState(0)
@@ -225,6 +226,21 @@ export default function MegaNavigation() {
             >
               <Linkedin size={18} />
             </Link>
+            <Link
+              href={generalWhatsAppLink}
+              target="_blank" rel="noopener noreferrer"
+              className={`${navLinkTextColor} hover:text-accent-green transition-colors duration-300 rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-green hover:text-accent-green transition-colors`}
+              aria-label="WhatsApp"
+            >
+              <Image
+                src="/whatsappIcon.png"
+                alt="Whatsapp"
+                width={24}
+                height={24}
+                className="rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-green hover:text-accent-green transition-colors"
+              />
+            </Link>
+
             <button
               className={`${navLinkTextColor} hover:text-accent-green transition-colors duration-300`}
               aria-label="Search"

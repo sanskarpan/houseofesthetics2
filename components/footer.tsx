@@ -1,5 +1,9 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Instagram, Linkedin } from "lucide-react"
+
+// Define WhatsApp link
+const generalWhatsAppLink = "https://wa.me/919848000000";
 
 export default function Footer() {
   return (
@@ -86,6 +90,21 @@ export default function Footer() {
                     <span className="sr-only">LinkedIn</span>
                     <Linkedin size={18} />
                   </Link>
+                  <Link
+                href={generalWhatsAppLink}
+                target="_blank" rel="noopener noreferrer"
+                className="opacity-80 hover:opacity-100 transition-opacity duration-300"
+                aria-label="WhatsApp"
+              >
+                <Image
+                src="/whatsappIcon.png"
+                alt="Whatsapp"
+                width={24}
+                height={24}
+                // className="rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-green hover:text-accent-green transition-colors"
+                className="opacity-80 hover:opacity-100 transition-opacity duration-300"
+              />
+              </Link>
                 </div>
               </li>
             </ul>
