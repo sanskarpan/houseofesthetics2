@@ -22,24 +22,21 @@ export default function ManufacturingVideo() {
   return (
     <section 
       ref={ref} 
-      className="w-full py-0 relative overflow-hidden min-h-[70vh] md:min-h-screen flex items-center justify-center" // Removed bg-deep-neutral, py-24/32
+      className="w-full py-0 relative overflow-hidden min-h-[70vh] md:min-h-screen flex items-center justify-center"
     >
-      {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
-          src="/videos/manufacturing_video.mp4" //  YOUR ACTUAL VIDEO PATH
+          src="/videos/manufacturing_video.mp4"
           className="w-full h-full object-cover"
           autoPlay
           loop
           muted
           playsInline
         />
-        {/* Optional: Dark overlay for better text contrast */}
         <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
-      {/* Text Overlay Content */}
       <div className="relative z-10 container mx-auto px-6 text-background-light">
         <motion.div
           initial="hidden"
@@ -55,13 +52,16 @@ export default function ManufacturingVideo() {
               },
             },
           }}
-          className="text-center" // Removed mb-16 as text is overlaid
+          className="text-center"
         >
-          <h2 className="section-title !text-3xl md:!text-5xl lg:!text-6xl !mb-4 md:!mb-6 text-background-light"> {/* Ensure text is light */}
+          <h2 className="section-title !text-3xl md:!text-5xl lg:!text-6xl !mb-4 md:!mb-6 text-background-light">
             Craftsmanship in Motion
           </h2>
-          <p className="body-text max-w-2xl mx-auto text-background-light/90 tracking-body-loose"> {/* Ensure text is light */}
-            Witness the meticulous process behind each House of Esthete creation.
+          {/* MODIFIED DESCRIPTION BELOW */}
+          <p className="body-text max-w-2xl mx-auto text-background-light/90 tracking-body-loose">
+            Witness the meticulous process and passion poured into each House of Esthete creation. 
+            From raw material selection to the final polish, our artisans blend traditional techniques 
+            with innovative design to craft pieces of enduring beauty and soul.
           </p>
         </motion.div>
       </div>

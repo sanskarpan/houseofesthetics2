@@ -30,12 +30,10 @@ export default function ProductInquiry({ productName, isOpen, onClose }: Product
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false)
       setIsSubmitted(true)
 
-      // Reset form after 3 seconds
       setTimeout(() => {
         onClose()
         setIsSubmitted(false)
@@ -56,7 +54,7 @@ export default function ProductInquiry({ productName, isOpen, onClose }: Product
       <div className="bg-white max-w-md w-full relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-800 hover:text-accent-green transition-colors"
+          className="absolute top-4 right-4 text-gray-800 hover:text-accent-black transition-colors" // MODIFIED
           aria-label="Close"
         >
           <X size={24} />
@@ -84,7 +82,7 @@ export default function ProductInquiry({ productName, isOpen, onClose }: Product
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full border border-gray-300 p-2 font-body text-sm focus:outline-none focus:border-accent-green"
+                    className="w-full border border-gray-300 p-2 font-body text-sm focus:outline-none focus:border-accent-black" // MODIFIED
                   />
                 </div>
 
@@ -99,7 +97,7 @@ export default function ProductInquiry({ productName, isOpen, onClose }: Product
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full border border-gray-300 p-2 font-body text-sm focus:outline-none focus:border-accent-green"
+                    className="w-full border border-gray-300 p-2 font-body text-sm focus:outline-none focus:border-accent-black" // MODIFIED
                   />
                 </div>
 
@@ -114,7 +112,7 @@ export default function ProductInquiry({ productName, isOpen, onClose }: Product
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full border border-gray-300 p-2 font-body text-sm focus:outline-none focus:border-accent-green"
+                    className="w-full border border-gray-300 p-2 font-body text-sm focus:outline-none focus:border-accent-black" // MODIFIED
                   />
                 </div>
 
@@ -128,14 +126,14 @@ export default function ProductInquiry({ productName, isOpen, onClose }: Product
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
-                    className="w-full border border-gray-300 p-2 font-body text-sm focus:outline-none focus:border-accent-green"
+                    className="w-full border border-gray-300 p-2 font-body text-sm focus:outline-none focus:border-accent-black" // MODIFIED
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-deep-neutral text-white py-3 font-body text-sm uppercase tracking-wider hover:bg-accent-green transition-colors disabled:opacity-70"
+                  className="w-full bg-deep-neutral text-white py-3 font-body text-sm uppercase tracking-wider hover:bg-accent-black transition-colors disabled:opacity-70" // MODIFIED hover:bg
                 >
                   {isSubmitting ? "Submitting..." : "Submit"}
                 </button>

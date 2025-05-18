@@ -77,7 +77,7 @@ export default function StoryPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <RevealSection delay={0.2}>
               <div className="text-center">
-                <div className="w-20 h-20 rounded-full bg-accent-green/20 flex items-center justify-center mx-auto mb-6">
+                <div className="w-20 h-20 rounded-full bg-accent-black/20 flex items-center justify-center mx-auto mb-6"> {/* MODIFIED */}
                   <span className="font-display text-2xl">01</span>
                 </div>
                 <h3 className="font-display text-xl tracking-wider mb-4">Timelessness</h3>
@@ -90,7 +90,7 @@ export default function StoryPage() {
 
             <RevealSection delay={0.4}>
               <div className="text-center">
-                <div className="w-20 h-20 rounded-full bg-accent-green/20 flex items-center justify-center mx-auto mb-6">
+                <div className="w-20 h-20 rounded-full bg-accent-black/20 flex items-center justify-center mx-auto mb-6"> {/* MODIFIED */}
                   <span className="font-display text-2xl">02</span>
                 </div>
                 <h3 className="font-display text-xl tracking-wider mb-4">Craftsmanship</h3>
@@ -103,7 +103,7 @@ export default function StoryPage() {
 
             <RevealSection delay={0.6}>
               <div className="text-center">
-                <div className="w-20 h-20 rounded-full bg-accent-green/20 flex items-center justify-center mx-auto mb-6">
+                <div className="w-20 h-20 rounded-full bg-accent-black/20 flex items-center justify-center mx-auto mb-6"> {/* MODIFIED */}
                   <span className="font-display text-2xl">03</span>
                 </div>
                 <h3 className="font-display text-xl tracking-wider mb-4">Intentionality</h3>
@@ -117,68 +117,85 @@ export default function StoryPage() {
         </div>
       </section>
 
-      {/* Directors Section */}
+      {/* Directors Section, Design Studio Section, etc. remain unchanged in terms of color logic as they don't use accent-black directly */}
       <section id="directors" className="py-24 md:py-32 bg-background-light">
-        <div className="container mx-auto px-6">
-          <RevealSection>
-            <h2 className="section-title text-center mb-16">Meet The Directors</h2>
-          </RevealSection>
+  <div className="container mx-auto px-6 flex flex-col items-center">
+    <RevealSection>
+      <h2 className="section-title text-center mb-16">Meet The Directors</h2>
+    </RevealSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <RevealSection delay={0.2} direction="left">
-              <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                <div className="w-40 h-40 rounded-full overflow-hidden relative flex-shrink-0">
-                  <Image
-                    src="/Frame 7.png?height=400&width=400&text=Director"
-                    alt="Creative Director"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-display text-xl tracking-wider mb-2 text-center md:text-left">
-                    Alexandra Esthete
-                  </h3>
-                  <p className="font-body text-sm text-deep-neutral/80 mb-4 text-center md:text-left">
-                    Creative Director
-                  </p>
-                  <p className="font-body">
-                    With a background in fine arts and architecture, Alexandra brings a unique perspective to the
-                    brand's creative vision. Her approach is defined by a deep appreciation for the dialogue between
-                    form and function.
-                  </p>
-                </div>
-              </div>
-            </RevealSection>
-
-            <RevealSection delay={0.4} direction="right">
-              <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                <div className="w-40 h-40 rounded-full overflow-hidden relative flex-shrink-0">
-                  <Image
-                    src="/Frame 7.png?height=400&width=400&text=Director"
-                    alt="Design Director"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-display text-xl tracking-wider mb-2 text-center md:text-left">Marcus Esthete</h3>
-                  <p className="font-body text-sm text-deep-neutral/80 mb-4 text-center md:text-left">
-                    Design Director
-                  </p>
-                  <p className="font-body">
-                    Marcus brings over two decades of experience in product design to House of Esthete. His work is
-                    characterized by a meticulous attention to detail and a profound understanding of materials and
-                    manufacturing processes.
-                  </p>
-                </div>
-              </div>
-            </RevealSection>
+    {/* Changed grid-cols-2 to grid-cols-3 */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+      <RevealSection delay={0.2} direction="left">
+        <div className="flex flex-col md:flex-col gap-8 items-center text-center">
+          <div className="w-40 h-40 rounded-full overflow-hidden relative flex-shrink-0">
+            <Image
+              src="/Frame 7.png?height=400&width=400&text=Director"
+              alt="Creative Director"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h3 className="font-display text-xl tracking-wider mb-2">Alexandra Esthete</h3>
+            <p className="font-body text-sm text-deep-neutral/80 mb-4">Creative Director</p>
+            <p className="font-body">
+              With a background in fine arts and architecture, Alexandra brings a unique perspective to the brand's
+              creative vision. Her approach is defined by a deep appreciation for the dialogue between form and
+              function.
+            </p>
           </div>
         </div>
-      </section>
+      </RevealSection>
 
-      {/* Design Studio Section */}
+      <RevealSection delay={0.4} direction="right">
+        <div className="flex flex-col md:flex-col gap-8 items-center text-center">
+          <div className="w-40 h-40 rounded-full overflow-hidden relative flex-shrink-0">
+            <Image
+              src="/Frame 7.png?height=400&width=400&text=Director"
+              alt="Design Director"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h3 className="font-display text-xl tracking-wider mb-2">Marcus Esthete</h3>
+            <p className="font-body text-sm text-deep-neutral/80 mb-4">Design Director</p>
+            <p className="font-body">
+              Marcus brings over two decades of experience in product design to House of Esthete. His work is
+              characterized by a meticulous attention to detail and a profound understanding of materials and
+              manufacturing processes.
+            </p>
+          </div>
+        </div>
+      </RevealSection>
+
+      <RevealSection delay={0.6} direction="left">
+        <div className="flex flex-col md:flex-col gap-8 items-center text-center">
+          <div className="w-40 h-40 rounded-full overflow-hidden relative flex-shrink-0">
+            <Image
+              src="/Frame 7.png?height=400&width=400&text=Director"
+              alt="Creative Director"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h3 className="font-display text-xl tracking-wider mb-2">Alexandra Esthete</h3>
+            <p className="font-body text-sm text-deep-neutral/80 mb-4">Creative Director</p>
+            <p className="font-body">
+              With a background in fine arts and architecture, Alexandra brings a unique perspective to the brand's
+              creative vision. Her approach is defined by a deep appreciation for the dialogue between form and
+              function.
+            </p>
+          </div>
+        </div>
+      </RevealSection>
+    </div>
+  </div>
+</section>
+
+
       <section id="studio" className="py-24 md:py-32 bg-background-dark text-background">
         <div className="container mx-auto px-6">
           <RevealSection>
@@ -218,38 +235,6 @@ export default function StoryPage() {
           </div>
         </div>
       </section>
-
-      {/* Designers Section */}
-      {/* <section id="designers" className="py-24 md:py-32 bg-background-light">
-        <div className="container mx-auto px-6">
-          <RevealSection>
-            <h2 className="section-title text-center mb-16">Meet The Designers</h2>
-          </RevealSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[1, 2, 3].map((designer) => (
-              <RevealSection key={designer} delay={0.2 * designer}>
-                <div className="text-center">
-                  <div className="w-40 h-40 rounded-full overflow-hidden relative mx-auto mb-6">
-                    <Image
-                      src={`/Frame 7.png?height=400&width=400&text=Designer ${designer}`}
-                      alt={`Designer ${designer}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <h3 className="font-display text-xl tracking-wider mb-2">Designer Name</h3>
-                  <p className="font-body text-sm text-deep-neutral/80 mb-4">Senior Designer</p>
-                  <p className="font-body">
-                    With a background in industrial design and fine arts, our designers bring a unique perspective to
-                    each project, combining technical expertise with artistic vision.
-                  </p>
-                </div>
-              </RevealSection>
-            ))}
-          </div>
-        </div>
-      </section> */}
     </div>
   )
 }

@@ -83,7 +83,7 @@ export default function Navigation() {
             <Image
               src={logoVariant === "light" ? "/logo.jpeg" : "/logo.jpeg"}
               alt="House of Esthete"
-              width={120}
+              width={150}
               height={40}
               className={`transition-opacity duration-500 ${logoVariant === "light" ? "invert" : ""}`}
             />
@@ -94,7 +94,7 @@ export default function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("products")}
-                className={`flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-green transition-colors duration-300 ${textColor}`}
+                className={`flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
               >
                 Our Collections <ChevronDown size={16} className="ml-1" />
               </button>
@@ -115,7 +115,7 @@ export default function Navigation() {
                                 <li key={item}>
                                   <Link
                                     href={`/collections/${category.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                                    className="font-body text-xs hover:text-accent-green transition-colors duration-300"
+                                    className="font-body text-xs hover:text-accent-black transition-colors duration-300"
                                     onClick={() => setActiveDropdown(null)}
                                   >
                                     {item}
@@ -140,7 +140,7 @@ export default function Navigation() {
                                 <li key={item}>
                                   <Link
                                     href={`/collections/outdoor/${category.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                                    className="font-body text-xs hover:text-accent-green transition-colors duration-300"
+                                    className="font-body text-xs hover:text-accent-black transition-colors duration-300"
                                     onClick={() => setActiveDropdown(null)}
                                   >
                                     {item}
@@ -161,7 +161,7 @@ export default function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("about")}
-                className={`flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-green transition-colors duration-300 ${textColor}`}
+                className={`flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
               >
                 Our Story <ChevronDown size={16} className="ml-1" />
               </button>
@@ -173,7 +173,7 @@ export default function Navigation() {
                       <li key={link.name}>
                         <Link
                           href={link.path}
-                          className="font-body text-sm hover:text-accent-green transition-colors duration-300 block py-1"
+                          className="font-body text-sm hover:text-accent-black transition-colors duration-300 block py-1"
                           onClick={() => setActiveDropdown(null)}
                         >
                           {link.name}
@@ -187,14 +187,14 @@ export default function Navigation() {
 
             <Link
               href="/media"
-              className={`font-display text-sm tracking-widest uppercase hover:text-accent-green transition-colors duration-300 ${textColor}`}
+              className={`font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
             >
               Media
             </Link>
 
             <Link
               href="/contact"
-              className={`font-display text-sm tracking-widest uppercase hover:text-accent-green transition-colors duration-300 ${textColor}`}
+              className={`font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
             >
               Contact Us
             </Link>
@@ -203,20 +203,20 @@ export default function Navigation() {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
-              className={`${textColor} hover:text-accent-green transition-colors duration-300`}
+              className={`${textColor} hover:text-accent-black transition-colors duration-300`}
               aria-label="Instagram"
             >
               <Instagram size={18} />
             </Link>
             <Link
               href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
-              className={`${textColor} hover:text-accent-green transition-colors duration-300`}
+              className={`${textColor} hover:text-accent-black transition-colors duration-300`}
               aria-label="LinkedIn"
             >
               <Linkedin size={18} />
             </Link>
             <button
-              className={`${textColor} hover:text-accent-green transition-colors duration-300`}
+              className={`${textColor} hover:text-accent-black transition-colors duration-300`}
               aria-label="Search"
             >
               <Search size={18} />
@@ -249,7 +249,7 @@ export default function Navigation() {
               <li>
                 <Link
                   href="/collections"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
                   onClick={() => setActiveDropdown(null)}
                 >
                   Our Collections
@@ -258,7 +258,7 @@ export default function Navigation() {
               <li>
                 <Link
                   href="/story"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
                   onClick={() => setActiveDropdown(null)}
                 >
                   Our Story
@@ -267,7 +267,7 @@ export default function Navigation() {
               <li>
                 <Link
                   href="/media"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
                   onClick={() => setActiveDropdown(null)}
                 >
                   Media
@@ -276,7 +276,7 @@ export default function Navigation() {
               <li>
                 <Link
                   href="/contact"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
                   onClick={() => setActiveDropdown(null)}
                 >
                   Contact Us
@@ -287,20 +287,20 @@ export default function Navigation() {
           <div className="flex items-center space-x-6 mt-12">
             <Link
               href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
-              className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Instagram"
             >
               <Instagram size={24} />
             </Link>
             <Link
               href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
-              className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="LinkedIn"
             >
               <Linkedin size={24} />
             </Link>
             <button
-              className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Search"
             >
               <Search size={24} />

@@ -84,13 +84,13 @@ export default function ProductGallery() {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-accent-green/0 transition-all duration-500 group-hover:bg-accent-green/20"></div>
+                <div className="absolute inset-0 bg-accent-black/0 transition-all duration-500 group-hover:bg-accent-black/20"></div> {/* MODIFIED */}
               </div>
               <h3 className="font-display text-xl tracking-wider mb-2">{product.name}</h3>
               <p className="font-body text-sm text-deep-neutral/80 mb-4">{product.description}</p>
               <Link
                 href={`/collections/${product.id}`}
-                className="inline-block font-body text-xs uppercase tracking-widest text-accent-green hover:opacity-80 transition-opacity duration-300"
+                className="inline-block font-body text-xs uppercase tracking-widest text-accent-black hover:opacity-80 transition-opacity duration-300" // MODIFIED
               >
                 Discover
               </Link>
@@ -101,7 +101,7 @@ export default function ProductGallery() {
         <div className="text-center mt-16">
           <Link
             href="/collections"
-            className="inline-block font-body text-sm uppercase tracking-widest border border-deep-neutral/30 px-8 py-3 hover:bg-accent-green hover:border-accent-green hover:text-background-light transition-all duration-300"
+            className="inline-block font-body text-sm uppercase tracking-widest border border-deep-neutral/30 px-8 py-3 hover:bg-accent-black hover:border-accent-black hover:text-background-light transition-all duration-300" // MODIFIED
           >
             View All Collections
           </Link>

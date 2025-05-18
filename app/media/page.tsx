@@ -112,7 +112,7 @@ export default function MediaPage() {
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-accent-green/0 transition-all duration-500 group-hover:bg-accent-green/20"></div>
+                    <div className="absolute inset-0 bg-accent-black/0 transition-all duration-500 group-hover:bg-accent-black/20"></div> {/* MODIFIED */}
                   </div>
                   <p className="font-body text-sm text-deep-neutral/70 mb-2">{item.date}</p>
                   <h3 className="font-display text-xl tracking-wider mb-2">{item.title}</h3>
@@ -124,28 +124,6 @@ export default function MediaPage() {
         </div>
       </section>
 
-      {/* Press Kit Section */}
-      {/* <section className="py-24 md:py-32 bg-background-dark text-background">
-        <div className="container mx-auto px-6">
-          <RevealSection>
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="section-title mb-6">Press Kit</h2>
-              <p className="body-text mb-8">
-                Download our press kit for high-resolution images, product information, and brand assets.
-              </p>
-
-              <Link
-                href="#"
-                className="inline-block font-body text-sm uppercase tracking-widest border border-background-light/30 px-8 py-3 hover:bg-background-light hover:text-deep-neutral transition-all duration-300"
-              >
-                Download Press Kit
-              </Link>
-            </div>
-          </RevealSection>
-        </div>
-      </section> */}
-
-      {/* Contact Section */}
       <section className="py-24 md:py-32 bg-background-light">
         <div className="container mx-auto px-6">
           <RevealSection>

@@ -1,3 +1,4 @@
+// File: tailwind.config.ts
 import type { Config } from "tailwindcss"
 const config: Config = {
   darkMode: ["class"],
@@ -45,8 +46,8 @@ const config: Config = {
         },
         "background-light": "hsl(var(--background-light))",
         "background-dark": "hsl(var(--background-dark))",
-        "accent-green": "hsl(var(--accent-green))",
-        "deep-neutral": "hsl(var(--deep-neutral))",
+        "accent-black": "hsl(var(--accent-black))", 
+        "deep-neutral": "hsl(var(--deep-neutral))", // This will now pick up the new dark gray value
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -57,9 +58,10 @@ const config: Config = {
         display: ["var(--font-league-spartan)", "sans-serif"],
         body: ["var(--font-quicksand)", "sans-serif"],
       },
-      letterSpacing: { // Added custom letterSpacing
-        'body-loose': '0.05em', // For Quicksand, can be applied with tracking-body-loose
-        'display-tight': '-0.025em' // Example for tighter display font if needed
+      letterSpacing: { 
+        'body-loose': '0.05em', 
+        'display-tight': '-0.025em',
+        'ultra-wide': '0.3em', 
       },
       transitionDuration: {
         "2000": "2000ms",
@@ -69,7 +71,7 @@ const config: Config = {
         "fade-in": "fadeIn 2s ease-in-out forwards",
         "slide-up": "slideUp 1.5s ease-out forwards",
         "text-reveal": "textReveal 1.8s ease forwards",
-        "caret-blink": "caret-blink 1.25s ease-out infinite", // Added from ui/input-otp
+        "caret-blink": "caret-blink 1.25s ease-out infinite", 
       },
       keyframes: {
         fadeIn: {
@@ -84,7 +86,7 @@ const config: Config = {
           "0%": { transform: "translateY(100%)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
-        "caret-blink": { // Added from ui/input-otp
+        "caret-blink": { 
           "0%,70%,100%": { opacity: "1" },
           "20%,50%": { opacity: "0" },
         },

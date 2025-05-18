@@ -59,7 +59,7 @@ export default function Home() {
                 <div className="inline-block relative group">
                   <Link href="/story" className="font-body text-sm uppercase tracking-widest">
                     Discover our story
-                    <span className="block h-[1px] w-0 bg-accent-green absolute bottom-0 left-0 transition-all duration-300 group-hover:w-full"></span>
+                    <span className="block h-[1px] w-0 bg-accent-black absolute bottom-0 left-0 transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 </div>
               </RevealSection>
@@ -128,37 +128,6 @@ export default function Home() {
           </RevealSection>
         </div>
       </section>
-
-      {/* Newsletter Section */}
-      {/* <section className="py-24 md:py-32 bg-background-light">
-        <div className="container mx-auto px-6">
-          <RevealSection>
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="section-subtitle mb-6">Join Our Journal</h2>
-              <p className="body-text mb-8">
-                Subscribe to receive curated insights into our process, new collections, and exclusive events.
-              </p>
-
-              <form className="max-w-md mx-auto">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <input
-                    type="email"
-                    placeholder="Your email address"
-                    className="flex-1 px-4 py-3 bg-transparent border border-deep-neutral/30 focus:border-deep-neutral focus:outline-none font-body text-sm"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="px-6 py-3 bg-accent-green text-background-light font-body text-sm uppercase tracking-widest hover:bg-accent-green/90 transition-colors duration-300"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </form>
-            </div>
-          </RevealSection>
-        </div>
-      </section> */}
     </div>
   )
 }

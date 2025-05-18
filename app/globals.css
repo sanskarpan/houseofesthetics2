@@ -1,3 +1,4 @@
+/* File: app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,19 +7,20 @@
   :root {
     --background-light: 60 6% 91%; /* E9E9E7 */
     --background-dark: 60 5% 85%; /* D9D9D6 */
-    --accent-green: 152 55% 27%; /* #1F6B49 */
-    --deep-neutral: 144 14% 19%; /* #28362D */
-
+    /* --deep-neutral: 144 14% 19%; /* #28362D */ /* MODIFIED - Original Greenish Dark */
+    --deep-neutral: 0 0% 10%; /* #1A1A1A - True Dark Gray/Near Black */ /* MODIFIED */
+    --accent-black: var(--deep-neutral); 
+    
     --radius: 0.5rem;
   }
 
   html {
-    scroll-behavior: smooth; /* Added for smooth scrolling to #ids */
+    scroll-behavior: smooth;
   }
 
   body {
     @apply font-body text-deep-neutral;
-    cursor: none; /* For custom cursor */
+    cursor: none; 
   }
 
   h1,
@@ -27,52 +29,52 @@
   h4,
   h5,
   h6 {
-    @apply font-display tracking-normal; /* Reduced from tracking-wider */
+    @apply font-display tracking-normal; 
   }
 }
 
 @layer components {
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-display uppercase tracking-tight md:tracking-normal mb-8; /* Adjusted tracking */
+    @apply text-3xl md:text-4xl lg:text-5xl font-display uppercase tracking-tight md:tracking-normal mb-8;
   }
 
   .section-subtitle {
-    @apply text-xl md:text-2xl font-display tracking-tight md:tracking-normal mb-4; /* Adjusted tracking */
+    @apply text-xl md:text-2xl font-display tracking-tight md:tracking-normal mb-4;
   }
 
   .body-text {
-    @apply font-body text-base md:text-lg leading-relaxed tracking-wider; /* Increased from tracking-wide */
+    @apply font-body text-base md:text-lg leading-relaxed tracking-wider;
   }
 
   .micro-text {
     @apply font-body text-sm tracking-widest uppercase;
   }
 
-  /* Custom class for Quicksand increased letter spacing if needed beyond tracking-wider */
   .tracking-body-loose {
     letter-spacing: 0.05em;
   }
 }
 
 .cursor-dot {
-  width: 8px;
-  height: 8px;
-  background-color: rgba(31, 107, 73, 0.8); /* accent-green */
+  width: 15px; 
+  height: 15px; 
+  background-color: hsl(var(--deep-neutral)); 
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s, background-color 0.3s;
+  transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s; 
+  box-shadow: 0 0 0 1px hsla(var(--background-light), 0.7); 
 }
 
 .cursor-dot.expanded {
-  width: 24px;
-  height: 24px;
-  background-color: rgba(31, 107, 73, 0.4); /* accent-green with more transparency */
+  width: 28px; 
+  height: 28px; 
+  background-color: hsla(var(--deep-neutral), 0.4);
+  box-shadow: 0 0 0 1px hsla(var(--background-light), 0.5); 
 }
 
-/* Scroll animations (can be removed if RevealSection is used everywhere) */
 .fade-in-up {
   opacity: 0;
   transform: translateY(30px);
@@ -107,7 +109,7 @@
 }
 
 .gradient-transition {
-  background: linear-gradient(to bottom, rgba(233, 233, 231, 1) 0%, rgba(40, 54, 45, 1) 100%);
+  background: linear-gradient(to bottom, rgba(233, 233, 231, 1) 0%, hsl(var(--deep-neutral)) 100%); /* MODIFIED */
   height: 100px;
   width: 100%;
 }

@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Instagram, Linkedin, Search, ChevronDown, ChevronRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-
+import WhatsAppIcon from '@/components/icons/whatsapp-icon';
 // Updated product structure for "Our Collections" dropdown
 const collectionsNavProducts = {
   Furniture: {
@@ -66,13 +66,9 @@ export default function MegaNavigation() {
   const navbarOpacity = Math.min(scrollPosition / 300, 0.9)
   const navLinkTextColor = scrollPosition > 50 ? "text-deep-neutral" : "text-background-light"
   
-  // Logo style based on scroll position
-  // TextLogo.png is black text on transparent BG
-  // Initial state (transparent navbar): invert to white text
-  // Scrolled state (light navbar): original black text
   const logoFilterStyle = scrollPosition <= 50 
-    ? { filter: "invert(1) brightness(1.5) saturate(0)", transition: "filter 0.3s ease-in-out" } 
-    : { filter: "none", transition: "filter 0.3s ease-in-out" };
+    ? { filter: "invert(1) brightness(1.5) saturate(0)", transition: "filter 1s ease-in-out" } // MODIFIED DURATION
+    : { filter: "none", transition: "filter 1s ease-in-out" }; // MODIFIED DURATION
 
   const toggleDropdown = (dropdown: string) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown)
@@ -92,16 +88,16 @@ export default function MegaNavigation() {
       ref={dropdownRef}
     >
       <div className="container mx-auto px-6">
-        <div className="flex justify-between items-center py-2">
+        <div className="flex justify-between items-center py-4">
           <Link href="/" className="relative z-10 block">
             <Image
-              src="/TextLogo.png" // Updated to TextLogo.png
+              src="/TextLogo.png"
               alt="House of Esthete"
               width={174} 
               height={38} 
               priority
-              className="transition-filter duration-300 ease-in-out" // Class for transition
-              style={logoFilterStyle} // Apply dynamic filter style
+              className="transition-filter duration-1000 ease-in-out" // MODIFIED DURATION
+              style={logoFilterStyle}
             />
           </Link>
 
@@ -109,7 +105,7 @@ export default function MegaNavigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("collections")}
-                className={`font-display text-sm tracking-normal uppercase hover:text-accent-green transition-colors duration-300 flex items-center ${navLinkTextColor}`}
+                className={`font-display text-sm tracking-normal uppercase hover:text-accent-black transition-colors duration-300 flex items-center ${navLinkTextColor}`}
               >
                 Our Collections
                 <ChevronDown
@@ -124,7 +120,6 @@ export default function MegaNavigation() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.2 }}
-                    // Adjusted width and layout for simpler content
                     className="absolute left-0 mt-3 w-auto min-w-[500px] max-w-[700px] bg-background-light shadow-lg p-6 grid grid-cols-2 gap-x-8 gap-y-6 z-50 rounded-sm"
                   >
                     {Object.entries(collectionsNavProducts).map(([mainCategory, subCategories]) => (
@@ -138,7 +133,7 @@ export default function MegaNavigation() {
                                 <li key={item.name}>
                                   <Link
                                     href={item.path}
-                                    className="font-body text-xs hover:text-accent-green transition-colors text-deep-neutral/70 tracking-body-loose"
+                                    className="font-body text-xs hover:text-accent-black transition-colors text-deep-neutral/70 tracking-body-loose"
                                     onClick={() => { setActiveDropdown(null); setIsOpen(false);}}
                                   >
                                     {item.name}
@@ -155,11 +150,10 @@ export default function MegaNavigation() {
               </AnimatePresence>
             </div>
 
-            {/* About Us, Media, Contact Us links remain the same */}
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("about")}
-                className={`font-display text-sm tracking-normal uppercase hover:text-accent-green transition-colors duration-300 flex items-center ${navLinkTextColor}`}
+                className={`font-display text-sm tracking-normal uppercase hover:text-accent-black transition-colors duration-300 flex items-center ${navLinkTextColor}`}
               >
                 Our Story
                 <ChevronDown
@@ -181,7 +175,7 @@ export default function MegaNavigation() {
                         <li key={item.name}>
                           <Link
                             href={item.path}
-                            className="font-body text-sm hover:text-accent-green transition-colors text-deep-neutral tracking-body-loose"
+                            className="font-body text-sm hover:text-accent-black transition-colors text-deep-neutral tracking-body-loose"
                             onClick={() => { setActiveDropdown(null); setIsOpen(false);}}
                           >
                             {item.name}
@@ -196,7 +190,7 @@ export default function MegaNavigation() {
 
             <Link
               href="/media"
-              className={`font-display text-sm tracking-normal uppercase hover:text-accent-green transition-colors duration-300 ${navLinkTextColor}`}
+              className={`font-display text-sm tracking-normal uppercase hover:text-accent-black transition-colors duration-300 ${navLinkTextColor}`}
               onClick={() => { setActiveDropdown(null); setIsOpen(false);}}
             >
               Media
@@ -204,7 +198,7 @@ export default function MegaNavigation() {
 
             <Link
               href="/contact"
-              className={`font-display text-sm tracking-normal uppercase hover:text-accent-green transition-colors duration-300 ${navLinkTextColor}`}
+              className={`font-display text-sm tracking-normal uppercase hover:text-accent-black transition-colors duration-300 ${navLinkTextColor}`}
               onClick={() => { setActiveDropdown(null); setIsOpen(false);}}
             >
               Contact Us
@@ -214,14 +208,14 @@ export default function MegaNavigation() {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
-              className={`${navLinkTextColor} hover:text-accent-green transition-colors duration-300`}
+              className={`${navLinkTextColor} hover:text-accent-black transition-colors duration-300`}
               aria-label="Instagram"
             >
               <Instagram size={18} />
             </Link>
             <Link
               href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
-              className={`${navLinkTextColor} hover:text-accent-green transition-colors duration-300`}
+              className={`${navLinkTextColor} hover:text-accent-black transition-colors duration-300`}
               aria-label="LinkedIn"
             >
               <Linkedin size={18} />
@@ -229,20 +223,14 @@ export default function MegaNavigation() {
             <Link
               href={generalWhatsAppLink}
               target="_blank" rel="noopener noreferrer"
-              className={`${navLinkTextColor} hover:text-accent-green transition-colors duration-300 rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-green hover:text-accent-green transition-colors`}
+              className={`${navLinkTextColor} hover:text-accent-black transition-colors duration-300`} // Added some padding and transparent border for consistent sizing
               aria-label="WhatsApp"
             >
-              <Image
-                src="/whatsappIcon.png"
-                alt="Whatsapp"
-                width={24}
-                height={24}
-                className="rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-green hover:text-accent-green transition-colors"
-              />
+              <WhatsAppIcon className="w-6 h-6" /> {/* Or your desired size */}
             </Link>
 
             <button
-              className={`${navLinkTextColor} hover:text-accent-green transition-colors duration-300`}
+              className={`${navLinkTextColor} hover:text-accent-black transition-colors duration-300`}
               aria-label="Search"
             >
               <Search size={18} />
@@ -283,7 +271,7 @@ export default function MegaNavigation() {
                   <div className="relative">
                     <button
                       onClick={() => toggleMobileSubmenu("collections")}
-                      className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300 flex items-center justify-between w-full py-2"
+                      className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300 flex items-center justify-between w-full py-2"
                     >
                       Our Collections
                       <ChevronRight
@@ -312,7 +300,7 @@ export default function MegaNavigation() {
                                       <li key={item.name}>
                                         <Link
                                           href={item.path}
-                                          className="font-body text-sm hover:text-accent-green transition-colors text-deep-neutral/70 tracking-body-loose py-1 block"
+                                          className="font-body text-sm hover:text-accent-black transition-colors text-deep-neutral/70 tracking-body-loose py-1 block"
                                           onClick={() => setIsOpen(false)}
                                         >
                                           {item.name}
@@ -330,12 +318,11 @@ export default function MegaNavigation() {
                     </AnimatePresence>
                   </div>
                 </li>
-                {/* Story, Media, Contact links for mobile */}
                  <li>
                   <div className="relative">
                     <button
                       onClick={() => toggleMobileSubmenu("story")}
-                      className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300 flex items-center justify-between w-full py-2"
+                      className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300 flex items-center justify-between w-full py-2"
                     >
                       Our Story
                       <ChevronRight
@@ -357,7 +344,7 @@ export default function MegaNavigation() {
                               <li key={item.name}>
                                 <Link
                                   href={item.path}
-                                  className="font-body text-base hover:text-accent-green transition-colors text-deep-neutral tracking-body-loose py-1 block"
+                                  className="font-body text-base hover:text-accent-black transition-colors text-deep-neutral tracking-body-loose py-1 block"
                                   onClick={() => setIsOpen(false)}
                                 >
                                   {item.name}
@@ -373,7 +360,7 @@ export default function MegaNavigation() {
                 <li>
                   <Link
                     href="/media"
-                    className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300 py-2 block"
+                    className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300 py-2 block"
                     onClick={() => setIsOpen(false)}
                   >
                     Media
@@ -382,7 +369,7 @@ export default function MegaNavigation() {
                 <li>
                   <Link
                     href="/contact"
-                    className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-green transition-colors duration-300 py-2 block"
+                    className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300 py-2 block"
                     onClick={() => setIsOpen(false)}
                   >
                     Contact Us
@@ -393,20 +380,20 @@ export default function MegaNavigation() {
             <div className="flex items-center space-x-6 mt-10">
               <Link
                 href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
-                className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
                 aria-label="Instagram"
               >
                 <Instagram size={24} />
               </Link>
               <Link
                 href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
-                className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={24} />
               </Link>
               <button
-                className="text-deep-neutral hover:text-accent-green transition-colors duration-300"
+                className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
                 aria-label="Search"
               >
                 <Search size={24} />

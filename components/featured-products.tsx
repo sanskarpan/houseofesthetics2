@@ -11,7 +11,7 @@ const products = [
     name: "Duchess",
     type: "Chair",
     description: "An elegant chair with refined proportions and timeless appeal.",
-    image: "/duchess/Duchess6.jpg", // Assuming this is /public/duchess/Duchess6.jpg
+    image: "/duchess/Duchess6.jpg", 
     slug: "duchess-chair",
   },
   {
@@ -50,14 +50,13 @@ const products = [
 
 export default function FeaturedProducts() {
   const ref = useRef(null)
-  // Consider a slightly larger amount for when the animation triggers
   const isInView = useInView(ref, { once: true, amount: 0.2 }) 
 
   return (
     <section ref={ref} className="py-24 md:py-32 bg-background-light">
       <div className="container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }} // Changed to y for consistency
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
@@ -68,7 +67,6 @@ export default function FeaturedProducts() {
           </p>
         </motion.div>
 
-        {/* Option 1: Animate the grid container once, children fade in with stagger */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial="hidden"
@@ -78,35 +76,33 @@ export default function FeaturedProducts() {
             visible: {
               opacity: 1,
               transition: {
-                staggerChildren: 0.15, // Stagger children if they have their own simple variants
-                delayChildren: 0.2, // Delay children slightly after parent is visible
+                staggerChildren: 0.15, 
+                delayChildren: 0.2, 
                 duration: 0.5,
               },
             },
           }}
         >
           {products.map((product) => (
-            // Simpler animation for each card, or rely on parent's staggerChildren
             <motion.div
               key={product.id}
               className="group"
-              variants={{ // Child variants for staggerChildren
+              variants={{ 
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
               }}
             >
               <Link href={`/products/${product.slug}`} className="block">
-                <div className="relative aspect-square overflow-hidden mb-4 bg-gray-100"> {/* Added bg for loading placeholder */}
+                <div className="relative aspect-square overflow-hidden mb-4 bg-gray-100"> 
                   <Image
-                    src={product.image || "/placeholder.svg"} // Ensure placeholder.svg exists
+                    src={product.image || "/placeholder.svg"} 
                     alt={product.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    // CRITICAL: Add sizes prop for images with fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    priority={false} // Set true only for above-the-fold critical images
+                    priority={false}
                   />
-                  <div className="absolute inset-0 bg-accent-green/0 transition-all duration-500 group-hover:bg-accent-green/20"></div>
+                  <div className="absolute inset-0 bg-accent-black/0 transition-all duration-500 group-hover:bg-accent-black/20"></div> {/* MODIFIED */}
                 </div>
                 <h3 className="font-display text-xl tracking-wider mb-1">{product.name}</h3>
                 <p className="font-body text-sm text-deep-neutral/80 mb-2 tracking-body-loose">{product.type}</p>
@@ -119,7 +115,7 @@ export default function FeaturedProducts() {
         <div className="text-center mt-16">
           <Link
             href="/collections"
-            className="inline-block font-body text-sm uppercase tracking-widest border border-deep-neutral/30 px-8 py-3 hover:bg-accent-green hover:border-accent-green hover:text-background-light transition-all duration-300"
+            className="inline-block font-body text-sm uppercase tracking-widest border border-deep-neutral/30 px-8 py-3 hover:bg-accent-black hover:border-accent-black hover:text-background-light transition-all duration-300" // MODIFIED
           >
             View All Collections
           </Link>

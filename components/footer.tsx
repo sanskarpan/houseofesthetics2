@@ -1,3 +1,4 @@
+// File: components/footer.tsx
 import Link from "next/link"
 import Image from "next/image"
 import { Instagram, Linkedin } from "lucide-react"
@@ -58,22 +59,6 @@ export default function Footer() {
           <div>
             <h4 className="font-display text-base tracking-widest uppercase mb-6">Connect</h4>
             <ul className="space-y-3">
-              {/* <li>
-                <Link
-                  href="/visit"
-                  className="font-body text-sm tracking-wide opacity-80 hover:opacity-100 transition-opacity duration-300"
-                >
-                  Visit Atelier
-                </Link>
-              </li> */}
-              {/* <li>
-                <Link
-                  href="/newsletter"
-                  className="font-body text-sm tracking-wide opacity-80 hover:opacity-100 transition-opacity duration-300"
-                >
-                  Newsletter
-                </Link>
-              </li> */}
               <li>
                 <div className="flex space-x-4 mt-2">
                   <Link
@@ -91,20 +76,19 @@ export default function Footer() {
                     <Linkedin size={18} />
                   </Link>
                   <Link
-                href={generalWhatsAppLink}
-                target="_blank" rel="noopener noreferrer"
-                className="opacity-80 hover:opacity-100 transition-opacity duration-300"
-                aria-label="WhatsApp"
-              >
-                <Image
-                src="/whatsappIcon.png"
-                alt="Whatsapp"
-                width={24}
-                height={24}
-                // className="rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-green hover:text-accent-green transition-colors"
-                className="opacity-80 hover:opacity-100 transition-opacity duration-300"
-              />
-              </Link>
+                    href={generalWhatsAppLink}
+                    target="_blank" rel="noopener noreferrer"
+                    className="opacity-80 hover:opacity-100 transition-opacity duration-300"
+                    aria-label="WhatsApp"
+                  >
+                    <Image
+                      src="/whatsappIcon.png"
+                      alt="Whatsapp"
+                      width={24}
+                      height={24}
+                      className="opacity-80 hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </Link>
                 </div>
               </li>
             </ul>

@@ -127,7 +127,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-display mb-4">Product Not Found</h1>
-          <Link href="/collections" className="text-accent-green hover:underline">
+          <Link href="/collections" className="text-accent-black hover:underline"> {/* MODIFIED */}
             View all collections
           </Link>
         </div>
@@ -135,10 +135,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     )
   }
 
-  // Generate thumbnail images (in a real app, these would be actual different views)
   const thumbnails = [product.image, product.image, product.image, product.image, product.image]
 
-  // Generate color swatches for finishes
   const colorMap = {
     Brass: "bg-yellow-700",
     Bronze: "bg-amber-800",
@@ -166,11 +164,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       {/* Breadcrumb */}
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center text-sm">
-          <Link href="/" className="hover:text-accent-green transition-colors">
+          <Link href="/" className="hover:text-accent-black transition-colors"> {/* MODIFIED */}
             Home
           </Link>
           <ChevronRight size={14} className="mx-2" />
-          <Link href="/collections" className="hover:text-accent-green transition-colors">
+          <Link href="/collections" className="hover:text-accent-black transition-colors"> {/* MODIFIED */}
             Collections
           </Link>
           <ChevronRight size={14} className="mx-2" />
@@ -203,7 +201,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                   key={i}
                   onClick={() => setSelectedImage(i)}
                   className={`aspect-square relative border ${
-                    selectedImage === i ? "border-accent-green" : "border-gray-200"
+                    selectedImage === i ? "border-accent-black" : "border-gray-200" // MODIFIED
                   }`}
                 >
                   <Image
@@ -250,7 +248,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               <p className="font-body">{product.designer}</p>
             </div>
 
-            {/* Finishes */}
             <div className="mb-8">
               <h3 className="font-display text-lg tracking-wider mb-4">Finishes</h3>
 
@@ -275,7 +272,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             <div className="flex items-center gap-3">
             <button
               onClick={() => setIsInquiryOpen(true)}
-              className="inline-block font-body text-sm uppercase tracking-widest border border-deep-neutral px-8 py-3 hover:bg-accent-green hover:border-accent-green hover:text-background-light transition-all duration-300"
+              className="inline-block font-body text-sm uppercase tracking-widest border border-deep-neutral px-8 py-3 hover:bg-accent-black hover:border-accent-black hover:text-background-light transition-all duration-300" // MODIFIED
             >
               Enquire
             </button>
@@ -283,7 +280,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               href={productSpecificWhatsAppLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-11 h-11 border border-deep-neutral rounded-sm text-deep-neutral hover:bg-green-500 hover:text-white hover:border-green-500 transition-all duration-300"
+              className="inline-flex items-center justify-center w-11 h-11 border border-deep-neutral rounded-sm text-deep-neutral hover:bg-black-500 hover:text-white hover:border-black-500 transition-all duration-300" // Keep WhatsApp green as it's brand color
               aria-label="Inquire on WhatsApp"
               title="Inquire on WhatsApp"
             >
@@ -339,7 +336,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      {/* Product Inquiry Modal */}
       <ProductInquiry
         productName={`${product.name} ${product.type}`}
         isOpen={isInquiryOpen}

@@ -103,14 +103,14 @@ export default function CollectionsPage() {
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
                 className={`font-display text-sm tracking-wider uppercase transition-colors duration-300 pb-2 relative ${
-                  activeCategory === category.id ? "text-accent-green" : "text-deep-neutral hover:text-accent-green"
+                  activeCategory === category.id ? "text-accent-black" : "text-deep-neutral hover:text-accent-black" // MODIFIED
                 }`}
               >
                 {category.name}
                 {activeCategory === category.id && (
                   <motion.div
                     layoutId="underline"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent-green"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent-black" // MODIFIED
                     initial={false}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
@@ -145,7 +145,7 @@ export default function CollectionsPage() {
                       fill
                       className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-accent-green/0 transition-all duration-500 group-hover:bg-accent-green/10"></div>
+                    <div className="absolute inset-0 bg-accent-black/0 transition-all duration-500 group-hover:bg-accent-black/10"></div> {/* MODIFIED */}
                   </div>
                   <h3 className="font-display text-xl tracking-wider mb-1">{product.name}</h3>
                   <p className="font-body text-sm text-deep-neutral/80 mb-2">{product.type}</p>
@@ -156,25 +156,6 @@ export default function CollectionsPage() {
           </div>
         </div>
       </section>
-
-      {/* Catalog Section */}
-      {/* <section className="py-24 md:py-32 bg-deep-neutral text-background-light">
-        <div className="container mx-auto px-6">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-display text-3xl md:text-4xl tracking-wider mb-6">Complete Catalog</h2>
-            <p className="font-body text-lg mb-8">
-              Download our complete catalog to explore our full range of collections and discover the craftsmanship
-              behind each piece.
-            </p>
-            <a
-              href="#"
-              className="inline-block font-body text-sm uppercase tracking-widest border border-background-light/30 px-8 py-3 hover:bg-background-light hover:text-deep-neutral transition-all duration-300"
-            >
-              Download Catalog
-            </a>
-          </div>
-        </div>
-      </section> */}
     </div>
   )
 }

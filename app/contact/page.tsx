@@ -56,7 +56,7 @@ export default function ContactPage() {
                       <input
                         type="text"
                         id="name"
-                        className="w-full border border-deep-neutral/30 p-3 font-body focus:outline-none focus:border-accent-green bg-transparent"
+                        className="w-full border border-deep-neutral/30 p-3 font-body focus:outline-none focus:border-accent-black bg-transparent" // MODIFIED
                         required
                       />
                     </div>
@@ -67,7 +67,7 @@ export default function ContactPage() {
                       <input
                         type="email"
                         id="email"
-                        className="w-full border border-deep-neutral/30 p-3 font-body focus:outline-none focus:border-accent-green bg-transparent"
+                        className="w-full border border-deep-neutral/30 p-3 font-body focus:outline-none focus:border-accent-black bg-transparent" // MODIFIED
                         required
                       />
                     </div>
@@ -80,7 +80,7 @@ export default function ContactPage() {
                     <input
                       type="text"
                       id="subject"
-                      className="w-full border border-deep-neutral/30 p-3 font-body focus:outline-none focus:border-accent-green bg-transparent"
+                      className="w-full border border-deep-neutral/30 p-3 font-body focus:outline-none focus:border-accent-black bg-transparent" // MODIFIED
                       required
                     />
                   </div>
@@ -92,14 +92,14 @@ export default function ContactPage() {
                     <textarea
                       id="message"
                       rows={6}
-                      className="w-full border border-deep-neutral/30 p-3 font-body focus:outline-none focus:border-accent-green bg-transparent"
+                      className="w-full border border-deep-neutral/30 p-3 font-body focus:outline-none focus:border-accent-black bg-transparent" // MODIFIED
                       required
                     ></textarea>
                   </div>
 
                   <button
                     type="submit"
-                    className="inline-block font-body text-sm uppercase tracking-widest border border-deep-neutral px-8 py-3 hover:bg-accent-green hover:border-accent-green hover:text-background-light transition-all duration-300"
+                    className="inline-block font-body text-sm uppercase tracking-widest border border-deep-neutral px-8 py-3 hover:bg-accent-black hover:border-accent-black hover:text-background-light transition-all duration-300" // MODIFIED
                   >
                     Send Message
                   </button>
@@ -118,7 +118,7 @@ export default function ContactPage() {
 
                 <div className="space-y-8">
                   <div className="flex items-start">
-                    <MapPin className="mr-4 text-accent-green flex-shrink-0 mt-1" />
+                    <MapPin className="mr-4 text-accent-black flex-shrink-0 mt-1" /> {/* MODIFIED */}
                     <div>
                       <h3 className="font-display text-lg mb-2">Visit Our Atelier</h3>
                       <p className="font-body">
@@ -132,7 +132,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start">
-                    <Mail className="mr-4 text-accent-green flex-shrink-0 mt-1" />
+                    <Mail className="mr-4 text-accent-black flex-shrink-0 mt-1" /> {/* MODIFIED */}
                     <div>
                       <h3 className="font-display text-lg mb-2">Email Us</h3>
                       <p className="font-body">info@houseofesthete.com</p>
@@ -141,7 +141,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start">
-                    <Phone className="mr-4 text-accent-green flex-shrink-0 mt-1" />
+                    <Phone className="mr-4 text-accent-black flex-shrink-0 mt-1" /> {/* MODIFIED */}
                     <div>
                       <h3 className="font-display text-lg mb-2">Call Us</h3>
                       <p className="font-body">+1 (555) 123-4567</p>
@@ -153,14 +153,14 @@ export default function ContactPage() {
                     <div className="flex space-x-4">
                       <a
                         href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
-                        className="w-10 h-10 rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-green hover:text-accent-green transition-colors"
+                        className="w-10 h-10 rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-black hover:text-accent-black transition-colors" // MODIFIED
                         aria-label="Instagram"
                       >
                         <Instagram size={18} />
                       </a>
                       <a
                         href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
-                        className="w-10 h-10 rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-green hover:text-accent-green transition-colors"
+                        className="w-10 h-10 rounded-full border border-deep-neutral/30 flex items-center justify-center hover:border-accent-black hover:text-accent-black transition-colors" // MODIFIED
                         aria-label="LinkedIn"
                       >
                         <Linkedin size={18} />
@@ -173,13 +173,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      {/* Map Section */}
-      {/* <section className="h-[800px] w-[1920px] relative">
-        <div className="absolute inset-0 bg-gray-300">
-          <Image src="/Hyderabad.jpeg?height=800&width=1920&text=Map" alt="Map" fill className="object-cover" />
-        </div>
-      </section> */}
     </div>
   )
 }
