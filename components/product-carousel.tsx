@@ -13,7 +13,6 @@ const slidesData = [
     image: null,
     alt: "House of Esthete - Beyond The Threshold",
     title: "beyond the threshold",
-    description: "a moment. a feeling. your curated encounter.",
     ctaText: "discover the essence",
     ctaLink: "/story",
     isPlainWhite: true,
@@ -23,8 +22,6 @@ const slidesData = [
     image: "/basilisk/Basilisk1.jpg?height=1080&width=1920&text=Basilisk+Bar+Counter",
     alt: "Basilisk - Luxury Bar Counter",
     title: "basilisk",
-    description:
-      "",
     ctaText: "explore basilisk",
     ctaLink: "/products/basilisk-bar-counter",
     isPlainWhite: false,
@@ -34,7 +31,6 @@ const slidesData = [
     image: "/vayuvega/Vayuvega_white.png?height=1080&width=1920&text=VayuVega+Night+Stand",
     alt: "VayuVega - Elegant Night Stand",
     title: "vayuvega",
-    description: "",
     ctaText: "discover vayuvega",
     ctaLink: "/products/vayuvega-night-stand",
     isPlainWhite: false,
@@ -44,8 +40,6 @@ const slidesData = [
     image: "/duchess/Ducchess_white.png?height=1080&width=1920&text=Duchess+Luxury+Chair",
     alt: "Duchess - Luxury Chair",
     title: "duchess",
-    description:
-      "",
     ctaText: "experience duchess",
     ctaLink: "/products/duchess-chair",
     isPlainWhite: false,
@@ -151,8 +145,6 @@ export default function ProductCarousel() {
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      {" "}
-      {/* MODIFIED - Removed bg-deep-neutral, handled by slide */}
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentSlide}
@@ -198,7 +190,7 @@ export default function ProductCarousel() {
                     <>
                       <motion.h1
                         variants={textVariants}
-                        className="font-display text-5xl md:text-7xl lg:text-8xl uppercase tracking-ultra-wide mb-10 max-w-4xl mx-auto leading-tight"
+                        className="brand-title text-5xl md:text-7xl lg:text-8xl mb-12 max-w-4xl mx-auto"
                       >
                         <motion.div variants={childVariants} className="block mb-2 md:mb-4">
                           <span>beyond the</span>
@@ -207,17 +199,11 @@ export default function ProductCarousel() {
                           <span>threshold</span>
                         </motion.div>
                       </motion.h1>
-                      <motion.p
-                        variants={childVariants}
-                        className="font-body text-base md:text-lg tracking-body-loose mb-12 opacity-90"
-                      >
-                        {slidesData[currentSlide].description}
-                      </motion.p>
                       {slidesData[currentSlide].ctaText && slidesData[currentSlide].ctaLink && (
                         <motion.div variants={childVariants}>
                           <Link
                             href={slidesData[currentSlide].ctaLink!}
-                            className="font-body text-sm uppercase tracking-widest text-deep-neutral relative group inline-block"
+                            className="font-['Quicksand'] text-sm uppercase tracking-widest text-deep-neutral relative group inline-block"
                           >
                             {slidesData[currentSlide].ctaText}
                             <span className="block h-[1px] w-full bg-deep-neutral absolute bottom-[-3px] left-0 transition-all duration-300 group-hover:w-full"></span>
@@ -229,21 +215,15 @@ export default function ProductCarousel() {
                     <>
                       <motion.h1
                         variants={childVariants}
-                        className="brand-title text-6xl md:text-8xl lg:text-9xl mb-8 max-w-4xl mx-auto"
+                        className="brand-title text-6xl md:text-8xl lg:text-9xl mb-12 max-w-4xl mx-auto"
                       >
                         {slidesData[currentSlide].title}
                       </motion.h1>
-                      <motion.p
-                        variants={childVariants}
-                        className="font-body text-lg md:text-xl tracking-wide max-w-2xl mx-auto mb-8 opacity-90"
-                      >
-                        {slidesData[currentSlide].description}
-                      </motion.p>
                       {slidesData[currentSlide].ctaText && slidesData[currentSlide].ctaLink && (
                         <motion.div variants={childVariants}>
                           <Link
                             href={slidesData[currentSlide].ctaLink!}
-                            className="font-body text-sm uppercase tracking-widest text-deep-neutral relative group inline-block"
+                            className="font-['Quicksand'] text-sm uppercase tracking-widest text-deep-neutral relative group inline-block"
                           >
                             {slidesData[currentSlide].ctaText}
                             <span className="block h-[1px] w-full bg-deep-neutral absolute bottom-[-3px] left-0 transition-all duration-300 group-hover:w-full"></span>
@@ -258,6 +238,7 @@ export default function ProductCarousel() {
           </div>
         </motion.div>
       </AnimatePresence>
+
       {/* Navigation arrows */}
       <button
         onClick={prevSlide}
@@ -275,6 +256,7 @@ export default function ProductCarousel() {
       >
         <ChevronRight size={24} />
       </button>
+
       {/* Dots indicator */}
       <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-3 z-10">
         {slidesData.map((_, index) => (

@@ -6,34 +6,22 @@ import Image from "next/image"
 import { Instagram, Linkedin, Search, ChevronDown } from "lucide-react"
 
 export default function Navigation() {
-  const [scrollPosition, setScrollPosition] = useState(0)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY)
-    }
-
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setActiveDropdown(null)
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
     document.addEventListener("mousedown", handleClickOutside)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
-
-  // Calculate opacity based on scroll position for gradient effect
-  const navbarOpacity = Math.min(scrollPosition / 300, 0.9)
-  const textColor = scrollPosition > 100 ? "text-deep-neutral" : "text-background-light drop-shadow-sm"
-  const logoVariant = scrollPosition > 100 ? "dark" : "light"
 
   const toggleDropdown = (dropdown: string) => {
     if (activeDropdown === dropdown) {
@@ -53,11 +41,6 @@ export default function Navigation() {
       surfaces: ["Panellings", "Partition Screens"],
       beds: ["Beds"],
     },
-    // outdoor: {
-    //   seating: ["Chairs", "Daybeds | Chaises | Benches", "Lounge Chairs", "Ottomans | Stools", "Sofas"],
-    //   tables: ["Side Tables", "Coffee Tables", "Dining Tables"],
-    //   complements: ["Trolleys"],
-    // },
   }
 
   const aboutUsLinks = [
@@ -65,40 +48,19 @@ export default function Navigation() {
     { name: "Brand Values", path: "/story#values" },
     { name: "Meet The Directors", path: "/story#directors" },
     { name: "House of Esthete Design Studio", path: "/story#studio" },
-    // { name: "Meet The Designers", path: "/story#designers" },
   ]
 
   return (
-    <header
-      className="fixed top-0 left-0 w-full z-50 transition-all duration-500"
-      style={{
-        backgroundColor: `rgba(233, 233, 231, ${Math.max(navbarOpacity, 0.1)})`,
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        borderBottom: scrollPosition > 50 ? "1px solid rgba(0, 0, 0, 0.1)" : "none",
-      }}
-      ref={dropdownRef}
-    >
-      <div className="container mx-auto px-6 relative">
-        {/* Add overlay for better text visibility */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              scrollPosition > 100
-                ? "linear-gradient(to bottom, rgba(233, 233, 231, 0.95), rgba(233, 233, 231, 0.9))"
-                : "linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1))",
-          }}
-        />
-
-        <div className="flex justify-between items-center py-4 relative z-10">
+    <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200" ref={dropdownRef}>
+      <div className="container mx-auto px-6">
+        <div className="flex justify-between items-center py-4">
           <Link href="/" className="relative z-10">
             <Image
-              src={logoVariant === "light" ? "/logo.jpeg" : "/logo.jpeg"}
+              src="/logo.jpeg"
               alt="House of Esthete"
               width={150}
               height={40}
-              className={`transition-opacity duration-500 ${logoVariant === "light" ? "invert" : ""}`}
+              className="transition-opacity duration-500"
             />
           </Link>
 
@@ -107,14 +69,13 @@ export default function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("products")}
-                className={`flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
-                style={{ textShadow: scrollPosition < 100 ? "0 1px 3px rgba(0,0,0,0.5)" : "none" }}
+                className="flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
               >
                 Our Collections <ChevronDown size={16} className="ml-1" />
               </button>
 
               {activeDropdown === "products" && (
-                <div className="absolute top-full left-0 mt-2 w-[800px] bg-background-light shadow-lg z-50 p-6">
+                <div className="absolute top-full left-0 mt-2 w-[800px] bg-white shadow-lg z-50 p-6 border border-gray-200">
                   <div className="grid grid-cols-2 gap-8">
                     <div>
                       <h3 className="font-display text-sm uppercase tracking-wider mb-4 text-deep-neutral">Indoor</h3>
@@ -141,31 +102,6 @@ export default function Navigation() {
                         ))}
                       </div>
                     </div>
-                    {/* <div>
-                      <h3 className="font-display text-sm uppercase tracking-wider mb-4 text-deep-neutral">Outdoor</h3>
-                      <div className="grid grid-cols-3 gap-6">
-                        {Object.entries(productCategories.outdoor).map(([category, items]) => (
-                          <div key={category} className="mb-4">
-                            <h4 className="font-display text-xs uppercase tracking-wider mb-2 text-deep-neutral">
-                              {category}
-                            </h4>
-                            <ul className="space-y-1">
-                              {items.map((item) => (
-                                <li key={item}>
-                                  <Link
-                                    href={`/collections/outdoor/${category.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                                    className="font-body text-xs hover:text-accent-black transition-colors duration-300"
-                                    onClick={() => setActiveDropdown(null)}
-                                  >
-                                    {item}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    </div> */}
                   </div>
                 </div>
               )}
@@ -175,13 +111,13 @@ export default function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("about")}
-                className={`flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
+                className="flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
               >
                 Our Story <ChevronDown size={16} className="ml-1" />
               </button>
 
               {activeDropdown === "about" && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-background-light shadow-lg z-50 p-4">
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg z-50 p-4 border border-gray-200">
                   <ul className="space-y-2">
                     {aboutUsLinks.map((link) => (
                       <li key={link.name}>
@@ -201,16 +137,14 @@ export default function Navigation() {
 
             <Link
               href="/media"
-              className={`font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
-              style={{ textShadow: scrollPosition < 100 ? "0 1px 3px rgba(0,0,0,0.5)" : "none" }}
+              className="font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
             >
               Media
             </Link>
 
             <Link
               href="/contact"
-              className={`font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
-              style={{ textShadow: scrollPosition < 100 ? "0 1px 3px rgba(0,0,0,0.5)" : "none" }}
+              className="font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
             >
               Contact Us
             </Link>
@@ -219,20 +153,20 @@ export default function Navigation() {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
-              className={`${textColor} hover:text-accent-black transition-colors duration-300`}
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Instagram"
             >
               <Instagram size={18} />
             </Link>
             <Link
               href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
-              className={`${textColor} hover:text-accent-black transition-colors duration-300`}
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="LinkedIn"
             >
               <Linkedin size={18} />
             </Link>
             <button
-              className={`${textColor} hover:text-accent-black transition-colors duration-300`}
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Search"
             >
               <Search size={18} />
@@ -241,7 +175,7 @@ export default function Navigation() {
 
           <button
             onClick={() => toggleDropdown("mobile")}
-            className={`md:hidden relative z-50 w-10 h-10 flex flex-col justify-center items-center focus:outline-none ${textColor}`}
+            className="md:hidden relative z-50 w-10 h-10 flex flex-col justify-center items-center focus:outline-none text-deep-neutral"
             aria-label={activeDropdown === "mobile" ? "Close menu" : "Open menu"}
           >
             <span
@@ -259,7 +193,7 @@ export default function Navigation() {
 
       {/* Mobile menu */}
       {activeDropdown === "mobile" && (
-        <div className="md:hidden absolute top-0 left-0 w-full h-screen bg-background-light z-40 flex flex-col justify-center items-center">
+        <div className="md:hidden absolute top-0 left-0 w-full h-screen bg-white z-40 flex flex-col justify-center items-center">
           <nav className="text-center">
             <ul className="space-y-8">
               <li>

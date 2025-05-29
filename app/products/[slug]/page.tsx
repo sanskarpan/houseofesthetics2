@@ -243,19 +243,19 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           >
-            <h1 className="font-display text-3xl md:text-4xl tracking-tighter lowercase mb-4">
+            <h1 className="brand-title text-3xl md:text-4xl mb-4">
               {product.name} {product.type}
             </h1>
 
             <p className="font-['Quicksand'] mb-8">{product.description}</p>
 
             <div className="mb-8">
-              <h3 className="font-display text-lg tracking-tighter lowercase mb-2">available size (in mm)</h3>
+              <h3 className="section-subtitle">available size (in mm)</h3>
               <p className="font-['Quicksand']">{product.dimensions}</p>
             </div>
 
             <div className="mb-8">
-              <h3 className="font-display text-lg tracking-tighter lowercase mb-2">details</h3>
+              <h3 className="section-subtitle">details</h3>
               <ul className="space-y-1">
                 {product.details.map((detail, index) => (
                   <li key={index} className="font-['Quicksand']">
@@ -266,12 +266,12 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </div>
 
             <div className="mb-8">
-              <h3 className="font-display text-lg tracking-tighter lowercase mb-2">designed by</h3>
+              <h3 className="section-subtitle">designed by</h3>
               <p className="font-['Quicksand']">{product.designer}</p>
             </div>
 
             <div className="mb-8">
-              <h3 className="font-display text-lg tracking-tighter lowercase mb-4">finishes</h3>
+              <h3 className="section-subtitle">finishes</h3>
 
               {Object.entries(product.finishes).map(([category, options]) => (
                 <div key={category} className="mb-6">
@@ -316,7 +316,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       {/* Related Products */}
       <section className="py-16 bg-background-dark">
         <div className="container mx-auto px-6">
-          <h2 className="font-display text-2xl tracking-tighter lowercase mb-8">related products</h2>
+          <h2 className="section-title">related products</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {products
@@ -343,7 +343,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                         className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
-                    <h3 className="font-display text-lg tracking-tighter lowercase mb-1">{relatedProduct.name}</h3>
+                    <h3 className="brand-title text-lg mb-1">{relatedProduct.name}</h3>
                     <p className="font-['Quicksand'] text-sm">{relatedProduct.type}</p>
                   </Link>
                 </motion.div>
