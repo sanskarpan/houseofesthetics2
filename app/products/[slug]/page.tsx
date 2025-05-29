@@ -7,7 +7,7 @@ import { ChevronRight } from "lucide-react"
 import ProductInquiry from "@/components/product-inquiry"
 import { motion, useInView } from "framer-motion"
 
-const productSpecificWhatsAppLink = "https://wa.me/919848000000";
+const productSpecificWhatsAppLink = "https://wa.me/919848000000"
 const products = [
   {
     id: "duchess",
@@ -28,7 +28,7 @@ const products = [
       wood: ["Walnut", "Oak", "Ebony"],
       fabric: ["Linen", "Velvet", "Wool", "Leather"],
     },
-    image: "/duchess/Duchess1.jpg",
+    images: ["/duchess/Duchess1.jpg", "/duchess/Duchess2.jpg", "/duchess/Duchess3.jpg", "/duchess/Duchess4.jpg"],
     slug: "duchess-chair",
   },
   {
@@ -49,7 +49,12 @@ const products = [
       metal: ["Brass", "Bronze", "Graphite"],
       wood: ["Walnut", "Oak", "Ash", "Maple"],
     },
-    image: "/vayuvega/Vayuvega1.jpg",
+    images: [
+      "/vayuvega/Vayuvega1.jpg",
+      "/vayuvega/Vayuvega2.jpg",
+      "/vayuvega/Vayuvega3.jpg",
+      "/vayuvega/Vayuvega4.jpg",
+    ],
     slug: "vayuvega-night-stand",
   },
   {
@@ -71,7 +76,7 @@ const products = [
       wood: ["Walnut", "Oak", "Ebony"],
       stone: ["Marble", "Granite", "Travertine"],
     },
-    image: "/pinetta/Pinetta1.jpg",
+    images: ["/pinetta/Pinetta1.jpg", "/pinetta/Pinetta2.jpg", "/pinetta/Pinetta3.jpg", "/pinetta/Pinetta4.jpg"],
     slug: "pinetta-booze-stand",
   },
   {
@@ -87,7 +92,12 @@ const products = [
       metal: ["Bronze", "Brass", "Blackened Steel"],
       stone: ["Marble", "Granite", "Limestone", "Travertine"],
     },
-    image: "/rise-of-the-great/Rise3.jpg",
+    images: [
+      "/rise-of-the-great/Rise1.jpg",
+      "/rise-of-the-great/Rise2.jpg",
+      "/rise-of-the-great/Rise3.jpg",
+      "/rise-of-the-great/Rise4.jpg",
+    ],
     slug: "rise-of-the-great-artefact",
   },
   {
@@ -109,7 +119,12 @@ const products = [
       wood: ["Walnut", "Oak", "Ebony"],
       stone: ["Marble", "Granite", "Quartzite"],
     },
-    image: "/basilisk/Basilisk1.jpg",
+    images: [
+      "/basilisk/Basilisk1.jpg",
+      "/basilisk/Basilisk2.jpg",
+      "/basilisk/Basilisk3.jpg",
+      "/basilisk/Basilisk4.jpg",
+    ],
     slug: "basilisk-bar-counter",
   },
 ]
@@ -126,16 +141,22 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-display mb-4">Product Not Found</h1>
-          <Link href="/collections" className="text-accent-black hover:underline"> {/* MODIFIED */}
-            View all collections
+          <h1 className="text-2xl font-display mb-4 lowercase tracking-tighter">product not found</h1>
+          <Link href="/collections" className="text-accent-black hover:underline">
+            view all collections
           </Link>
         </div>
       </div>
     )
   }
 
-  const thumbnails = [product.image, product.image, product.image, product.image, product.image]
+  // Use the product's actual images
+  const thumbnails = product.images || [
+    product.images?.[0],
+    product.images?.[0],
+    product.images?.[0],
+    product.images?.[0],
+  ]
 
   const colorMap = {
     Brass: "bg-yellow-700",
@@ -164,11 +185,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       {/* Breadcrumb */}
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center text-sm">
-          <Link href="/" className="hover:text-accent-black transition-colors"> {/* MODIFIED */}
+          <Link href="/" className="hover:text-accent-black transition-colors">
             Home
           </Link>
           <ChevronRight size={14} className="mx-2" />
-          <Link href="/collections" className="hover:text-accent-black transition-colors"> {/* MODIFIED */}
+          <Link href="/collections" className="hover:text-accent-black transition-colors">
             Collections
           </Link>
           <ChevronRight size={14} className="mx-2" />
@@ -187,28 +208,29 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="aspect-square relative mb-4 bg-gray-100">
+            <div className="aspect-square relative mb-4 bg-gray-100 overflow-hidden">
               <Image
-                src={product.image || "/placeholder.svg"}
+                src={thumbnails[selectedImage] || "/placeholder.svg"}
                 alt={`${product.name} ${product.type}`}
                 fill
-                className="object-contain p-4"
+                className="object-contain p-4 transition-transform duration-500 hover:scale-105"
+                priority
               />
             </div>
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-4 gap-2">
               {thumbnails.map((thumb, i) => (
                 <button
                   key={i}
                   onClick={() => setSelectedImage(i)}
                   className={`aspect-square relative border ${
-                    selectedImage === i ? "border-accent-black" : "border-gray-200" // MODIFIED
-                  }`}
+                    selectedImage === i ? "border-accent-black" : "border-gray-200"
+                  } overflow-hidden transition-all duration-300 hover:opacity-90`}
                 >
                   <Image
                     src={thumb || "/placeholder.svg"}
                     alt={`${product.name} view ${i + 1}`}
                     fill
-                    className="object-contain p-1"
+                    className="object-cover"
                   />
                 </button>
               ))}
@@ -221,22 +243,22 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           >
-            <h1 className="font-display text-3xl md:text-4xl tracking-wider mb-4">
+            <h1 className="font-display text-3xl md:text-4xl tracking-tighter lowercase mb-4">
               {product.name} {product.type}
             </h1>
 
-            <p className="body-text mb-8">{product.description}</p>
+            <p className="font-['Quicksand'] mb-8">{product.description}</p>
 
             <div className="mb-8">
-              <h3 className="font-display text-lg tracking-wider mb-2">Available Size (in mm)</h3>
-              <p className="font-body">{product.dimensions}</p>
+              <h3 className="font-display text-lg tracking-tighter lowercase mb-2">available size (in mm)</h3>
+              <p className="font-['Quicksand']">{product.dimensions}</p>
             </div>
 
             <div className="mb-8">
-              <h3 className="font-display text-lg tracking-wider mb-2">Details</h3>
+              <h3 className="font-display text-lg tracking-tighter lowercase mb-2">details</h3>
               <ul className="space-y-1">
                 {product.details.map((detail, index) => (
-                  <li key={index} className="font-body">
+                  <li key={index} className="font-['Quicksand']">
                     {detail}
                   </li>
                 ))}
@@ -244,18 +266,18 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </div>
 
             <div className="mb-8">
-              <h3 className="font-display text-lg tracking-wider mb-2">Designed By</h3>
-              <p className="font-body">{product.designer}</p>
+              <h3 className="font-display text-lg tracking-tighter lowercase mb-2">designed by</h3>
+              <p className="font-['Quicksand']">{product.designer}</p>
             </div>
 
             <div className="mb-8">
-              <h3 className="font-display text-lg tracking-wider mb-4">Finishes</h3>
+              <h3 className="font-display text-lg tracking-tighter lowercase mb-4">finishes</h3>
 
               {Object.entries(product.finishes).map(([category, options]) => (
                 <div key={category} className="mb-6">
                   <h4 className="font-display text-base mb-2 capitalize">{category}</h4>
                   <div className="flex flex-wrap gap-2">
-                    {options.map((option:any) => (
+                    {options.map((option: any) => (
                       <div
                         key={option}
                         className={`w-12 h-12 rounded-full ${colorMap[option as keyof typeof colorMap] || "bg-gray-300"} flex items-center justify-center`}
@@ -270,29 +292,23 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </div>
 
             <div className="flex items-center gap-3">
-            <button
-              onClick={() => setIsInquiryOpen(true)}
-              className="inline-block font-body text-sm uppercase tracking-widest border border-deep-neutral px-8 py-3 hover:bg-accent-black hover:border-accent-black hover:text-background-light transition-all duration-300" // MODIFIED
-            >
-              Enquire
-            </button>
-            <Link
-              href={productSpecificWhatsAppLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-11 h-11 border border-deep-neutral rounded-sm text-deep-neutral hover:bg-black-500 hover:text-white hover:border-black-500 transition-all duration-300" // Keep WhatsApp green as it's brand color
-              aria-label="Inquire on WhatsApp"
-              title="Inquire on WhatsApp"
-            >
-              <Image
-                src="/whatsappIcon.png"
-                alt="Whatsapp"
-                width={24}
-                height={24}
-              />
-            </Link>
-          </div>
-
+              <button
+                onClick={() => setIsInquiryOpen(true)}
+                className="inline-block font-['Quicksand'] text-sm uppercase tracking-widest border border-deep-neutral px-8 py-3 hover:bg-accent-black hover:border-accent-black hover:text-background-light transition-all duration-300"
+              >
+                Enquire
+              </button>
+              <Link
+                href={productSpecificWhatsAppLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-11 h-11 border border-deep-neutral rounded-sm text-deep-neutral hover:bg-black-500 hover:text-white hover:border-black-500 transition-all duration-300"
+                aria-label="Inquire on WhatsApp"
+                title="Inquire on WhatsApp"
+              >
+                <Image src="/whatsappIcon.png" alt="Whatsapp" width={24} height={24} />
+              </Link>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -300,7 +316,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       {/* Related Products */}
       <section className="py-16 bg-background-dark">
         <div className="container mx-auto px-6">
-          <h2 className="font-display text-2xl tracking-wider mb-8">Related Products</h2>
+          <h2 className="font-display text-2xl tracking-tighter lowercase mb-8">related products</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {products
@@ -321,14 +337,14 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                   <Link href={`/products/${relatedProduct.slug}`}>
                     <div className="relative aspect-square overflow-hidden mb-4 bg-gray-100">
                       <Image
-                        src={relatedProduct.image || "/placeholder.svg"}
+                        src={relatedProduct.images?.[0] || "/placeholder.svg"}
                         alt={relatedProduct.name}
                         fill
                         className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
-                    <h3 className="font-display text-lg tracking-wider mb-1">{relatedProduct.name}</h3>
-                    <p className="font-body text-sm">{relatedProduct.type}</p>
+                    <h3 className="font-display text-lg tracking-tighter lowercase mb-1">{relatedProduct.name}</h3>
+                    <p className="font-['Quicksand'] text-sm">{relatedProduct.type}</p>
                   </Link>
                 </motion.div>
               ))}
