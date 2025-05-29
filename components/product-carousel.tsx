@@ -7,39 +7,47 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-const slidesData = [ // Renamed to slidesData to avoid conflict
+const slidesData = [
   {
-    id: 0, 
-    image: null, // MODIFIED - No image for the first slide
+    id: 0,
+    image: null,
     alt: "House of Esthete - Beyond The Threshold",
-    title: "Beyond the Threshold", 
-    description: "A moment. A feeling. Your Curated Encounter.", 
-    ctaText: "Discover The Essence", 
-    ctaLink: "/story", 
-    isPlainWhite: true, // MODIFIED - Flag for special styling
+    title: "beyond the threshold",
+    description: "a moment. a feeling. your curated encounter.",
+    ctaText: "discover the essence",
+    ctaLink: "/story",
+    isPlainWhite: true,
   },
   {
     id: 1,
-    image: "/Frame 7.png?height=1080&width=1920&text=Luxury Interior 1", // Original first slide
-    alt: "Luxury interior setting with modern furniture",
-    title: "Timeless Elegance",
-    description: "Meticulously crafted pieces that transform spaces into sanctuaries of refined living.",
+    image: "/basilisk/Basilisk1.jpg?height=1080&width=1920&text=Basilisk+Bar+Counter",
+    alt: "Basilisk - Luxury Bar Counter",
+    title: "basilisk",
+    description:
+      "",
+    ctaText: "explore basilisk",
+    ctaLink: "/products/basilisk-bar-counter",
     isPlainWhite: false,
   },
   {
     id: 2,
-    image: "/Frame 6.png?height=1080&width=1920&text=Luxury Interior 2", // Original second slide
-    alt: "Sophisticated living room with handcrafted decor",
-    title: "Artisanal Craftsmanship",
-    description: "Each object tells a story of tradition, innovation, and uncompromising quality.",
+    image: "/vayuvega/Vayuvega_white.png?height=1080&width=1920&text=VayuVega+Night+Stand",
+    alt: "VayuVega - Elegant Night Stand",
+    title: "vayuvega",
+    description: "",
+    ctaText: "discover vayuvega",
+    ctaLink: "/products/vayuvega-night-stand",
     isPlainWhite: false,
   },
   {
     id: 3,
-    image: "/Frame 9.png?height=1080&width=1920&text=Luxury Interior 3", // Original third slide
-    alt: "Minimalist interior with statement pieces",
-    title: "Curated Encounters",
-    description: "Discover objects that transcend function to become vessels of meaning and beauty.",
+    image: "/duchess/Ducchess_white.png?height=1080&width=1920&text=Duchess+Luxury+Chair",
+    alt: "Duchess - Luxury Chair",
+    title: "duchess",
+    description:
+      "",
+    ctaText: "experience duchess",
+    ctaLink: "/products/duchess-chair",
     isPlainWhite: false,
   },
 ]
@@ -122,7 +130,7 @@ export default function ProductCarousel() {
       transition: {
         duration: 0.6,
         ease: [0.22, 1, 0.36, 1],
-        staggerChildren: 0.15, 
+        staggerChildren: 0.15,
       },
     },
     exit: {
@@ -135,15 +143,16 @@ export default function ProductCarousel() {
       },
     },
   }
-  
-  const childVariants = { 
+
+  const childVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
   }
-  
 
   return (
-    <div className="relative h-screen w-full overflow-hidden"> {/* MODIFIED - Removed bg-deep-neutral, handled by slide */}
+    <div className="relative h-screen w-full overflow-hidden">
+      {" "}
+      {/* MODIFIED - Removed bg-deep-neutral, handled by slide */}
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentSlide}
@@ -162,14 +171,15 @@ export default function ProductCarousel() {
             <div className="relative h-full w-full">
               {slidesData[currentSlide].image && (
                 <Image
-                  src={slidesData[currentSlide].image!}
+                  src={slidesData[currentSlide].image! || "/placeholder.svg"}
                   alt={slidesData[currentSlide].alt}
                   fill
-                  priority={currentSlide === 0} 
-                  className="object-cover"
+                  priority={currentSlide === 0}
+                  className="object-cover object-center"
+                  style={{ border: "none", outline: "none" }}
                 />
               )}
-              <div className="absolute inset-0 bg-deep-neutral/30"></div>
+              <div className="absolute inset-0 bg-black/20"></div>
             </div>
           )}
 
@@ -182,22 +192,25 @@ export default function ProductCarousel() {
                   animate="visible"
                   exit="exit"
                   variants={textVariants}
-                  className={`max-w-3xl mx-auto ${slidesData[currentSlide].isPlainWhite ? 'text-deep-neutral' : 'text-background-light'}`}
+                  className={`max-w-3xl mx-auto text-deep-neutral`}
                 >
                   {slidesData[currentSlide].isPlainWhite ? (
                     <>
-                      <motion.h1 
-                        variants={textVariants} 
+                      <motion.h1
+                        variants={textVariants}
                         className="font-display text-5xl md:text-7xl lg:text-8xl uppercase tracking-ultra-wide mb-10 max-w-4xl mx-auto leading-tight"
                       >
                         <motion.div variants={childVariants} className="block mb-2 md:mb-4">
-                          <span>Beyond the</span>
+                          <span>beyond the</span>
                         </motion.div>
                         <motion.div variants={childVariants} className="block">
-                          <span>Threshold</span>
+                          <span>threshold</span>
                         </motion.div>
                       </motion.h1>
-                      <motion.p variants={childVariants} className="font-body text-base md:text-lg tracking-body-loose mb-12 opacity-90">
+                      <motion.p
+                        variants={childVariants}
+                        className="font-body text-base md:text-lg tracking-body-loose mb-12 opacity-90"
+                      >
                         {slidesData[currentSlide].description}
                       </motion.p>
                       {slidesData[currentSlide].ctaText && slidesData[currentSlide].ctaLink && (
@@ -214,10 +227,29 @@ export default function ProductCarousel() {
                     </>
                   ) : (
                     <>
-                      <h1 className="font-display text-4xl md:text-6xl lg:text-7xl uppercase tracking-[0.2em] mb-6">
+                      <motion.h1
+                        variants={childVariants}
+                        className="brand-title text-6xl md:text-8xl lg:text-9xl mb-8 max-w-4xl mx-auto"
+                      >
                         {slidesData[currentSlide].title}
-                      </h1>
-                      <p className="font-body text-lg md:text-xl tracking-wider">{slidesData[currentSlide].description}</p>
+                      </motion.h1>
+                      <motion.p
+                        variants={childVariants}
+                        className="font-body text-lg md:text-xl tracking-wide max-w-2xl mx-auto mb-8 opacity-90"
+                      >
+                        {slidesData[currentSlide].description}
+                      </motion.p>
+                      {slidesData[currentSlide].ctaText && slidesData[currentSlide].ctaLink && (
+                        <motion.div variants={childVariants}>
+                          <Link
+                            href={slidesData[currentSlide].ctaLink!}
+                            className="font-body text-sm uppercase tracking-widest text-deep-neutral relative group inline-block"
+                          >
+                            {slidesData[currentSlide].ctaText}
+                            <span className="block h-[1px] w-full bg-deep-neutral absolute bottom-[-3px] left-0 transition-all duration-300 group-hover:w-full"></span>
+                          </Link>
+                        </motion.div>
+                      )}
                     </>
                   )}
                 </motion.div>
@@ -226,12 +258,11 @@ export default function ProductCarousel() {
           </div>
         </motion.div>
       </AnimatePresence>
-
       {/* Navigation arrows */}
       <button
         onClick={prevSlide}
         className={`absolute left-4 top-1/2 transform -translate-y-1/2 rounded-full p-2 backdrop-blur-sm transition-all duration-300 z-10 
-                    ${slidesData[currentSlide].isPlainWhite ? 'bg-deep-neutral/10 hover:bg-deep-neutral/20 text-deep-neutral' : 'bg-background-light/10 hover:bg-background-light/20 text-background-light'}`}
+                    ${slidesData[currentSlide].isPlainWhite ? "bg-deep-neutral/10 hover:bg-deep-neutral/20 text-deep-neutral" : "bg-background-light/10 hover:bg-background-light/20 text-background-light"}`}
         aria-label="Previous slide"
       >
         <ChevronLeft size={24} />
@@ -239,12 +270,11 @@ export default function ProductCarousel() {
       <button
         onClick={nextSlide}
         className={`absolute right-4 top-1/2 transform -translate-y-1/2 rounded-full p-2 backdrop-blur-sm transition-all duration-300 z-10
-                    ${slidesData[currentSlide].isPlainWhite ? 'bg-deep-neutral/10 hover:bg-deep-neutral/20 text-deep-neutral' : 'bg-background-light/10 hover:bg-background-light/20 text-background-light'}`}
+                    ${slidesData[currentSlide].isPlainWhite ? "bg-deep-neutral/10 hover:bg-deep-neutral/20 text-deep-neutral" : "bg-background-light/10 hover:bg-background-light/20 text-background-light"}`}
         aria-label="Next slide"
       >
         <ChevronRight size={24} />
       </button>
-
       {/* Dots indicator */}
       <div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-3 z-10">
         {slidesData.map((_, index) => (
@@ -252,9 +282,14 @@ export default function ProductCarousel() {
             key={index}
             onClick={() => handleDotClick(index)}
             className={`w-2.5 h-2.5 rounded-full transition-all duration-300 
-                        ${currentSlide === index 
-                            ? (slidesData[currentSlide].isPlainWhite ? 'bg-deep-neutral w-8' : 'bg-background-light w-8') 
-                            : (slidesData[currentSlide].isPlainWhite ? 'bg-deep-neutral/50' : 'bg-background-light/50')
+                        ${
+                          currentSlide === index
+                            ? slidesData[currentSlide].isPlainWhite
+                              ? "bg-deep-neutral w-8"
+                              : "bg-background-light w-8"
+                            : slidesData[currentSlide].isPlainWhite
+                              ? "bg-deep-neutral/50"
+                              : "bg-background-light/50"
                         }`}
             aria-label={`Go to slide ${index + 1}`}
           />

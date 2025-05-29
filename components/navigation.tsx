@@ -32,7 +32,7 @@ export default function Navigation() {
 
   // Calculate opacity based on scroll position for gradient effect
   const navbarOpacity = Math.min(scrollPosition / 300, 0.9)
-  const textColor = scrollPosition > 100 ? "text-deep-neutral" : "text-background-light"
+  const textColor = scrollPosition > 100 ? "text-deep-neutral" : "text-background-light drop-shadow-sm"
   const logoVariant = scrollPosition > 100 ? "dark" : "light"
 
   const toggleDropdown = (dropdown: string) => {
@@ -72,13 +72,26 @@ export default function Navigation() {
     <header
       className="fixed top-0 left-0 w-full z-50 transition-all duration-500"
       style={{
-        backgroundColor: `rgba(233, 233, 231, ${navbarOpacity})`,
-        backdropFilter: scrollPosition > 50 ? "blur(8px)" : "none",
+        backgroundColor: `rgba(233, 233, 231, ${Math.max(navbarOpacity, 0.1)})`,
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderBottom: scrollPosition > 50 ? "1px solid rgba(0, 0, 0, 0.1)" : "none",
       }}
       ref={dropdownRef}
     >
-      <div className="container mx-auto px-6">
-        <div className="flex justify-between items-center py-4">
+      <div className="container mx-auto px-6 relative">
+        {/* Add overlay for better text visibility */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              scrollPosition > 100
+                ? "linear-gradient(to bottom, rgba(233, 233, 231, 0.95), rgba(233, 233, 231, 0.9))"
+                : "linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1))",
+          }}
+        />
+
+        <div className="flex justify-between items-center py-4 relative z-10">
           <Link href="/" className="relative z-10">
             <Image
               src={logoVariant === "light" ? "/logo.jpeg" : "/logo.jpeg"}
@@ -95,6 +108,7 @@ export default function Navigation() {
               <button
                 onClick={() => toggleDropdown("products")}
                 className={`flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
+                style={{ textShadow: scrollPosition < 100 ? "0 1px 3px rgba(0,0,0,0.5)" : "none" }}
               >
                 Our Collections <ChevronDown size={16} className="ml-1" />
               </button>
@@ -188,6 +202,7 @@ export default function Navigation() {
             <Link
               href="/media"
               className={`font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
+              style={{ textShadow: scrollPosition < 100 ? "0 1px 3px rgba(0,0,0,0.5)" : "none" }}
             >
               Media
             </Link>
@@ -195,6 +210,7 @@ export default function Navigation() {
             <Link
               href="/contact"
               className={`font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 ${textColor}`}
+              style={{ textShadow: scrollPosition < 100 ? "0 1px 3px rgba(0,0,0,0.5)" : "none" }}
             >
               Contact Us
             </Link>
