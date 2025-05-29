@@ -7,10 +7,9 @@
   :root {
     --background-light: 60 6% 91%; /* E9E9E7 */
     --background-dark: 60 5% 85%; /* D9D9D6 */
-    /* --deep-neutral: 144 14% 19%; /* #28362D */ /* MODIFIED - Original Greenish Dark */
-    --deep-neutral: 0 0% 10%; /* #1A1A1A - True Dark Gray/Near Black */ /* MODIFIED */
-    --accent-black: var(--deep-neutral); 
-    
+    --deep-neutral: 0 0% 10%; /* #1A1A1A - True Dark Gray/Near Black */
+    --accent-black: var(--deep-neutral);
+
     --radius: 0.5rem;
   }
 
@@ -20,7 +19,7 @@
 
   body {
     @apply font-body text-deep-neutral;
-    cursor: none; 
+    cursor: none;
   }
 
   h1,
@@ -29,50 +28,67 @@
   h4,
   h5,
   h6 {
-    @apply font-display tracking-normal; 
+    @apply font-display tracking-normal;
   }
 }
 
 @layer components {
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-display uppercase tracking-tight md:tracking-normal mb-8;
+    @apply text-3xl md:text-4xl lg:text-5xl font-display lowercase font-black tracking-tighter leading-none mb-8;
+    letter-spacing: -0.05em; /* Extra tight spacing like the image */
   }
 
   .section-subtitle {
-    @apply text-xl md:text-2xl font-display tracking-tight md:tracking-normal mb-4;
+    @apply text-xl md:text-2xl font-display lowercase font-bold tracking-tighter leading-tight mb-4;
+    letter-spacing: -0.03em;
   }
 
   .body-text {
-    @apply font-body text-base md:text-lg leading-relaxed tracking-wider;
+    @apply font-body text-base md:text-lg leading-relaxed;
+    letter-spacing: 0.01em; /* Slight spacing for readability */
   }
 
   .micro-text {
-    @apply font-body text-sm tracking-widest uppercase;
+    @apply font-body text-sm tracking-wide lowercase;
   }
 
   .tracking-body-loose {
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
+  }
+
+  /* Brand title style matching the image */
+  .brand-title {
+    @apply font-display lowercase font-black tracking-tighter text-4xl md:text-5xl lg:text-6xl;
+    letter-spacing: -0.08em; /* Very tight like the image */
+    line-height: 0.9;
   }
 }
 
 .cursor-dot {
-  width: 15px; 
-  height: 15px; 
-  background-color: hsl(var(--deep-neutral)); 
+  width: 15px;
+  height: 15px;
+  background-color: hsl(var(--background-light)); /* Changed to light color for dark backgrounds */
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s; 
-  box-shadow: 0 0 0 1px hsla(var(--background-light), 0.7); 
+  transition: width 0.3s, height 0.3s, background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 0 1px hsla(var(--deep-neutral), 0.7);
+  mix-blend-mode: difference; /* This will make it visible on any background */
 }
 
 .cursor-dot.expanded {
-  width: 28px; 
-  height: 28px; 
-  background-color: hsla(var(--deep-neutral), 0.4);
-  box-shadow: 0 0 0 1px hsla(var(--background-light), 0.5); 
+  width: 28px;
+  height: 28px;
+  background-color: hsla(var(--background-light), 0.8);
+  box-shadow: 0 0 0 1px hsla(var(--deep-neutral), 0.5);
+}
+
+/* Dark background cursor override */
+.cursor-dot.on-dark {
+  background-color: hsl(var(--background-light));
+  box-shadow: 0 0 0 1px hsla(var(--deep-neutral), 0.3);
 }
 
 .fade-in-up {
@@ -109,7 +125,7 @@
 }
 
 .gradient-transition {
-  background: linear-gradient(to bottom, rgba(233, 233, 231, 1) 0%, hsl(var(--deep-neutral)) 100%); /* MODIFIED */
+  background: linear-gradient(to bottom, rgba(233, 233, 231, 1) 0%, hsl(var(--deep-neutral)) 100%);
   height: 100px;
   width: 100%;
 }
