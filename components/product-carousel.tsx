@@ -175,7 +175,7 @@ export default function ProductCarousel() {
             </div>
           )}
 
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center" style={{ paddingBottom: "15vh" }}>
             <div className="container mx-auto px-6 text-center">
               <AnimatePresence mode="wait">
                 <motion.div

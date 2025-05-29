@@ -3,140 +3,97 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Instagram, Linkedin, Search, ChevronDown, ChevronRight } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-import WhatsAppIcon from '@/components/icons/whatsapp-icon';
-// Updated product structure for "Our Collections" dropdown
-const collectionsNavProducts = {
-  Furniture: {
-    Seating: [
-      { name: "Duchess", path: "/products/duchess-chair" }
-    ],
-    Tables: [
-      { name: "Basilisk", path: "/products/basilisk-bar-counter" }
-    ],
-    Storage: [
-      { name: "Pinetta", path: "/products/pinetta-booze-stand" }
-    ]
-  },
-  Artefacts: {
-    "Standing Artefacts": [ // Sub-category title for structure
-        { name: "Rise of the Great", path: "/products/rise-of-the-great-artefact" }
-    ]
-  }
-};
-
-const aboutUsLinks = [
-  { name: "Our Philosophy", path: "/story#philosophy" },
-  { name: "Brand Values", path: "/story#values" },
-  { name: "Meet The Directors", path: "/story#directors" },
-  { name: "House of Esthete Design Studio", path: "/story#studio" },
-  // { name: "Meet The Designers", path: "/story#designers" },
-]
-const generalWhatsAppLink = "https://wa.me/919848000000";
+import { Instagram, Linkedin, Search, ChevronDown } from "lucide-react"
 
 export default function MegaNavigation() {
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const [isOpen, setIsOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY)
-    }
-
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setActiveDropdown(null)
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
     document.addEventListener("mousedown", handleClickOutside)
-    handleScroll(); 
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
 
-  const navbarOpacity = Math.min(scrollPosition / 300, 0.9)
-  const navLinkTextColor = scrollPosition > 50 ? "text-deep-neutral" : "text-background-light"
-  
-  const logoFilterStyle = scrollPosition <= 50 
-    ? { filter: "invert(1) brightness(1.5) saturate(0)", transition: "filter 1s ease-in-out" } // MODIFIED DURATION
-    : { filter: "none", transition: "filter 1s ease-in-out" }; // MODIFIED DURATION
-
   const toggleDropdown = (dropdown: string) => {
-    setActiveDropdown(activeDropdown === dropdown ? null : dropdown)
+    if (activeDropdown === dropdown) {
+      setActiveDropdown(null)
+    } else {
+      setActiveDropdown(dropdown)
+    }
   }
 
-  const toggleMobileSubmenu = (submenu: string) => {
-    setMobileSubmenu(mobileSubmenu === submenu ? null : submenu)
+  const productCategories = {
+    indoor: {
+      seating: ["Chairs", "Lounge Chairs", "Sofas", "Ottomans | Stools", "Daybeds | Chaises | Benches"],
+      tables: ["Side Tables", "Coffee Tables", "Dining Tables", "Consoles", "Desks", "Dressers"],
+      lighting: ["Floor Lamps", "Table Lamps", "Wall Sconces", "Suspended Lamps"],
+      storage: ["Shelving Units", "Chest Of Drawers", "Sideboards", "Bedside Tables", "Bar Cabinets", "Bar Counters"],
+      complements: ["Mirrors", "Trolleys", "Valet Stands", "Magazine Stands"],
+      surfaces: ["Panellings", "Partition Screens"],
+      beds: ["Beds"],
+    },
   }
+
+  const aboutUsLinks = [
+    { name: "Our Philosophy", path: "/story#philosophy" },
+    { name: "Brand Values", path: "/story#values" },
+    { name: "Meet The Directors", path: "/story#directors" },
+    { name: "House of Esthete Design Studio", path: "/story#studio" },
+  ]
 
   return (
-    <header
-      className="fixed top-0 left-0 w-full z-[60] transition-colors duration-300 ease-out"
-      style={{
-        backgroundColor: `hsla(var(--background-light), ${navbarOpacity})`,
-        backdropFilter: scrollPosition > 20 ? "blur(1px)" : "none",
-      }}
-      ref={dropdownRef}
-    >
+    <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200" ref={dropdownRef}>
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-center py-4">
-          <Link href="/" className="relative z-10 block">
+          <Link href="/" className="relative z-10">
             <Image
               src="/TextLogo.png"
               alt="House of Esthete"
-              width={174} 
-              height={38} 
-              priority
-              className="transition-filter duration-1000 ease-in-out" // MODIFIED DURATION
-              style={logoFilterStyle}
+              width={174}
+              height={40}
+              className="transition-opacity duration-500"
             />
           </Link>
 
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-8">
+            {/* Products Dropdown */}
             <div className="relative">
               <button
-                onClick={() => toggleDropdown("collections")}
-                className={`font-display text-sm tracking-normal uppercase hover:text-accent-black transition-colors duration-300 flex items-center ${navLinkTextColor}`}
+                onClick={() => toggleDropdown("products")}
+                className="flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
               >
-                Our Collections
-                <ChevronDown
-                  size={16}
-                  className={`ml-1 transition-transform duration-300 ${activeDropdown === "collections" ? "rotate-180" : ""} ${navLinkTextColor}`}
-                />
+                Our Collections <ChevronDown size={16} className="ml-1" />
               </button>
-              <AnimatePresence>
-                {activeDropdown === "collections" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute left-0 mt-3 w-auto min-w-[500px] max-w-[700px] bg-background-light shadow-lg p-6 grid grid-cols-2 gap-x-8 gap-y-6 z-50 rounded-sm"
-                  >
-                    {Object.entries(collectionsNavProducts).map(([mainCategory, subCategories]) => (
-                      <div key={mainCategory}>
-                        <h3 className="font-display text-base uppercase tracking-normal mb-3 text-deep-neutral">{mainCategory}</h3>
-                        {Object.entries(subCategories).map(([subCategoryName, items]) => (
-                          <div key={subCategoryName} className="mb-3">
-                            <h4 className="font-display text-sm uppercase tracking-tight mb-2 text-deep-neutral/80">{subCategoryName}</h4>
-                            <ul className="space-y-1.5">
-                              {(items as { name: string; path: string }[]).map((item) => (
-                                <li key={item.name}>
+
+              {activeDropdown === "products" && (
+                <div className="absolute top-full left-0 mt-2 w-[800px] bg-white shadow-lg z-50 p-6 border border-gray-200">
+                  <div className="grid grid-cols-2 gap-8">
+                    <div>
+                      <h3 className="font-display text-sm uppercase tracking-wider mb-4 text-deep-neutral">Indoor</h3>
+                      <div className="grid grid-cols-3 gap-6">
+                        {Object.entries(productCategories.indoor).map(([category, items]) => (
+                          <div key={category} className="mb-4">
+                            <h4 className="font-display text-xs uppercase tracking-wider mb-2 text-deep-neutral">
+                              {category}
+                            </h4>
+                            <ul className="space-y-1">
+                              {items.map((item) => (
+                                <li key={item}>
                                   <Link
-                                    href={item.path}
-                                    className="font-body text-xs hover:text-accent-black transition-colors text-deep-neutral/70 tracking-body-loose"
-                                    onClick={() => { setActiveDropdown(null); setIsOpen(false);}}
+                                    href={`/collections/${category.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                                    className="font-body text-xs hover:text-accent-black transition-colors duration-300"
+                                    onClick={() => setActiveDropdown(null)}
                                   >
-                                    {item.name}
+                                    {item}
                                   </Link>
                                 </li>
                               ))}
@@ -144,62 +101,50 @@ export default function MegaNavigation() {
                           </div>
                         ))}
                       </div>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
+            {/* About Us Dropdown */}
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("about")}
-                className={`font-display text-sm tracking-normal uppercase hover:text-accent-black transition-colors duration-300 flex items-center ${navLinkTextColor}`}
+                className="flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
               >
-                Our Story
-                <ChevronDown
-                  size={16}
-                  className={`ml-1 transition-transform duration-300 ${activeDropdown === "about" ? "rotate-180" : ""} ${navLinkTextColor}`}
-                />
+                Our Story <ChevronDown size={16} className="ml-1" />
               </button>
-              <AnimatePresence>
-                {activeDropdown === "about" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute left-0 mt-3 w-64 bg-background-light shadow-lg p-6 z-50 rounded-sm"
-                  >
-                    <ul className="space-y-2">
-                      {aboutUsLinks.map((item) => (
-                        <li key={item.name}>
-                          <Link
-                            href={item.path}
-                            className="font-body text-sm hover:text-accent-black transition-colors text-deep-neutral tracking-body-loose"
-                            onClick={() => { setActiveDropdown(null); setIsOpen(false);}}
-                          >
-                            {item.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+
+              {activeDropdown === "about" && (
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg z-50 p-4 border border-gray-200">
+                  <ul className="space-y-2">
+                    {aboutUsLinks.map((link) => (
+                      <li key={link.name}>
+                        <Link
+                          href={link.path}
+                          className="font-body text-sm hover:text-accent-black transition-colors duration-300 block py-1"
+                          onClick={() => setActiveDropdown(null)}
+                        >
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             <Link
               href="/media"
-              className={`font-display text-sm tracking-normal uppercase hover:text-accent-black transition-colors duration-300 ${navLinkTextColor}`}
-              onClick={() => { setActiveDropdown(null); setIsOpen(false);}}
+              className="font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
             >
               Media
             </Link>
 
             <Link
               href="/contact"
-              className={`font-display text-sm tracking-normal uppercase hover:text-accent-black transition-colors duration-300 ${navLinkTextColor}`}
-              onClick={() => { setActiveDropdown(null); setIsOpen(false);}}
+              className="font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
             >
               Contact Us
             </Link>
@@ -208,29 +153,20 @@ export default function MegaNavigation() {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
-              className={`${navLinkTextColor} hover:text-accent-black transition-colors duration-300`}
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Instagram"
             >
               <Instagram size={18} />
             </Link>
             <Link
               href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
-              className={`${navLinkTextColor} hover:text-accent-black transition-colors duration-300`}
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="LinkedIn"
             >
               <Linkedin size={18} />
             </Link>
-            <Link
-              href={generalWhatsAppLink}
-              target="_blank" rel="noopener noreferrer"
-              className={`${navLinkTextColor} hover:text-accent-black transition-colors duration-300`} // Added some padding and transparent border for consistent sizing
-              aria-label="WhatsApp"
-            >
-              <WhatsAppIcon className="w-6 h-6" /> {/* Or your desired size */}
-            </Link>
-
             <button
-              className={`${navLinkTextColor} hover:text-accent-black transition-colors duration-300`}
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Search"
             >
               <Search size={18} />
@@ -238,170 +174,90 @@ export default function MegaNavigation() {
           </div>
 
           <button
-            onClick={() => {setIsOpen(!isOpen); setActiveDropdown(null);}}
-            className={`md:hidden relative z-[70] w-10 h-10 flex flex-col justify-center items-center focus:outline-none ${navLinkTextColor}`}
-            aria-label={isOpen ? "Close menu" : "Open menu"}
+            onClick={() => toggleDropdown("mobile")}
+            className="md:hidden relative z-50 w-10 h-10 flex flex-col justify-center items-center focus:outline-none text-deep-neutral"
+            aria-label={activeDropdown === "mobile" ? "Close menu" : "Open menu"}
           >
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${isOpen ? "rotate-45 translate-y-[1px]" : "-translate-y-1"}`}
+              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "rotate-45 translate-y-0.5" : "-translate-y-1"}`}
             ></span>
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 my-[3px] ${isOpen ? "opacity-0" : "opacity-100"}`}
+              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "opacity-0" : "opacity-100"}`}
             ></span>
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${isOpen ? "-rotate-45 -translate-y-[1px]" : "translate-y-1"}`}
+              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "-rotate-45 -translate-y-0.5" : "translate-y-1"}`}
             ></span>
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: "-100%" }}
-            animate={{ opacity: 1, y: "0%" }}
-            exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden fixed top-0 left-0 w-full h-screen bg-background-light z-[50] flex flex-col pt-20 px-6 overflow-y-auto"
-          >
-            <nav className="text-left">
-              <ul className="space-y-4">
-                <li>
-                  <div className="relative">
-                    <button
-                      onClick={() => toggleMobileSubmenu("collections")}
-                      className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300 flex items-center justify-between w-full py-2"
-                    >
-                      Our Collections
-                      <ChevronRight
-                        size={20}
-                        className={`transition-transform duration-300 ${mobileSubmenu === "collections" ? "rotate-90" : ""}`}
-                      />
-                    </button>
-                    <AnimatePresence>
-                      {mobileSubmenu === "collections" && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="overflow-hidden pl-4"
-                        >
-                          <div className="pt-2">
-                            {Object.entries(collectionsNavProducts).map(([mainCategory, subCategories]) => (
-                              <div key={mainCategory} className="mb-3">
-                                <h3 className="font-display text-lg uppercase tracking-tight mb-1.5 text-deep-neutral">{mainCategory}</h3>
-                                {Object.entries(subCategories).map(([subCategoryName, items]) => (
-                                <div key={subCategoryName} className="mb-1.5">
-                                  <h4 className="font-display text-base uppercase tracking-tight mb-1 text-deep-neutral/80 pl-2">{subCategoryName}</h4>
-                                  <ul className="space-y-1 pl-4">
-                                    {(items as { name: string; path: string }[]).map((item) => (
-                                      <li key={item.name}>
-                                        <Link
-                                          href={item.path}
-                                          className="font-body text-sm hover:text-accent-black transition-colors text-deep-neutral/70 tracking-body-loose py-1 block"
-                                          onClick={() => setIsOpen(false)}
-                                        >
-                                          {item.name}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                                ))}
-                              </div>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </li>
-                 <li>
-                  <div className="relative">
-                    <button
-                      onClick={() => toggleMobileSubmenu("story")}
-                      className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300 flex items-center justify-between w-full py-2"
-                    >
-                      Our Story
-                      <ChevronRight
-                        size={20}
-                        className={`transition-transform duration-300 ${mobileSubmenu === "story" ? "rotate-90" : ""}`}
-                      />
-                    </button>
-                    <AnimatePresence>
-                      {mobileSubmenu === "story" && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="overflow-hidden pl-4"
-                        >
-                          <ul className="space-y-2 pt-2">
-                            {aboutUsLinks.map((item) => (
-                              <li key={item.name}>
-                                <Link
-                                  href={item.path}
-                                  className="font-body text-base hover:text-accent-black transition-colors text-deep-neutral tracking-body-loose py-1 block"
-                                  onClick={() => setIsOpen(false)}
-                                >
-                                  {item.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </li>
-                <li>
-                  <Link
-                    href="/media"
-                    className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300 py-2 block"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Media
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/contact"
-                    className="font-display text-xl tracking-tight uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300 py-2 block"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Contact Us
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-            <div className="flex items-center space-x-6 mt-10">
-              <Link
-                href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
-                className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
-                aria-label="Instagram"
-              >
-                <Instagram size={24} />
-              </Link>
-              <Link
-                href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
-                className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={24} />
-              </Link>
-              <button
-                className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
-                aria-label="Search"
-              >
-                <Search size={24} />
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {activeDropdown === "mobile" && (
+        <div className="md:hidden absolute top-0 left-0 w-full h-screen bg-white z-40 flex flex-col justify-center items-center">
+          <nav className="text-center">
+            <ul className="space-y-8">
+              <li>
+                <Link
+                  href="/collections"
+                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
+                  onClick={() => setActiveDropdown(null)}
+                >
+                  Our Collections
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/story"
+                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
+                  onClick={() => setActiveDropdown(null)}
+                >
+                  Our Story
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/media"
+                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
+                  onClick={() => setActiveDropdown(null)}
+                >
+                  Media
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
+                  onClick={() => setActiveDropdown(null)}
+                >
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          <div className="flex items-center space-x-6 mt-12">
+            <Link
+              href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
+              aria-label="Instagram"
+            >
+              <Instagram size={24} />
+            </Link>
+            <Link
+              href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={24} />
+            </Link>
+            <button
+              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
+              aria-label="Search"
+            >
+              <Search size={24} />
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

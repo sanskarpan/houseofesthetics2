@@ -48,7 +48,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light">
           <CustomCursor />
           <MegaNavigation />
-          <main>{children}</main>
+          <main className="pt-[72px]">{children}</main>
           <Footer />
           <ScrollToTop />
         </ThemeProvider>

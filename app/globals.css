@@ -18,7 +18,7 @@
   }
 
   body {
-    @apply font-body text-deep-neutral;
+    @apply font-body text-deep-neutral bg-white;
     cursor: none;
   }
 
@@ -128,4 +128,8 @@
   background: linear-gradient(to bottom, rgba(233, 233, 231, 1) 0%, hsl(var(--deep-neutral)) 100%);
   height: 100px;
   width: 100%;
+}
+
+.debug-bg {
+  background-color: #ff00ff !important;
 }

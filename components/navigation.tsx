@@ -51,56 +51,58 @@ export default function Navigation() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200" ref={dropdownRef}>
-      <div className="container mx-auto px-6">
-        <div className="flex justify-between items-center py-4">
-          <Link href="/" className="relative z-10">
-            <Image
-              src="/logo.jpeg"
-              alt="House of Esthete"
-              width={150}
-              height={40}
-              className="transition-opacity duration-500"
-            />
+    <header
+  className="fixed top-0 left-0 w-full z-50 bg-white text-black shadow-md border-b border-gray-200"
+  ref={dropdownRef}
+>
+
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link href="/" className="flex-shrink-0">
+            <Image src="/logo.jpeg" alt="House of Esthete" width={140} height={35} className="h-8 w-auto" priority />
           </Link>
 
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Center Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
             {/* Products Dropdown */}
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("products")}
-                className="flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
+                className="flex items-center text-sm font-medium tracking-wide uppercase text-gray-900 hover:text-gray-600 transition-colors duration-200"
               >
-                Our Collections <ChevronDown size={16} className="ml-1" />
+                PRODUCTS
+                <ChevronDown size={14} className="ml-1 transition-transform duration-200" />
               </button>
 
               {activeDropdown === "products" && (
-                <div className="absolute top-full left-0 mt-2 w-[800px] bg-white shadow-lg z-50 p-6 border border-gray-200">
-                  <div className="grid grid-cols-2 gap-8">
-                    <div>
-                      <h3 className="font-display text-sm uppercase tracking-wider mb-4 text-deep-neutral">Indoor</h3>
-                      <div className="grid grid-cols-3 gap-6">
-                        {Object.entries(productCategories.indoor).map(([category, items]) => (
-                          <div key={category} className="mb-4">
-                            <h4 className="font-display text-xs uppercase tracking-wider mb-2 text-deep-neutral">
-                              {category}
-                            </h4>
-                            <ul className="space-y-1">
-                              {items.map((item) => (
-                                <li key={item}>
-                                  <Link
-                                    href={`/collections/${category.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                                    className="font-body text-xs hover:text-accent-black transition-colors duration-300"
-                                    onClick={() => setActiveDropdown(null)}
-                                  >
-                                    {item}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
+                <div
+                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-[800px] z-50 border border-gray-100"
+                  style={{ backgroundColor: "#ffffff", boxShadow: "0 10px 25px -3px rgba(0, 0, 0, 0.1)" }}
+                >
+                  <div className="p-8">
+                    <div className="grid grid-cols-3 gap-8">
+                      {Object.entries(productCategories.indoor).map(([category, items]) => (
+                        <div key={category}>
+                          <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-900 mb-3">
+                            {category}
+                          </h4>
+                          <ul className="space-y-2">
+                            {items.map((item) => (
+                              <li key={item}>
+                                <Link
+                                  href={`/collections/${category.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200 block"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  {item}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -111,150 +113,151 @@ export default function Navigation() {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("about")}
-                className="flex items-center font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
+                className="flex items-center text-sm font-medium tracking-wide uppercase text-gray-900 hover:text-gray-600 transition-colors duration-200"
               >
-                Our Story <ChevronDown size={16} className="ml-1" />
+                ABOUT US
+                <ChevronDown size={14} className="ml-1 transition-transform duration-200" />
               </button>
 
               {activeDropdown === "about" && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg z-50 p-4 border border-gray-200">
-                  <ul className="space-y-2">
-                    {aboutUsLinks.map((link) => (
-                      <li key={link.name}>
-                        <Link
-                          href={link.path}
-                          className="font-body text-sm hover:text-accent-black transition-colors duration-300 block py-1"
-                          onClick={() => setActiveDropdown(null)}
-                        >
-                          {link.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                <div
+                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 w-64 z-50 border border-gray-100"
+                  style={{ backgroundColor: "#ffffff", boxShadow: "0 10px 25px -3px rgba(0, 0, 0, 0.1)" }}
+                >
+                  <div className="p-4">
+                    <ul className="space-y-2">
+                      {aboutUsLinks.map((link) => (
+                        <li key={link.name}>
+                          <Link
+                            href={link.path}
+                            className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200 block py-1"
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {link.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               )}
             </div>
 
             <Link
               href="/media"
-              className="font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
+              className="text-sm font-medium tracking-wide uppercase text-gray-900 hover:text-gray-600 transition-colors duration-200"
             >
-              Media
+              MEDIA
             </Link>
 
             <Link
               href="/contact"
-              className="font-display text-sm tracking-widest uppercase hover:text-accent-black transition-colors duration-300 text-deep-neutral"
+              className="text-sm font-medium tracking-wide uppercase text-gray-900 hover:text-gray-600 transition-colors duration-200"
             >
-              Contact Us
+              CONTACT US
             </Link>
-          </div>
+          </nav>
 
+          {/* Right Side Icons */}
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
-              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
+              className="text-gray-900 hover:text-gray-600 transition-colors duration-200"
               aria-label="Instagram"
             >
-              <Instagram size={18} />
+              <Instagram size={20} />
             </Link>
             <Link
               href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
-              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
+              className="text-gray-900 hover:text-gray-600 transition-colors duration-200"
               aria-label="LinkedIn"
             >
-              <Linkedin size={18} />
+              <Linkedin size={20} />
             </Link>
-            <button
-              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
-              aria-label="Search"
-            >
-              <Search size={18} />
+            <button className="text-gray-900 hover:text-gray-600 transition-colors duration-200" aria-label="Search">
+              <Search size={20} />
             </button>
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             onClick={() => toggleDropdown("mobile")}
-            className="md:hidden relative z-50 w-10 h-10 flex flex-col justify-center items-center focus:outline-none text-deep-neutral"
+            className="md:hidden relative z-50 w-8 h-8 flex flex-col justify-center items-center focus:outline-none"
             aria-label={activeDropdown === "mobile" ? "Close menu" : "Open menu"}
           >
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "rotate-45 translate-y-0.5" : "-translate-y-1"}`}
-            ></span>
+              className={`block w-5 h-0.5 bg-gray-900 transition-all duration-300 ${
+                activeDropdown === "mobile" ? "rotate-45 translate-y-0.5" : "-translate-y-1"
+              }`}
+            />
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "opacity-0" : "opacity-100"}`}
-            ></span>
+              className={`block w-5 h-0.5 bg-gray-900 transition-all duration-300 ${
+                activeDropdown === "mobile" ? "opacity-0" : "opacity-100"
+              }`}
+            />
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "-rotate-45 -translate-y-0.5" : "translate-y-1"}`}
-            ></span>
+              className={`block w-5 h-0.5 bg-gray-900 transition-all duration-300 ${
+                activeDropdown === "mobile" ? "-rotate-45 -translate-y-0.5" : "translate-y-1"
+              }`}
+            />
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu */}
       {activeDropdown === "mobile" && (
-        <div className="md:hidden absolute top-0 left-0 w-full h-screen bg-white z-40 flex flex-col justify-center items-center">
-          <nav className="text-center">
-            <ul className="space-y-8">
-              <li>
-                <Link
-                  href="/collections"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
-                  onClick={() => setActiveDropdown(null)}
-                >
-                  Our Collections
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/story"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
-                  onClick={() => setActiveDropdown(null)}
-                >
-                  Our Story
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/media"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
-                  onClick={() => setActiveDropdown(null)}
-                >
-                  Media
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
-                  onClick={() => setActiveDropdown(null)}
-                >
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-          </nav>
-          <div className="flex items-center space-x-6 mt-12">
-            <Link
-              href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
-              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
-              aria-label="Instagram"
-            >
-              <Instagram size={24} />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
-              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={24} />
-            </Link>
-            <button
-              className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
-              aria-label="Search"
-            >
-              <Search size={24} />
-            </button>
+        <div className="md:hidden absolute top-0 left-0 w-full h-screen z-40" style={{ backgroundColor: "#ffffff" }}>
+          <div className="flex flex-col justify-center items-center h-full">
+            <nav className="text-center space-y-8">
+              <Link
+                href="/collections"
+                className="block text-xl font-medium tracking-wide uppercase text-gray-900 hover:text-gray-600 transition-colors duration-200"
+                onClick={() => setActiveDropdown(null)}
+              >
+                PRODUCTS
+              </Link>
+              <Link
+                href="/story"
+                className="block text-xl font-medium tracking-wide uppercase text-gray-900 hover:text-gray-600 transition-colors duration-200"
+                onClick={() => setActiveDropdown(null)}
+              >
+                ABOUT US
+              </Link>
+              <Link
+                href="/media"
+                className="block text-xl font-medium tracking-wide uppercase text-gray-900 hover:text-gray-600 transition-colors duration-200"
+                onClick={() => setActiveDropdown(null)}
+              >
+                MEDIA
+              </Link>
+              <Link
+                href="/contact"
+                className="block text-xl font-medium tracking-wide uppercase text-gray-900 hover:text-gray-600 transition-colors duration-200"
+                onClick={() => setActiveDropdown(null)}
+              >
+                CONTACT US
+              </Link>
+            </nav>
+
+            <div className="flex items-center space-x-6 mt-12">
+              <Link
+                href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
+                className="text-gray-900 hover:text-gray-600 transition-colors duration-200"
+                aria-label="Instagram"
+              >
+                <Instagram size={24} />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
+                className="text-gray-900 hover:text-gray-600 transition-colors duration-200"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={24} />
+              </Link>
+              <button className="text-gray-900 hover:text-gray-600 transition-colors duration-200" aria-label="Search">
+                <Search size={24} />
+              </button>
+            </div>
           </div>
         </div>
       )}
