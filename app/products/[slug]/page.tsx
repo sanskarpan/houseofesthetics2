@@ -28,7 +28,12 @@ const products = [
       wood: ["Walnut", "Oak", "Ebony"],
       fabric: ["Linen", "Velvet", "Wool", "Leather"],
     },
-    images: ["/duchess/Duchess1.jpg", "/duchess/Duchess2.jpg", "/duchess/Duchess3.jpg", "/duchess/Duchess4.jpg"],
+    images: [
+      "/duchess/Duchess_Black.png",
+      "/duchess/Duchess2.jpg",
+      "/duchess/Duchess3.jpg",
+      "/duchess/Duchess4.jpg",
+    ],
     slug: "duchess-chair",
   },
   {
@@ -50,8 +55,8 @@ const products = [
       wood: ["Walnut", "Oak", "Ash", "Maple"],
     },
     images: [
-      "/vayuvega/Vayuvega1.jpg",
       "/vayuvega/Vayuvega2.jpg",
+      "/vayuvega/Vayuvega1.jpg",
       "/vayuvega/Vayuvega3.jpg",
       "/vayuvega/Vayuvega4.jpg",
     ],
@@ -76,7 +81,12 @@ const products = [
       wood: ["Walnut", "Oak", "Ebony"],
       stone: ["Marble", "Granite", "Travertine"],
     },
-    images: ["/pinetta/Pinetta1.jpg", "/pinetta/Pinetta2.jpg", "/pinetta/Pinetta3.jpg", "/pinetta/Pinetta4.jpg"],
+    images: [
+      "/pinetta/Pinetta_Black.png",
+      "/pinetta/Pinetta2.jpg",
+      "/pinetta/Pinetta3.jpg",
+      "/pinetta/Pinetta4.jpg",
+    ],
     slug: "pinetta-booze-stand",
   },
   {
@@ -86,14 +96,19 @@ const products = [
     description:
       "Rise of the Great is a sculptural piece that blurs the line between functional object and art. Its abstract form creates a striking visual presence in any space, while also serving as a unique conversation piece. Crafted from premium materials with a focus on texture and form.",
     dimensions: "400 L x 400 D x 1500 H (mm)",
-    details: ["Structure - Cast metal", "Base - Natural stone", "Finish - Hand-applied patina", "Weight - 45 kg"],
+    details: [
+      "Structure - Cast metal",
+      "Base - Natural stone",
+      "Finish - Hand-applied patina",
+      "Weight - 45 kg",
+    ],
     designer: "House of Esthete Design Studio",
     finishes: {
       metal: ["Bronze", "Brass", "Blackened Steel"],
       stone: ["Marble", "Granite", "Limestone", "Travertine"],
     },
     images: [
-      "/rise-of-the-great/Rise1.jpg",
+      "/rise-of-the-great/Rise_Black.png",
       "/rise-of-the-great/Rise2.jpg",
       "/rise-of-the-great/Rise3.jpg",
       "/rise-of-the-great/Rise4.jpg",
@@ -120,10 +135,10 @@ const products = [
       stone: ["Marble", "Granite", "Quartzite"],
     },
     images: [
-      "/basilisk/Basilisk1.jpg",
+      "/basilisk/Basilisk_Black.png",
       "/basilisk/Basilisk2.jpg",
       "/basilisk/Basilisk3.jpg",
-      "/basilisk/Basilisk4.jpg",
+      "/basilisk/Basilisk1.jpg",
     ],
     slug: "basilisk-bar-counter",
   },
@@ -141,7 +156,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-display mb-4 lowercase tracking-tighter">product not found</h1>
+          <h1 className="text-2xl font-display mb-4 lowercase tracking-tighter">
+            product not found
+          </h1>
           <Link href="/collections" className="text-accent-black hover:underline">
             view all collections
           </Link>
@@ -151,12 +168,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   }
 
   // Use the product's actual images
-  const thumbnails = product.images || [
-    product.images?.[0],
-    product.images?.[0],
-    product.images?.[0],
-    product.images?.[0],
-  ]
+  const thumbnails = product.images
 
   const colorMap = {
     Brass: "bg-yellow-700",
@@ -208,15 +220,19 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
+            {/* Main image container */}
             <div className="aspect-square relative mb-4 bg-gray-100 overflow-hidden">
               <Image
                 src={thumbnails[selectedImage] || "/placeholder.svg"}
                 alt={`${product.name} ${product.type}`}
+                sizes="1000px"
                 fill
-                className="object-contain p-4 transition-transform duration-500 hover:scale-105"
+                className="object-cover"
                 priority
               />
             </div>
+
+            {/* Thumbnails */}
             <div className="grid grid-cols-4 gap-2">
               {thumbnails.map((thumb, i) => (
                 <button
@@ -280,7 +296,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                     {options.map((option: any) => (
                       <div
                         key={option}
-                        className={`w-12 h-12 rounded-full ${colorMap[option as keyof typeof colorMap] || "bg-gray-300"} flex items-center justify-center`}
+                        className={`w-12 h-12 rounded-full ${
+                          colorMap[option as keyof typeof colorMap] || "bg-gray-300"
+                        } flex items-center justify-center`}
                         title={option}
                       >
                         <span className="sr-only">{option}</span>
@@ -340,7 +358,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                         src={relatedProduct.images?.[0] || "/placeholder.svg"}
                         alt={relatedProduct.name}
                         fill
-                        className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
                     <h3 className="brand-title text-lg mb-1">{relatedProduct.name}</h3>

@@ -81,7 +81,7 @@ export default function Home() {
       <section className="py-24 md:py-32 bg-deep-neutral text-background-light relative">
         <div className="absolute inset-0 opacity-20">
           <Image
-            src="/brand.png?height=1080&width=1920&query=Texture"
+            src="/Basilisk_ENV.png?height=1080&width=1920&query=Texture"
             alt="Workshop textures"
             fill
             className="object-cover"

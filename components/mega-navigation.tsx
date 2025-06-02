@@ -32,15 +32,21 @@ export default function MegaNavigation() {
   }
 
   const productCategories = {
-    indoor: {
-      seating: ["Chairs", "Lounge Chairs", "Sofas", "Ottomans | Stools", "Daybeds | Chaises | Benches"],
-      tables: ["Side Tables", "Coffee Tables", "Dining Tables", "Consoles", "Desks", "Dressers"],
-      lighting: ["Floor Lamps", "Table Lamps", "Wall Sconces", "Suspended Lamps"],
-      storage: ["Shelving Units", "Chest Of Drawers", "Sideboards", "Bedside Tables", "Bar Cabinets", "Bar Counters"],
-      complements: ["Mirrors", "Trolleys", "Valet Stands", "Magazine Stands"],
-      surfaces: ["Panellings", "Partition Screens"],
-      beds: ["Beds"],
-    },
+    Furniture: {
+      Seating: [
+        { name: "Duchess", path: "/products/duchess-chair" }
+      ],
+      Tables: [
+        { name: "Basilisk", path: "/products/basilisk-bar-counter" }
+      ],
+      Storage: [
+        { name: "Pinetta", path: "/products/pinetta-booze-stand" }
+      ],
+      Artefacts: [
+        { name: "Rise of the Great", path: "/products/rise-of-the-great-artefact" },
+        { name: "Vayuvega", path: "/products/vayuvega-night-stand" },
+      ]
+    }
   }
 
   const aboutUsLinks = [
@@ -78,22 +84,22 @@ export default function MegaNavigation() {
                 <div className="absolute top-full left-0 mt-2 w-[800px] bg-white shadow-lg z-50 p-6 border border-gray-200">
                   <div className="grid grid-cols-2 gap-8">
                     <div>
-                      <h3 className="font-display text-sm uppercase tracking-wider mb-4 text-deep-neutral">Indoor</h3>
+                      <h3 className="font-display text-sm uppercase tracking-wider mb-4 text-deep-neutral">Furniture</h3>
                       <div className="grid grid-cols-3 gap-6">
-                        {Object.entries(productCategories.indoor).map(([category, items]) => (
+                        {Object.entries(productCategories.Furniture).map(([category, items]) => (
                           <div key={category} className="mb-4">
                             <h4 className="font-display text-xs uppercase tracking-wider mb-2 text-deep-neutral">
                               {category}
                             </h4>
                             <ul className="space-y-1">
                               {items.map((item) => (
-                                <li key={item}>
+                                <li key={item.name}>
                                   <Link
-                                    href={`/collections/${category.toLowerCase()}/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                                    href={item.path}
                                     className="font-body text-xs hover:text-accent-black transition-colors duration-300"
                                     onClick={() => setActiveDropdown(null)}
                                   >
-                                    {item}
+                                    {item.name}
                                   </Link>
                                 </li>
                               ))}

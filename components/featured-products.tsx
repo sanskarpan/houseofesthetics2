@@ -11,7 +11,7 @@ const products = [
     name: "Duchess",
     type: "Chair",
     description: "An elegant chair with refined proportions and timeless appeal.",
-    image: "/duchess/Duchess6.jpg",
+    image: "/duchess/Duchess15.jpg",
     slug: "duchess-chair",
   },
   {
@@ -19,7 +19,7 @@ const products = [
     name: "Vayuvega",
     type: "Night Stand",
     description: "A sculptural night stand that combines functionality with artistic form.",
-    image: "/vayuvega/Vayuvega2.jpg",
+    image: "/vayuvega/Vayuvega6.png",
     slug: "vayuvega-night-stand",
   },
   {
@@ -27,7 +27,7 @@ const products = [
     name: "Pinetta",
     type: "Booze Stand",
     description: "A sophisticated booze stand crafted with meticulous attention to detail.",
-    image: "/pinetta/Pinetta3.jpg",
+    image: "/pinetta/Pinetta2.jpg",
     slug: "pinetta-booze-stand",
   },
   {
@@ -43,7 +43,7 @@ const products = [
     name: "Basilisk",
     type: "Bar Counter",
     description: "An architectural bar counter that transforms any space into a luxurious entertainment area.",
-    image: "/basilisk/Basilisk2.jpg",
+    image: "/basilisk/Basilisk5.jpg",
     slug: "basilisk-bar-counter",
   },
 ]

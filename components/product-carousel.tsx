@@ -8,15 +8,15 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const slidesData = [
-  {
-    id: 0,
-    image: null,
-    alt: "House of Esthete - Beyond The Threshold",
-    title: "beyond the threshold",
-    ctaText: "discover the essence",
-    ctaLink: "/story",
-    isPlainWhite: true,
-  },
+  // {
+  //   id: 0,
+  //   image: null,
+  //   alt: "House of Esthete - Beyond The Threshold",
+  //   title: "beyond the threshold",
+  //   ctaText: "discover the essence",
+  //   ctaLink: "/story",
+  //   isPlainWhite: true,
+  // },
   {
     id: 1,
     image: "/basilisk/Basilisk1.jpg?height=1080&width=1920&text=Basilisk+Bar+Counter",
