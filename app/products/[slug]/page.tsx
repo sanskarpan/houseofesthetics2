@@ -8,6 +8,62 @@ import ProductInquiry from "@/components/product-inquiry"
 import { motion, useInView } from "framer-motion"
 
 const productSpecificWhatsAppLink = "https://wa.me/919848000000"
+
+// Define custom finish types for better type safety
+type StandardFinish = {
+  type: "standard"
+  categories: {
+    [category: string]: string[]
+  }
+}
+
+type MaterialOptionsFinish = {
+  type: "material-options"
+  options: {
+    title: string
+    materials: {
+      name: string
+      color: string
+      image?: string
+    }[]
+  }[]
+}
+
+type SingleOptionFinish = {
+  type: "single-option"
+  option: string
+  color: string
+}
+
+type ColorOptionsFinish = {
+  type: "color-options"
+  options: {
+    name: string
+    color: string
+    textColor?: string
+  }[]
+}
+
+type WoodOptionsFinish = {
+  type: "wood-options"
+  options: {
+    title: string
+    woodType: string
+    metalType: string
+    woodColor: string
+    metalColor: string
+    image?: string
+  }[]
+}
+
+type ProductFinish =
+  | StandardFinish
+  | MaterialOptionsFinish
+  | SingleOptionFinish
+  | ColorOptionsFinish
+  | WoodOptionsFinish
+
+// Updated product data with specific finish types
 const products = [
   {
     id: "duchess",
@@ -24,16 +80,18 @@ const products = [
     ],
     designer: "House of Esthete Design Studio",
     finishes: {
-      metal: ["Brass", "Bronze", "Graphite", "Copper"],
-      wood: ["Walnut", "Oak", "Ebony"],
-      fabric: ["Linen", "Velvet", "Wool", "Leather"],
-    },
-    images: [
-      "/duchess/Duchess_Black.png",
-      "/duchess/Duchess2.jpg",
-      "/duchess/Duchess3.jpg",
-      "/duchess/Duchess4.jpg",
-    ],
+      type: "material-options",
+      options: [
+        {
+          materials: [
+            { name: "Mango Wood", color: "bg-amber-700" },
+            { name: "Brushed Steel", color: "bg-gray-400" },
+            { name: "Black Leather", color: "bg-gray-900" },
+          ],
+        },
+      ],
+    } as MaterialOptionsFinish,
+    images: ["/duchess/Duchess_Black.png", "/duchess/Duchess2.jpg", "/duchess/Duchess3.jpg", "/duchess/Duchess4.jpg"],
     slug: "duchess-chair",
   },
   {
@@ -51,9 +109,10 @@ const products = [
     ],
     designer: "House of Esthete Design Studio",
     finishes: {
-      metal: ["Brass", "Bronze", "Graphite"],
-      wood: ["Walnut", "Oak", "Ash", "Maple"],
-    },
+      type: "single-option",
+      option: "White",
+      color: "bg-white border border-gray-200",
+    } as SingleOptionFinish,
     images: [
       "/vayuvega/Vayuvega2.jpg",
       "/vayuvega/Vayuvega1.jpg",
@@ -77,16 +136,25 @@ const products = [
     ],
     designer: "House of Esthete Design Studio",
     finishes: {
-      metal: ["Brass", "Bronze", "Graphite", "Copper"],
-      wood: ["Walnut", "Oak", "Ebony"],
-      stone: ["Marble", "Granite", "Travertine"],
-    },
-    images: [
-      "/pinetta/Pinetta_Black.png",
-      "/pinetta/Pinetta2.jpg",
-      "/pinetta/Pinetta3.jpg",
-      "/pinetta/Pinetta4.jpg",
-    ],
+      type: "wood-options",
+      options: [
+        {
+          title: "Sheesham",
+          woodType: "Sheesham",
+          metalType: "Brushed Steel",
+          woodColor: "bg-amber-700",
+          metalColor: "bg-gray-400",
+        },
+        {
+          title: "Black Oak",
+          woodType: "Black Oak",
+          metalType: "Satin Chrome",
+          woodColor: "bg-gray-800",
+          metalColor: "bg-gray-300",
+        },
+      ],
+    } as WoodOptionsFinish,
+    images: ["/pinetta/Pinetta_Black.png", "/pinetta/Pinetta2.jpg", "/pinetta/Pinetta3.jpg", "/pinetta/Pinetta4.jpg"],
     slug: "pinetta-booze-stand",
   },
   {
@@ -96,22 +164,33 @@ const products = [
     description:
       "Rise of the Great is a sculptural piece that blurs the line between functional object and art. Its abstract form creates a striking visual presence in any space, while also serving as a unique conversation piece. Crafted from premium materials with a focus on texture and form.",
     dimensions: "400 L x 400 D x 1500 H (mm)",
-    details: [
-      "Structure - Cast metal",
-      "Base - Natural stone",
-      "Finish - Hand-applied patina",
-      "Weight - 45 kg",
-    ],
+    details: ["Structure - Cast metal", "Base - Natural stone", "Finish - Hand-applied patina", "Weight - 45 kg"],
     designer: "House of Esthete Design Studio",
     finishes: {
-      metal: ["Bronze", "Brass", "Blackened Steel"],
-      stone: ["Marble", "Granite", "Limestone", "Travertine"],
-    },
+      type: "color-options",
+      options: [
+        {
+          name: "Blaze Red",
+          color: "bg-red-600",
+          textColor: "text-white",
+        },
+        {
+          name: "Pineapple Yellow",
+          color: "bg-yellow-400",
+          textColor: "text-black",
+        },
+        {
+          name: "French racing Blue",
+          color: "bg-blue-500",
+          textColor: "text-white",
+        },
+      ],
+    } as ColorOptionsFinish,
     images: [
       "/rise-of-the-great/Rise_Black.png",
       "/rise-of-the-great/Rise2.jpg",
+      "/rise-of-the-great/Rise1.jpg",
       "/rise-of-the-great/Rise3.jpg",
-      "/rise-of-the-great/Rise4.jpg",
     ],
     slug: "rise-of-the-great-artefact",
   },
@@ -130,10 +209,10 @@ const products = [
     ],
     designer: "House of Esthete Design Studio",
     finishes: {
-      metal: ["Brass", "Bronze", "Graphite", "Copper"],
-      wood: ["Walnut", "Oak", "Ebony"],
-      stone: ["Marble", "Granite", "Quartzite"],
-    },
+      type: "single-option",
+      option: "Black",
+      color: "bg-gray-900",
+    } as SingleOptionFinish,
     images: [
       "/basilisk/Basilisk_Black.png",
       "/basilisk/Basilisk2.jpg",
@@ -143,6 +222,51 @@ const products = [
     slug: "basilisk-bar-counter",
   },
 ]
+
+// Color mapping for standard finishes
+const colorMap = {
+  Brass: "bg-yellow-700",
+  Bronze: "bg-amber-800",
+  Graphite: "bg-gray-700",
+  Copper: "bg-orange-700",
+  Walnut: "bg-amber-900",
+  Oak: "bg-yellow-100",
+  Ebony: "bg-gray-900",
+  Ash: "bg-gray-200",
+  Maple: "bg-yellow-50",
+  Marble: "bg-gray-100",
+  Granite: "bg-gray-500",
+  Travertine: "bg-yellow-200",
+  Limestone: "bg-gray-300",
+  Quartzite: "bg-gray-400",
+  Linen: "bg-yellow-50",
+  Velvet: "bg-purple-900",
+  Wool: "bg-gray-300",
+  Leather: "bg-amber-800",
+  "Blackened Steel": "bg-gray-800",
+  White: "bg-white border border-gray-200",
+  Black: "bg-gray-900",
+}
+
+// Component for consistent square option display
+const OptionSquare = ({ color, image, name }: { color: string; image?: string; name: string }) => (
+  <div className="flex flex-col items-center gap-2">
+    {image ? (
+      <div className="w-24 h-24 overflow-hidden border border-gray-200">
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={name}
+          width={96}
+          height={96}
+          className="object-cover w-full h-full"
+        />
+      </div>
+    ) : (
+      <div className={`w-24 h-24 ${color} border border-gray-200`} title={name}></div>
+    )}
+    <span className="text-sm font-['Quicksand'] text-center">{name}</span>
+  </div>
+)
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const [isInquiryOpen, setIsInquiryOpen] = useState(false)
@@ -156,9 +280,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-display mb-4 lowercase tracking-tighter">
-            product not found
-          </h1>
+          <h1 className="text-2xl font-display mb-4 lowercase tracking-tighter">product not found</h1>
           <Link href="/collections" className="text-accent-black hover:underline">
             view all collections
           </Link>
@@ -170,26 +292,92 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   // Use the product's actual images
   const thumbnails = product.images
 
-  const colorMap = {
-    Brass: "bg-yellow-700",
-    Bronze: "bg-amber-800",
-    Graphite: "bg-gray-700",
-    Copper: "bg-orange-700",
-    Walnut: "bg-amber-900",
-    Oak: "bg-yellow-100",
-    Ebony: "bg-gray-900",
-    Ash: "bg-gray-200",
-    Maple: "bg-yellow-50",
-    Marble: "bg-gray-100",
-    Granite: "bg-gray-500",
-    Travertine: "bg-yellow-200",
-    Limestone: "bg-gray-300",
-    Quartzite: "bg-gray-400",
-    Linen: "bg-yellow-50",
-    Velvet: "bg-purple-900",
-    Wool: "bg-gray-300",
-    Leather: "bg-amber-800",
-    "Blackened Steel": "bg-gray-800",
+  // Render finishes based on the finish type
+  const renderFinishes = () => {
+    const finishes = product.finishes as ProductFinish
+
+    switch (finishes.type) {
+      case "standard":
+        return (
+          <div className="space-y-6">
+            {Object.entries(finishes.categories).map(([category, options]) => (
+              <div key={category} className="mb-6">
+                <h4 className="font-display text-base mb-4 capitalize">{category}</h4>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {options.map((option) => (
+                    <OptionSquare
+                      key={option}
+                      color={colorMap[option as keyof typeof colorMap] || "bg-gray-300"}
+                      name={option}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+
+      case "material-options":
+        return (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {finishes.options.flatMap((option) =>
+              option.materials.map((material, idx) => (
+                <OptionSquare
+                  key={`${material.name}-${idx}`}
+                  color={material.color}
+                  image={material.image}
+                  name={material.name}
+                />
+              )),
+            )}
+          </div>
+        )
+
+      case "wood-options":
+        return (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {finishes.options.map((option, index) => (
+              <div key={index} className="space-y-4">
+                <OptionSquare color={option.woodColor} image={option.image} name={option.woodType} />
+                <div className="w-6 h-0.5 bg-gray-400 mx-auto my-3"></div>
+                <OptionSquare color={option.metalColor} name={option.metalType} />
+              </div>
+            ))}
+          </div>
+        )
+
+      case "color-options":
+        return (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-6">
+            {finishes.options.map((option, index) => (
+              <OptionSquare key={index} color={option.color} name={option.name} />
+            ))}
+          </div>
+        )
+
+      case "single-option":
+        return (
+          <div className="flex justify-start">
+            <OptionSquare color={finishes.color} name={finishes.option} />
+          </div>
+        )
+
+      default:
+        return null
+    }
+  }
+
+  // Get the appropriate section title
+  const getSectionTitle = () => {
+    const finishes = product.finishes as ProductFinish
+
+    if (product.id === "duchess") {
+      return "Material Options"
+    } else if (finishes.type === "color-options" || finishes.type === "wood-options") {
+      return "Colour Options"
+    } else {
+      return "finishes"
+    }
   }
 
   return (
@@ -286,27 +474,15 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               <p className="font-['Quicksand']">{product.designer}</p>
             </div>
 
+            {/* Options Section */}
             <div className="mb-8">
-              <h3 className="section-subtitle">finishes</h3>
+              {getSectionTitle() === "Colour Options" || getSectionTitle() === "Material Options" ? (
+                <h3 className="font-display text-3xl tracking-wide mb-6">{getSectionTitle()}</h3>
+              ) : (
+                <h3 className="section-subtitle">{getSectionTitle()}</h3>
+              )}
 
-              {Object.entries(product.finishes).map(([category, options]) => (
-                <div key={category} className="mb-6">
-                  <h4 className="font-display text-base mb-2 capitalize">{category}</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {options.map((option: any) => (
-                      <div
-                        key={option}
-                        className={`w-12 h-12 rounded-full ${
-                          colorMap[option as keyof typeof colorMap] || "bg-gray-300"
-                        } flex items-center justify-center`}
-                        title={option}
-                      >
-                        <span className="sr-only">{option}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+              {renderFinishes()}
             </div>
 
             <div className="flex items-center gap-3">
