@@ -1,4 +1,3 @@
-// File: components/product-carousel.tsx
 "use client"
 
 import { useState, useEffect, useRef } from "react"
@@ -144,7 +143,7 @@ export default function ProductCarousel() {
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative h-screen w-full overflow-hidden -mt-[72px] pt-[72px]">
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentSlide}
@@ -190,7 +189,7 @@ export default function ProductCarousel() {
                     <>
                       <motion.h1
                         variants={textVariants}
-                        className="brand-title text-5xl md:text-7xl lg:text-8xl mb-12 max-w-4xl mx-auto"
+                        className="brand-title text-5xl md:text-7xl lg:text-8xl mb-8 max-w-4xl mx-auto"
                       >
                         <motion.div variants={childVariants} className="block mb-2 md:mb-4">
                           <span>beyond the</span>
@@ -215,7 +214,7 @@ export default function ProductCarousel() {
                     <>
                       <motion.h1
                         variants={childVariants}
-                        className="brand-title text-6xl md:text-8xl lg:text-9xl mb-12 max-w-4xl mx-auto"
+                        className="brand-title text-6xl md:text-8xl lg:text-9xl mb-8 max-w-4xl mx-auto"
                       >
                         {slidesData[currentSlide].title}
                       </motion.h1>

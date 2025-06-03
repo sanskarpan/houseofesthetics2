@@ -248,23 +248,23 @@ const colorMap = {
   Black: "bg-gray-900",
 }
 
-// Component for consistent square option display
+// Component for consistent square option display - reduced size
 const OptionSquare = ({ color, image, name }: { color: string; image?: string; name: string }) => (
-  <div className="flex flex-col items-center gap-2">
+  <div className="flex flex-col items-center gap-1.5">
     {image ? (
-      <div className="w-24 h-24 overflow-hidden border border-gray-200">
+      <div className="w-16 h-16 overflow-hidden border border-gray-200">
         <Image
           src={image || "/placeholder.svg"}
           alt={name}
-          width={96}
-          height={96}
+          width={64}
+          height={64}
           className="object-cover w-full h-full"
         />
       </div>
     ) : (
-      <div className={`w-24 h-24 ${color} border border-gray-200`} title={name}></div>
+      <div className={`w-16 h-16 ${color} border border-gray-200`} title={name}></div>
     )}
-    <span className="text-sm font-['Quicksand'] text-center">{name}</span>
+    <span className="text-xs font-['Quicksand'] text-center leading-tight">{name}</span>
   </div>
 )
 
@@ -302,8 +302,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <div className="space-y-6">
             {Object.entries(finishes.categories).map(([category, options]) => (
               <div key={category} className="mb-6">
-                <h4 className="font-display text-base mb-4 capitalize">{category}</h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <h4 className="font-display text-base mb-3 capitalize">{category}</h4>
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {options.map((option) => (
                     <OptionSquare
                       key={option}
@@ -319,7 +319,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
       case "material-options":
         return (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {finishes.options.flatMap((option) =>
               option.materials.map((material, idx) => (
                 <OptionSquare
@@ -335,11 +335,11 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
       case "wood-options":
         return (
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
             {finishes.options.map((option, index) => (
-              <div key={index} className="space-y-4">
+              <div key={index} className="space-y-3">
                 <OptionSquare color={option.woodColor} image={option.image} name={option.woodType} />
-                <div className="w-6 h-0.5 bg-gray-400 mx-auto my-3"></div>
+                <div className="w-4 h-0.5 bg-gray-400 mx-auto my-2"></div>
                 <OptionSquare color={option.metalColor} name={option.metalType} />
               </div>
             ))}
@@ -348,7 +348,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
       case "color-options":
         return (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-4">
             {finishes.options.map((option, index) => (
               <OptionSquare key={index} color={option.color} name={option.name} />
             ))}
@@ -381,9 +381,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <div className="pt-24 min-h-screen bg-background-light">
+    <div className="min-h-screen bg-background-light">
       {/* Breadcrumb */}
-      <div className="container mx-auto px-6 py-4">
+      <div className="container mx-auto px-6 py-4 pt-20">
         <div className="flex items-center text-sm">
           <Link href="/" className="hover:text-accent-black transition-colors">
             Home
