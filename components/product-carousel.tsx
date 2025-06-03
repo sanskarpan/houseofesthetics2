@@ -177,7 +177,7 @@ export default function ProductCarousel() {
               {/* Text content for plain white slide */}
             </div>
           ) : (
-            <div className="relative h-full w-full">
+            <div className="relative h-[120%] w-[100%]">
               {slidesData[currentSlide].image && (
                 <Image
                   src={slidesData[currentSlide].image! || "/placeholder.svg"}
