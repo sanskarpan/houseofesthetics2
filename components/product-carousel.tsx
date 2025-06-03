@@ -20,8 +20,8 @@ const slidesData = [
     id: 1,
     image: "/Basilisk_Carousel.png?text=Basilisk+Bar+Counter",
     alt: "Basilisk - Luxury Bar Counter",
-    title: "",
-    ctaText: "",
+    title: "", 
+    ctaText: "", 
     ctaLink: "/products/basilisk-bar-counter",
     isPlainWhite: false,
   },
@@ -45,12 +45,10 @@ const slidesData = [
   },
 ]
 
-// Helper function to get product name from ctaLink
 const getProductName = (ctaLink: string) => {
   const segments = ctaLink.split("/")
   const productSlug = segments[segments.length - 1]
 
-  // Convert slug to display name
   switch (productSlug) {
     case "basilisk-bar-counter":
       return "Basilisk"
@@ -83,7 +81,6 @@ export default function ProductCarousel() {
     if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current)
     }
-
     if (isAutoPlaying) {
       autoPlayRef.current = setInterval(() => {
         nextSlide()
@@ -129,29 +126,18 @@ export default function ProductCarousel() {
   }
 
   const textVariants = {
-    hidden: {
-      opacity: 0,
-      y: 10,
-      filter: "blur(2px)",
-    },
+    hidden: { opacity: 0, y: 10, filter: "blur(2px)" },
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-        staggerChildren: 0.15,
-      },
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], staggerChildren: 0.15 },
     },
     exit: {
       opacity: 0,
       y: -10,
       filter: "blur(2px)",
-      transition: {
-        duration: 0.1,
-        ease: [0.22, 1, 0.36, 1],
-      },
+      transition: { duration: 0.1, ease: [0.22, 1, 0.36, 1] },
     },
   }
 
@@ -171,13 +157,12 @@ export default function ProductCarousel() {
           animate="center"
           exit="exit"
           className="absolute inset-0"
-        >
+        > 
           {slidesData[currentSlide].isPlainWhite ? (
-            <div className="relative h-full w-full bg-background-light flex items-center justify-center">
-              {/* Text content for plain white slide */}
+            <div className="h-full w-full bg-background-light flex items-center justify-center">
             </div>
           ) : (
-            <div className="relative h-[120%] w-[100%]">
+            <div className="h-[120%] w-[100%] absolute inset-0"> 
               {slidesData[currentSlide].image && (
                 <Image
                   src={slidesData[currentSlide].image! || "/placeholder.svg"}
@@ -188,24 +173,28 @@ export default function ProductCarousel() {
                   style={{ border: "none", outline: "none" }}
                 />
               )}
-              <div className="absolute inset-0 bg-black/20"></div>
-              {/* Explore Product Button - positioned in bottom-right */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute bottom-8 right-8 z-20"
-              >
-                <Link
-                  href={slidesData[currentSlide].ctaLink}
-                  className="bg-deep-neutral text-background-light px-6 py-3 rounded-full font-['Quicksand'] text-sm font-medium tracking-wide hover:bg-deep-neutral/90 transition-all duration-300 hover:scale-105 shadow-lg backdrop-blur-sm"
-                >
-                  Explore {getProductName(slidesData[currentSlide].ctaLink)}
-                </Link>
-              </motion.div>
+              <div className="absolute inset-0 bg-black/20"></div> 
             </div>
           )}
 
+          {/* Explore Product Button - Positioned relative to the slide, only for non-plainWhite slides with a ctaLink */}
+          {!slidesData[currentSlide].isPlainWhite && slidesData[currentSlide].ctaLink && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute bottom-12 right-8 z-20" 
+            >
+              <Link
+                href={slidesData[currentSlide].ctaLink}
+                className="bg-deep-neutral text-background-light px-6 py-3 rounded-full font-['Quicksand'] text-sm font-medium tracking-wide hover:bg-deep-neutral/90 transition-all duration-300 hover:scale-105 shadow-lg backdrop-blur-sm"
+              >
+                Explore {getProductName(slidesData[currentSlide].ctaLink)}
+              </Link>
+            </motion.div>
+          )}
+
+          {/* Central Text Layer */}
           <div className="absolute inset-0 flex items-center justify-center" style={{ paddingBottom: "15vh" }}>
             <div className="container mx-auto px-6 text-center">
               <AnimatePresence mode="wait">
@@ -215,12 +204,12 @@ export default function ProductCarousel() {
                   animate="visible"
                   exit="exit"
                   variants={textVariants}
-                  className={`max-w-3xl mx-auto text-deep-neutral`}
+                  className={`max-w-3xl mx-auto ${slidesData[currentSlide].isPlainWhite ? "text-deep-neutral" : "text-deep-neutral"}`}
                 >
                   {slidesData[currentSlide].isPlainWhite ? (
                     <>
                       <motion.h1
-                        variants={textVariants}
+                        variants={textVariants} 
                         className="brand-title text-5xl md:text-7xl lg:text-8xl mb-8 max-w-4xl mx-auto"
                       >
                         <motion.div variants={childVariants} className="block mb-2 md:mb-4">
@@ -248,7 +237,7 @@ export default function ProductCarousel() {
                         variants={childVariants}
                         className="brand-title text-6xl md:text-8xl lg:text-9xl mb-8 max-w-4xl mx-auto"
                       >
-                        {slidesData[currentSlide].title}
+                        {slidesData[currentSlide].title} 
                       </motion.h1>
                       {slidesData[currentSlide].ctaText && slidesData[currentSlide].ctaLink && (
                         <motion.div variants={childVariants}>
