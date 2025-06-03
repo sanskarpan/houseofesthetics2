@@ -18,32 +18,50 @@ const slidesData = [
   // },
   {
     id: 1,
-    image: "/basilisk/Basilisk1.jpg?height=1080&width=1920&text=Basilisk+Bar+Counter",
+    image: "/Basilisk_Carousel.png?text=Basilisk+Bar+Counter",
     alt: "Basilisk - Luxury Bar Counter",
-    title: "basilisk",
-    ctaText: "explore basilisk",
+    title: "",
+    ctaText: "",
     ctaLink: "/products/basilisk-bar-counter",
     isPlainWhite: false,
   },
   {
     id: 2,
-    image: "/vayuvega/Vayuvega_white.png?height=1080&width=1920&text=VayuVega+Night+Stand",
+    image: "/Vayuvega_Carousel.png?text=VayuVega+Night+Stand",
     alt: "VayuVega - Elegant Night Stand",
-    title: "vayuvega",
-    ctaText: "discover vayuvega",
+    title: "",
+    ctaText: "",
     ctaLink: "/products/vayuvega-night-stand",
     isPlainWhite: false,
   },
   {
     id: 3,
-    image: "/duchess/Ducchess_white.png?height=1080&width=1920&text=Duchess+Luxury+Chair",
+    image: "/Duchess_Carousel.png?text=Duchess+Luxury+Chair",
     alt: "Duchess - Luxury Chair",
-    title: "duchess",
-    ctaText: "experience duchess",
+    title: "",
+    ctaText: "",
     ctaLink: "/products/duchess-chair",
     isPlainWhite: false,
   },
 ]
+
+// Helper function to get product name from ctaLink
+const getProductName = (ctaLink: string) => {
+  const segments = ctaLink.split("/")
+  const productSlug = segments[segments.length - 1]
+
+  // Convert slug to display name
+  switch (productSlug) {
+    case "basilisk-bar-counter":
+      return "Basilisk"
+    case "vayuvega-night-stand":
+      return "Vayuvega"
+    case "duchess-chair":
+      return "Duchess"
+    default:
+      return "Product"
+  }
+}
 
 export default function ProductCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -143,7 +161,7 @@ export default function ProductCarousel() {
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden -mt-[72px] pt-[72px]">
+    <div className="relative h-screen w-full overflow-hidden -mt-[40px] pt-[40px]">
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentSlide}
@@ -171,6 +189,20 @@ export default function ProductCarousel() {
                 />
               )}
               <div className="absolute inset-0 bg-black/20"></div>
+              {/* Explore Product Button - positioned in bottom-right */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute bottom-8 right-8 z-20"
+              >
+                <Link
+                  href={slidesData[currentSlide].ctaLink}
+                  className="bg-deep-neutral text-background-light px-6 py-3 rounded-full font-['Quicksand'] text-sm font-medium tracking-wide hover:bg-deep-neutral/90 transition-all duration-300 hover:scale-105 shadow-lg backdrop-blur-sm"
+                >
+                  Explore {getProductName(slidesData[currentSlide].ctaLink)}
+                </Link>
+              </motion.div>
             </div>
           )}
 
