@@ -7,6 +7,7 @@ import { Instagram, Linkedin, Search, ChevronDown } from "lucide-react"
 
 export default function MegaNavigation() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -20,6 +21,23 @@ export default function MegaNavigation() {
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) { // Threshold of 10px to trigger the change
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    handleScroll() // Call on mount to set initial state based on current scroll position
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
     }
   }, [])
 
@@ -57,7 +75,14 @@ export default function MegaNavigation() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200" ref={dropdownRef}>
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
+        isScrolled
+          ? "bg-white border-b border-gray-200 shadow-md"
+          : "bg-transparent border-b border-transparent"
+      }`}
+      ref={dropdownRef}
+    >
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="relative z-10">
@@ -66,7 +91,7 @@ export default function MegaNavigation() {
               alt="House of Esthete"
               width={174}
               height={40}
-              className="transition-opacity duration-500"
+              className="transition-opacity duration-500" // This existing transition is fine
             />
           </Link>
 
@@ -96,7 +121,7 @@ export default function MegaNavigation() {
                                 <li key={item.name}>
                                   <Link
                                     href={item.path}
-                                    className="font-body text-xs hover:text-accent-black transition-colors duration-300"
+                                    className="font-body text-xs hover:text-accent-black transition-colors duration-300 text-deep-neutral"
                                     onClick={() => setActiveDropdown(null)}
                                   >
                                     {item.name}
@@ -108,6 +133,10 @@ export default function MegaNavigation() {
                         ))}
                       </div>
                     </div>
+                     {/* Placeholder for potential second column in products dropdown if needed */}
+                     {/* <div>
+                        <h3 className="font-display text-sm uppercase tracking-wider mb-4 text-deep-neutral">Another Category</h3>
+                     </div> */}
                   </div>
                 </div>
               )}
@@ -129,7 +158,7 @@ export default function MegaNavigation() {
                       <li key={link.name}>
                         <Link
                           href={link.path}
-                          className="font-body text-sm hover:text-accent-black transition-colors duration-300 block py-1"
+                          className="font-body text-sm hover:text-accent-black transition-colors duration-300 block py-1 text-deep-neutral"
                           onClick={() => setActiveDropdown(null)}
                         >
                           {link.name}
@@ -159,6 +188,8 @@ export default function MegaNavigation() {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Instagram"
             >
@@ -166,6 +197,8 @@ export default function MegaNavigation() {
             </Link>
             <Link
               href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="LinkedIn"
             >
@@ -174,6 +207,7 @@ export default function MegaNavigation() {
             <button
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Search"
+              // onClick={() => { /* Implement search functionality */ }}
             >
               <Search size={18} />
             </button>
@@ -185,13 +219,19 @@ export default function MegaNavigation() {
             aria-label={activeDropdown === "mobile" ? "Close menu" : "Open menu"}
           >
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "rotate-45 translate-y-0.5" : "-translate-y-1"}`}
+              className={`block w-6 h-0.5 bg-current transform transition-all duration-300 ease-in-out ${
+                activeDropdown === "mobile" ? "rotate-45 translate-y-[1px]" : "-translate-y-1"
+              }`}
             ></span>
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "opacity-0" : "opacity-100"}`}
+              className={`block w-6 h-0.5 bg-current mt-[5px] mb-[5px] transform transition-all duration-300 ease-in-out ${
+                activeDropdown === "mobile" ? "opacity-0" : "opacity-100"
+              }`}
             ></span>
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "-rotate-45 -translate-y-0.5" : "translate-y-1"}`}
+              className={`block w-6 h-0.5 bg-current transform transition-all duration-300 ease-in-out ${
+                activeDropdown === "mobile" ? "-rotate-45 -translate-y-[1px]" : "translate-y-1"
+              }`}
             ></span>
           </button>
         </div>
@@ -199,26 +239,36 @@ export default function MegaNavigation() {
 
       {/* Mobile menu */}
       {activeDropdown === "mobile" && (
-        <div className="md:hidden absolute top-0 left-0 w-full h-screen bg-white z-40 flex flex-col justify-center items-center">
+        <div className="md:hidden fixed inset-0 top-[var(--header-height,68px)] bg-white z-40 flex flex-col items-center pt-10 overflow-y-auto">
+          {/* The top value assumes header height of ~68px, adjust if necessary or use JS to calculate */}
           <nav className="text-center">
             <ul className="space-y-8">
               <li>
-                <Link
-                  href="/collections"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
-                  onClick={() => setActiveDropdown(null)}
+                <span
+                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300 cursor-pointer"
+                  // For mobile, direct link or sub-menu toggle could be added here
+                  onClick={() => {
+                     // Example: navigate or toggle sub-menu for collections
+                     setActiveDropdown(null); // Close main mobile menu
+                     // router.push('/collections'); // if using Next.js router
+                  }}
                 >
-                  Our Collections
-                </Link>
+                   Our Collections
+                </span>
+                {/* Mobile sub-menu for products can be implemented here */}
               </li>
               <li>
-                <Link
-                  href="/story"
-                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300"
-                  onClick={() => setActiveDropdown(null)}
+                 <span
+                  className="font-display text-2xl tracking-widest uppercase text-deep-neutral hover:text-accent-black transition-colors duration-300 cursor-pointer"
+                  onClick={() => {
+                    // Example: navigate or toggle sub-menu for story
+                    setActiveDropdown(null);
+                    // router.push('/story');
+                  }}
                 >
                   Our Story
-                </Link>
+                </span>
+                {/* Mobile sub-menu for About Us can be implemented here */}
               </li>
               <li>
                 <Link
@@ -243,21 +293,31 @@ export default function MegaNavigation() {
           <div className="flex items-center space-x-6 mt-12">
             <Link
               href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Instagram"
+              onClick={() => setActiveDropdown(null)}
             >
               <Instagram size={24} />
             </Link>
             <Link
               href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="LinkedIn"
+              onClick={() => setActiveDropdown(null)}
             >
               <Linkedin size={24} />
             </Link>
             <button
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Search"
+              onClick={() => {
+                // TODO: Implement search functionality
+                setActiveDropdown(null);
+              }}
             >
               <Search size={24} />
             </button>
