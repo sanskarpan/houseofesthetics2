@@ -7,6 +7,7 @@ import { Instagram, Linkedin, Search, ChevronDown } from "lucide-react"
 
 export default function MegaNavigation() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -20,6 +21,23 @@ export default function MegaNavigation() {
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) { // Threshold to trigger the change
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    handleScroll() // Call on mount to set initial state
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
     }
   }, [])
 
@@ -57,7 +75,14 @@ export default function MegaNavigation() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200" ref={dropdownRef}>
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
+        isScrolled
+          ? "bg-white/[0.75] backdrop-blur-md border-b border-gray-200/50 shadow-md" // 75% opaque white, backdrop blur, semi-transparent border, shadow
+          : "bg-transparent backdrop-blur-sm border-b border-transparent" // Transparent with subtle blur initially
+      }`}
+      ref={dropdownRef}
+    >
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="relative z-10">
@@ -81,7 +106,7 @@ export default function MegaNavigation() {
               </button>
 
               {activeDropdown === "products" && (
-                <div className="absolute top-full left-0 mt-2 w-[800px] bg-white shadow-lg z-50 p-6 border border-gray-200">
+                <div className="absolute top-full left-0 mt-2 w-[800px] bg-white shadow-lg z-50 p-6 border border-gray-200"> {/* Dropdown remains opaque white */}
                   <div className="grid grid-cols-2 gap-8">
                     <div>
                       <h3 className="font-display text-sm uppercase tracking-wider mb-4 text-deep-neutral">Furniture</h3>
@@ -96,7 +121,7 @@ export default function MegaNavigation() {
                                 <li key={item.name}>
                                   <Link
                                     href={item.path}
-                                    className="font-body text-xs hover:text-accent-black transition-colors duration-300"
+                                    className="font-body text-xs hover:text-accent-black transition-colors duration-300 text-deep-neutral"
                                     onClick={() => setActiveDropdown(null)}
                                   >
                                     {item.name}
@@ -108,6 +133,7 @@ export default function MegaNavigation() {
                         ))}
                       </div>
                     </div>
+                    {/* Placeholder for potential second column in products dropdown */}
                   </div>
                 </div>
               )}
@@ -123,13 +149,13 @@ export default function MegaNavigation() {
               </button>
 
               {activeDropdown === "about" && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg z-50 p-4 border border-gray-200">
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg z-50 p-4 border border-gray-200"> {/* Dropdown remains opaque white */}
                   <ul className="space-y-2">
                     {aboutUsLinks.map((link) => (
                       <li key={link.name}>
                         <Link
                           href={link.path}
-                          className="font-body text-sm hover:text-accent-black transition-colors duration-300 block py-1"
+                          className="font-body text-sm hover:text-accent-black transition-colors duration-300 block py-1 text-deep-neutral"
                           onClick={() => setActiveDropdown(null)}
                         >
                           {link.name}
@@ -159,6 +185,8 @@ export default function MegaNavigation() {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Instagram"
             >
@@ -166,6 +194,8 @@ export default function MegaNavigation() {
             </Link>
             <Link
               href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="LinkedIn"
             >
@@ -185,13 +215,19 @@ export default function MegaNavigation() {
             aria-label={activeDropdown === "mobile" ? "Close menu" : "Open menu"}
           >
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "rotate-45 translate-y-0.5" : "-translate-y-1"}`}
+              className={`block w-6 h-0.5 bg-current transform transition-all duration-300 ease-in-out ${
+                activeDropdown === "mobile" ? "rotate-45 translate-y-[1px]" : "-translate-y-1"
+              }`}
             ></span>
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "opacity-0" : "opacity-100"}`}
+              className={`block w-6 h-0.5 bg-current mt-[5px] mb-[5px] transform transition-all duration-300 ease-in-out ${
+                activeDropdown === "mobile" ? "opacity-0" : "opacity-100"
+              }`}
             ></span>
             <span
-              className={`block w-6 h-0.5 bg-current transition-all duration-300 ${activeDropdown === "mobile" ? "-rotate-45 -translate-y-0.5" : "translate-y-1"}`}
+              className={`block w-6 h-0.5 bg-current transform transition-all duration-300 ease-in-out ${
+                activeDropdown === "mobile" ? "-rotate-45 -translate-y-[1px]" : "translate-y-1"
+              }`}
             ></span>
           </button>
         </div>
@@ -199,7 +235,7 @@ export default function MegaNavigation() {
 
       {/* Mobile menu */}
       {activeDropdown === "mobile" && (
-        <div className="md:hidden absolute top-0 left-0 w-full h-screen bg-white z-40 flex flex-col justify-center items-center">
+        <div className="md:hidden fixed inset-0 top-0 bg-white z-40 flex flex-col justify-center items-center pt-16 sm:pt-20"> {/* Full screen opaque white for mobile menu */}
           <nav className="text-center">
             <ul className="space-y-8">
               <li>
@@ -243,21 +279,30 @@ export default function MegaNavigation() {
           <div className="flex items-center space-x-6 mt-12">
             <Link
               href="https://www.instagram.com/thehouseofesthete?igsh=Njk2Y2JyOGpvNDU3"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Instagram"
+              onClick={() => setActiveDropdown(null)}
             >
               <Instagram size={24} />
             </Link>
             <Link
               href="https://www.linkedin.com/company/the-house-of-esthete/?originalSubdomain=in"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="LinkedIn"
+              onClick={() => setActiveDropdown(null)}
             >
               <Linkedin size={24} />
             </Link>
             <button
               className="text-deep-neutral hover:text-accent-black transition-colors duration-300"
               aria-label="Search"
+              onClick={() => {
+                setActiveDropdown(null);
+              }}
             >
               <Search size={24} />
             </button>
