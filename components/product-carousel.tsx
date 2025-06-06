@@ -147,7 +147,7 @@ export default function ProductCarousel() {
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden -mt-[40px] pt-[40px]">
+    <div className="relative h-screen w-full overflow-hidden -mt-[75px] pt-[60px]">   
       <AnimatePresence initial={false} custom={direction} mode="wait">
         <motion.div
           key={currentSlide}
